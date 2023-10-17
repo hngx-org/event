@@ -4,6 +4,7 @@ import filterIcon from "@/public/assets/images/filter.svg";
 import multiply from "@/public/assets/images/multiply.svg";
 import Image from "next/image";
 import EventCard from "@/components/eventCard";
+import Footer from "@/components/web/footer";
 
 const filter = () => {
   return (
@@ -50,6 +51,7 @@ const filter = () => {
         <EventCard />
         <EventCard />
       </div>
+      <Footer />
     </div>
   );
 };

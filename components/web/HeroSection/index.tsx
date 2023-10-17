@@ -8,7 +8,7 @@ import Circle from "../../../public/images/circle.png";
 const HeroSection = () => {
   return (
     <div
-      className='h-[95vh] w-screen flex flex-col md:flex-row items-center px-20'
+      className='h-[95vh] w-screen flex flex-col gap-y-5 md:gap-x-4 lg:gap-x-1 md:flex-row items-center justify-center md:justify-normal px-5 md:px-20'
       style={{
         background:
           "linear-gradient(102deg, rgba(128, 0, 0, 0.12) -1.54%, rgba(128, 0, 0, 0.06) 18.74%, rgba(128, 0, 0, 0.08) 48.29%, rgba(128, 0, 0, 0.10) 79.52%, rgba(128, 0, 0, 0.05) 100%)",
@@ -24,9 +24,9 @@ const HeroSection = () => {
         <Image
           src={vectorImg}
           alt='vector_img'
-          className='absolute -top-6 right-10 w-10'
+          className='absolute -top-6 right-10 w-10 hidden lg:block'
         />
-        <p className='font-semibold text-5xl text-[#3B3B3B] mb-6 font-montserrat leading-[56px]'>
+        <p className='font-semibold text-3xl lg:text-5xl text-[#3B3B3B] mb-6 font-montserrat lg:leading-[56px] '>
           Discover Exciting Events Near You
         </p>
         <p className='font-base font-sans font-medium mb-8'>
@@ -37,10 +37,10 @@ const HeroSection = () => {
           Join an Event
         </button>
       </div>
-      <div className='z-10 w-4/6 flex justify-center'>
+      <div className='z-10 w-full lg:w-4/6 flex justify-center'>
         <Image src={HeroImg} alt='hero_img' className='z-10 w-[500px]' />
       </div>
-      <div className='absolute bottom-10 flex items-center'>
+      <div className='absolute bottom-10 flex items-center flex-wrap justify-center text-sm px-5 md:px-0'>
         ORGANIZE <Image src={Circle} alt='circle' className='w-2 h-2 mx-2' />{" "}
         JOIN
         <Image src={Circle} alt='circle' className='w-2 h-2 mx-2' /> CONNECT

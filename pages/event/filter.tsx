@@ -5,11 +5,13 @@ import multiply from "@/public/assets/images/multiply.svg";
 import Image from "next/image";
 import EventCard from "@/components/eventCard";
 import Footer from "@/components/web/footer";
+import EventHeader from "@/components/eventHeader";
 
 const filter = () => {
   return (
-    <div className="w-full p-[10px] md:p-[20px] grid gap-6">
-      <div className="w-full flex justify-between flex-wrap gap-[15px]">
+    <div className="w-full px-[20px] md:px-[40px] grid gap-4">
+      <EventHeader />
+      <div className="w-full md:mt-0 mt-2 flex justify-between flex-wrap gap-[15px]">
         <div className="gap-[16px] flex items-center">
           <Image
             src={arrow_back_ios}
@@ -44,8 +46,6 @@ const filter = () => {
         </button>
       </div>
       <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-[30px]">
-        <EventCard />
-        <EventCard />
         <EventCard />
         <EventCard />
         <EventCard />

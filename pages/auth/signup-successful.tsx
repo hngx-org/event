@@ -21,18 +21,18 @@ const CheckCircleSVG = () => (
 
 const signupSuccessful = () => {
     return (
-        <div className='w-100 min-h-screen bg-[#FEFEFE] p-6 flex items-center justify-center'>
-            <div className="w-[384px] text-center">
-                <h1 className="text-[#3B3B3B] font-montserrat font-bold text-[40px]">
+        <div className='w-full min-h-screen bg-[#FEFEFE] sm:p-6 flex items-center justify-center'>
+            <div className="max-w-[398px] w-full text-center">
+                <h1 className="text-[#3B3B3B] font-montserrat font-bold text-[32px] sm:text-[40px]">
                     Sign Up Successful
                 </h1>
                 <div className="p-6 border-[10px] border-[#E6FCDE] rounded-full w-min bg-[#CCFABD] mx-auto mt-8">
                     <CheckCircleSVG />
                 </div>
-                <p className="text-[#757575] text-base font-semibold">
+                <p className="text-[#757575] mt-6 text-base font-semibold">
                     Sign Up process has been completed successfully. A verification link has been sent to your mail.
                 </p>
-                <button className="w-[363px] mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold">
+                <button className="w-[377px] mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold active:scale-[0.99]">
                     Go to your mail
                 </button>
             </div>

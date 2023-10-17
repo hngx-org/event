@@ -19,7 +19,7 @@ export default function SuccessPage({ title, text, route, button }: SuccessProps
           </svg>
         </span>
         <p className="text-base text-center text-grey-100 font-semibold font-sans">{text}</p>
-        <button onClick={handleClick} className="py-[18px] text-white bg-secondary-300 w-[363px] rounded-lg text-center" type="button">{button}</button>
+        <button onClick={handleClick} className="py-[18px] text-white font-bold bg-secondary-300 w-[363px] rounded-lg text-center" type="button">{button}</button>
       </div>
     </div>
   )

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import CalendarIcon from "@/components/icons/EventDetails/Calendar";
 import ClockIcon from "@/components/icons/EventDetails/Clock";
 import LocationIcon from "@/components/icons/EventDetails/Location";

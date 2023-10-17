@@ -1,6 +1,6 @@
 import SuccessPage from "@/components/successPage"
 
-export default function ResetSuccesful() {
+export default function ResetPassWordSuccesful() {
   return (
     <SuccessPage
       route="login"

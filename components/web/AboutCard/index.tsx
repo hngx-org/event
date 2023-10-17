@@ -12,14 +12,10 @@ const AboutCard = ({title, subtitle}: any) => {
       />
 
       <p className='mb-4 font-semibold text-xl font-montserrat text-[#3B3B3B]'>
-        Event registration
+        {title}
       </p>
 
-      <p className='text-center text-[#666] font-sans'>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. A, inventore
-        incidunt ea accusamus quod eius voluptate omnis reiciendis eligendi
-        perspiciatis!
-      </p>
+      <p className='text-center text-[#666] font-sans'>{subtitle}</p>
     </div>
   );
 };

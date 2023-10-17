@@ -4,6 +4,29 @@ import VectorImg from "../../../public/images/vectorImg.png";
 import aboutImg from "../../../public/images/aboutImg.png";
 import AboutCard from "../AboutCard/index";
 
+const features = [
+  {
+    title: "Easy Registration",
+    subtitle:
+      "Register for events hassle-free and save time with our streamlined registration process.",
+  },
+  {
+    title: " Event Discovery",
+    subtitle:
+      "Explore a wide range of events and find the perfect ones to attend.",
+  },
+  {
+    title: "Networking Opportunities",
+    subtitle:
+      "Connect with like-minded individuals and expand your professional network at events.",
+  },
+  {
+    title: "Easy Event Creation",
+    subtitle:
+      "Create and manage your own events effortlessly with our intuitive event creation tool.",
+  },
+];
+
 const About = () => {
   return (
     <>
@@ -30,16 +53,18 @@ const About = () => {
 
       <div className='px-5 md:px-20 w-full h-full flex flex-col justify-center items-center lg:flex-row mt-10'>
         <div className='lg:w-3/12 flex flex-col md:flex-row lg:flex-col items-center justify-center h-full gap-y-10'>
-          <AboutCard />
-          <AboutCard />
+          {features.slice(0, 2).map((item, idx) => {
+            return <AboutCard {...item} key={idx} />;
+          })}
         </div>
         <div className='md:w-6/12 p-6'>
           <Image src={aboutImg} alt='hero-img' />
         </div>
 
         <div className='lg:w-3/12 flex flex-col md:flex-row lg:flex-col items-center justify-center h-full gap-y-10'>
-          <AboutCard />
-          <AboutCard />
+          {features.slice(2).map((item, idx) => {
+            return <AboutCard {...item} key={idx} />;
+          })}
         </div>
       </div>
 

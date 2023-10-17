@@ -8,7 +8,7 @@ import Circle from "../../../public/images/circle.png";
 const HeroSection = () => {
   return (
     <div
-      className='h-[95vh] w-screen flex flex-col gap-y-5 md:gap-x-4 lg:gap-x-1 md:flex-row items-center justify-center md:justify-normal px-5 md:px-20'
+      className='h-[93vh] w-screen flex flex-col gap-y-5 md:gap-x-4 lg:gap-x-1 md:flex-row items-center justify-center md:justify-normal px-5 lg:px-20'
       style={{
         background:
           "linear-gradient(102deg, rgba(128, 0, 0, 0.12) -1.54%, rgba(128, 0, 0, 0.06) 18.74%, rgba(128, 0, 0, 0.08) 48.29%, rgba(128, 0, 0, 0.10) 79.52%, rgba(128, 0, 0, 0.05) 100%)",
@@ -19,14 +19,14 @@ const HeroSection = () => {
         alt='spiral'
         className='absolute top-10 object-contain left-0'
       />
-      <div className='h-[95vh] w-3/12 absolute bg-red right-0 z-2 hidden md:block'></div>
+      <div className='h-[93vh] w-4/12 absolute bg-red right-0 z-2 hidden md:block'></div>
       <div className='relative max-w-[508px]'>
         <Image
           src={vectorImg}
           alt='vector_img'
           className='absolute -top-6 right-10 w-10 hidden lg:block'
         />
-        <p className='font-semibold text-3xl lg:text-5xl text-[#3B3B3B] mb-6 font-montserrat lg:leading-[56px] '>
+        <p className='font-semibold text-4xl lg:text-5xl text-[#3B3B3B] mb-6 font-montserrat lg:leading-[56px] '>
           Discover Exciting Events Near You
         </p>
         <p className='font-base font-sans font-medium mb-8'>

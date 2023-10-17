@@ -20,6 +20,7 @@ export default function ForgotPassword(){
             <label className='text-grey-500' htmlFor="forgot-password">Email Address*</label>
             <input
               type="email"
+              placeholder='Enter email address'
               className="p-3 text-grey-50 border border-grey-70 rounded-lg"
               required
             />

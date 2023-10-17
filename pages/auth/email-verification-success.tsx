@@ -25,7 +25,7 @@ const EmailVerificationSuccess = () => {
             <div className="sm:hidden">
                 <Header />
             </div>
-            <div className="w-full min-h-[90vh] sm:min-h-screen bg-[#FEFEFE] sm:p-6 flex items-center justify-center">
+            <div className="w-full min-h-[80vh] sm:min-h-screen bg-[#FEFEFE] sm:p-6 flex items-center justify-center">
                 <div className="max-w-[398px] w-full text-center">
                     <h1 className="text-[#3B3B3B] font-montserrat font-bold text-[32px] sm:text-[40px]">
                         Email Verification Successful

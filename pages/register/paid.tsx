@@ -1,5 +1,6 @@
 import AccountSummary from "@/components/accountSummary";
 import EventHeader from "@/components/eventHeader";
+import EventLayout from "@/components/layout/eventLayout";
 import Footer from "@/components/web/footer";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
@@ -8,8 +9,7 @@ import React from "react";
 
 const Paid = () => {
   return (
-    <div className="w-full ">
-      <EventHeader />
+    <EventLayout>
       <div className="w-full grid gap-4">
         <div className="px-[20px] md:px-[40px] grid gap-4 mt-5">
           <div className="gap-[16px] flex items-center">
@@ -118,10 +118,7 @@ const Paid = () => {
           </div>
         </div>
       </div>
-      <div className="w-full px-[20px] md:px-[40px]">
-        <Footer />
-      </div>
-    </div>
+    </EventLayout>
   );
 };
 

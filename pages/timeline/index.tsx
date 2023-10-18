@@ -1,6 +1,6 @@
 import WebLayout from "@/components/layout/webLayout";
 import BG from "@/public/assets/images/dashboardBg.png";
-import EventCard from "@/components/eventCard";
+import EventCard from "@/components/eventCardTimeline";
 import Event from "@/public/images/event-image.png";
 import Event2 from "@/public/images/event-image-2.png";
 import Event3 from "@/public/images/event-image-3.png";
@@ -32,22 +32,66 @@ export default function Dashboard() {
       <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
         <h4 className="text-2xl font-bold">Upcoming Events Near You</h4>
         <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* How to use the Event Card
-            <EventCard
-              img={Event}
-              title="HNGX Finalist Event"
-              location="Uyo"
-              time="9:00 AM"
-              month="OCT"
-              day="27"
-              cost={0}
-            /> */}
-          <EventCard img={Event} isLive={true} />
-          <EventCard img={Event2} isLive={true} />
-          <EventCard img={Event3} isLive={false} />
-          <EventCard img={Event} isLive={true} />
-          <EventCard img={Event} isLive={true} />
-          <EventCard img={Event} isLive={false} />
+          <EventCard
+            title="Event Name"
+            location="Event Location"
+            time="Event Time"
+            month="OCT"
+            day="08"
+            cost={0}
+            img={Event}
+            isLive={true}
+          />
+          <EventCard
+            title="Event Name"
+            location="Event Location"
+            time="Event Time"
+            month="OCT"
+            day="08"
+            cost={0}
+            img={Event2}
+            isLive={false}
+          />
+          <EventCard
+            title="Event Name"
+            location="Event Location"
+            time="Event Time"
+            month="OCT"
+            day="08"
+            cost={0}
+            img={Event3}
+            isLive={true}
+          />
+          <EventCard
+            title="Event Name"
+            location="Event Location"
+            time="Event Time"
+            month="OCT"
+            day="08"
+            cost={0}
+            img={Event}
+            isLive={true}
+          />
+          <EventCard
+            title="Event Name"
+            location="Event Location"
+            time="Event Time"
+            month="OCT"
+            day="08"
+            cost={0}
+            img={Event}
+            isLive={true}
+          />
+          <EventCard
+            title="Event Name"
+            location="Event Location"
+            time="Event Time"
+            month="OCT"
+            day="08"
+            cost={0}
+            img={Event}
+            isLive={true}
+          />
         </div>
       </div>
       <Footer />

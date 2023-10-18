@@ -6,7 +6,6 @@ import Image from "next/image";
 import EventCard from "@/components/eventCard";
 import Footer from "@/components/web/footer";
 import EventHeader from "@/components/eventHeader";
-import Event from "@/public/images/event-image.png";
 
 const filter = () => {
   return (
@@ -47,10 +46,10 @@ const filter = () => {
         </button>
       </div>
       <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-[30px]">
-        <EventCard img={Event} isLive={true} />
-        <EventCard img={Event} isLive={true} />
-        <EventCard img={Event} isLive={true} />
-        <EventCard img={Event} isLive={true} />
+        <EventCard />
+        <EventCard />
+        <EventCard />
+        <EventCard />
       </div>
       <Footer />
     </div>

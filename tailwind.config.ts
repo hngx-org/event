@@ -13,7 +13,6 @@ const config: Config = {
         montserrat: ["Montserrat", "sans-serif"],
       },
       colors: {
-        red: "#800000",
         primary: {
           50: "#fae9ef",
           75: "#eba4be",

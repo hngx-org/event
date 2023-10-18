@@ -20,6 +20,7 @@ interface filterParam {
 const Filter = () => {
   const searchParams = useSearchParams();
   const router = useRouter();
+  const [removeAlltxt, setRemoveAlltxt] = useState(true);
   const [params, setParams] = useState<filterParam>();
   const location = searchParams.get("location");
   const category = searchParams.get("category");
@@ -38,7 +39,7 @@ const Filter = () => {
         !newParams.date &&
         !newParams.fee
       ) {
-        router.push("/timeline");
+        setRemoveAlltxt(false);
       }
     }
   };
@@ -107,12 +108,14 @@ const Filter = () => {
                     <Image src={multiply} alt="close" />
                   </button>
                 )}
-                <button
-                  className="underline text-secondary-300 cursor-pointer"
-                  onClick={removeAll}
-                >
-                  Remove All
-                </button>
+                {removeAlltxt && (
+                  <button
+                    className="underline text-secondary-300 cursor-pointer"
+                    onClick={removeAll}
+                  >
+                    Remove All
+                  </button>
+                )}
               </div>
               <button className="text-base font-bold text-white bg-secondary-300 py-4 px-8 flex gap-[8px] items-center rounded-lg">
                 <Image src={filterIcon} alt="filter" />

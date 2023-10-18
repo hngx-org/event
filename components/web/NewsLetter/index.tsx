@@ -4,7 +4,7 @@ import {useState} from "react";
 const NewsLetter = () => {
   const [email, setUsername] = useState("");
   return (
-    <div className='w-full bg-black px-4 py-20 lg:px-20 mb-16 text-white'>
+    <div className='w-full max-w-7xl bg-black px-4 py-20 lg:px-20 mb-16 text-white  mx-auto'>
       <div className='max-w-lg'>
         <p className='font-montserrat text-3xl lg:text-4xl font-semibold mb-4'>
           Stay Updated with Our Newsletter

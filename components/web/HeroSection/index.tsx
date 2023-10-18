@@ -8,7 +8,7 @@ import Circle from "../../../public/images/circle.png";
 const HeroSection = () => {
   return (
     <div
-      className='h-[93vh] w-screen flex flex-col gap-y-5 md:gap-x-4 lg:gap-x-1 md:flex-row items-center justify-center md:justify-normal px-5 lg:px-20'
+      className='h-[93vh] w-screen 2xl:xl:max-w-7xl mx-auto flex flex-col gap-y-5 md:gap-x-4 lg:gap-x-1 md:flex-row items-center justify-center md:justify-normal px-5 lg:px-20'
       style={{
         background:
           "linear-gradient(102deg, rgba(128, 0, 0, 0.12) -1.54%, rgba(128, 0, 0, 0.06) 18.74%, rgba(128, 0, 0, 0.08) 48.29%, rgba(128, 0, 0, 0.10) 79.52%, rgba(128, 0, 0, 0.05) 100%)",

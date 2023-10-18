@@ -1,5 +1,5 @@
-import {User} from "@/@types";
-import {useEffect, useState} from "react";
+import { User } from "@/@types";
+import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 
 export function useAuth() {
@@ -19,5 +19,5 @@ export function useAuth() {
     }
   }, []);
 
-  return {user, token};
+  return { user, token };
 }

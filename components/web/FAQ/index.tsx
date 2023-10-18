@@ -49,7 +49,7 @@ const FAQ = () => {
             <>
               <div
                 key={idx}
-                className='flex justify-between mb-4 px-2 transition-all duration-300 ease-in-out'
+                className='flex justify-between mb-3 px-2 transition-all ease-in-out duration-[2000]'
               >
                 <h5>{item.question}</h5>
                 <PlusIcon
@@ -58,8 +58,10 @@ const FAQ = () => {
                 />
               </div>
               <div
-                className={`px-2 mb-2 transition-max-height transform ${
-                  idx === currentItem ? "max-h-[600px]" : "max-h-0"
+                className={`px-2 mb-2 transition-all transform ${
+                  idx === currentItem
+                    ? "h-auto translate-y-0"
+                    : "h-0 -translate-y-3 overflow-hidden"
                 }`}
               >
                 {item.answer}

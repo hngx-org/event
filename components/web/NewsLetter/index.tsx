@@ -2,7 +2,7 @@ import React from "react";
 import {useState} from "react";
 
 const NewsLetter = () => {
-  const [email, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   return (
     <div className='w-full max-w-7xl bg-black px-4 py-20 lg:px-20 mb-16 text-white  mx-auto'>
       <div className='max-w-lg'>
@@ -20,10 +20,18 @@ const NewsLetter = () => {
           name='email'
           id='email'
           value={email}
-          className='rounded px-3 py-2 mr-2 w-full lg:w-3/12'
+          onChange={(e) => setEmail(e.target.value)}
+          className='rounded px-3 py-2 mr-2 w-full lg:w-3/12 text-black'
           placeholder='Enter email address'
         />
-        <button className='bg-red rounded-md px-6 text-center'>Submit</button>
+        <button
+          className='bg-red rounded-md px-6 text-center'
+          onClick={() => {
+            console.log(email);
+          }}
+        >
+          Submit
+        </button>
       </div>
 
       <p className='font text-xs font-mono mt-4'>

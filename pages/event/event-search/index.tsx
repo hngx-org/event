@@ -2,35 +2,13 @@ import EventCard from "@/components/eventCard";
 import Link from "next/link";
 import Image from "next/image";
 import Footer from "@/components/web/footer";
+import EventHeader from "@/components/eventHeader";
 
 export default function SearchResults() {
   return (
     <div className="max-w-7xl w-full h-full mx-auto my-10 ">
-      <header className="flex justify-between mb-10">
-        <div className="flex gap-20 items-center">
-          <Image src="/images/Logo.svg" alt="Logo" width={133} height={31} />
-
-          <div className="w-[380px] flex gap-2 items-center rounded-lg border border-black p-3">
-            <Image
-              src="/images/search.svg"
-              alt="search icon"
-              width={16}
-              height={16}
-            />
-            <p className=" font-medium text-[#666]">Search for more events</p>
-          </div>
-        </div>
-        <div className="flex gap-4 items-center ">
-          <Image
-            src="/images/avatar.svg"
-            alt="search icon"
-            width={40}
-            height={40}
-          />
-          <p className=" font-semibold">Username</p>
-        </div>
-      </header>
-      <div className="w-full flex justify-between">
+      <EventHeader />
+      <div className="w-full mt-6 flex justify-between">
         <Link href={"#"} className="flex gap-2 items-center">
           <Image
             src="/images/backarrow.svg"
@@ -42,7 +20,10 @@ export default function SearchResults() {
             Search results for <span className="font-bold">“search input”</span>
           </p>
         </Link>
-        <button className="bg-[#800000] rounded-lg px-8 py-4 flex gap-2">
+        <Link
+          href="./filter"
+          className="bg-[#800000] rounded-lg px-8 py-4 flex gap-2"
+        >
           <svg
             width="24"
             height="24"
@@ -64,7 +45,7 @@ export default function SearchResults() {
             />
           </svg>
           <p className="font-bold text-white">Filter</p>
-        </button>
+        </Link>
       </div>
       <div className="mt-9 mb-14 grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
         <EventCard />

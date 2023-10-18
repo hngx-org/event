@@ -10,9 +10,8 @@ const EventHeader = () => {
   return (
     <div className="w-full flex px-[20px] md:px-[40px] justify-between items-center py-[20px] gap-3 relative">
       <div
-        className={`w-full ${
-          showSearch ? "flex" : "hidden"
-        } bottom-[-25px] items-center gap-4 border border-black/20 p-[10px] max-w-[350px] rounded-lg absolute`}
+        className={`w-full ${showSearch ? "flex" : "hidden"
+          } bottom-[-25px] items-center gap-4 border border-black/20 p-[10px] max-w-[350px] rounded-lg absolute`}
       >
         <input
           type="text"
@@ -39,6 +38,8 @@ const EventHeader = () => {
       </div>
       <div className="flex items-center gap-[20px]">
         <button
+          title="search btn"
+          type="button"
           onClick={() => toggleSearch(showSearch)}
           className="md:hidden flex"
         >

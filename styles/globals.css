@@ -9,9 +9,3 @@
     display: grid;
     grid-template-columns: auto auto auto;
 }
-
-/* 
-* {
-    box-sizing: border-box;
-    border: 2px solid green;
-} */

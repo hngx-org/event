@@ -1,3 +1,5 @@
+import { StaticImageData } from "next/image";
+
 export type SuccessProps = {
   title: string;
   text: string;
@@ -22,4 +24,15 @@ export type User = {
   id: string;
   token: string;
   username: string;
+};
+
+export type EventCardProps = {
+  img: StaticImageData | string;
+  title: string;
+  location: string;
+  time: string;
+  month: string;
+  day: string;
+  isLive: boolean;
+  cost: number;
 };

@@ -34,7 +34,7 @@ export default function LoginForm() {
         Cookies.set("user", JSON.stringify(response.user));
         toast.success("Log in successful");
         setTimeout(() => {
-          router.push("/");
+          router.push("/timeline");
         }, 1000);
       }
     } catch (error: any) {

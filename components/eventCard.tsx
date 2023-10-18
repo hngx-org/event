@@ -40,10 +40,10 @@ const EventCard = () => {
       </div>
       <div className="w-full flex justify-between px-[24px] py-3">
         <div className="flex gap-2 items-center">
-          <Image src={Ellipse} alt="arrow" className="w-[24px] h-[24px]" />
-          <p className="text-[#30980C]">Free</p>
+          <Image src={Ellipse} alt="arrow" className="w-[10px] h-[10px]" />
+          <p className="text-[#30980C]">Live</p>
         </div>
-        <p className="font-bold px-2">Live</p>
+        <p className="font-bold px-2">Free</p>
       </div>
     </div>
   );

@@ -61,10 +61,12 @@ export default function ResetPassword() {
           setTimeout(() => {
             router.push("/auth/reset-password-successful");
           }, 1000);
+        } else {
+          toast.error("Password reset failed.");
         }
       } 
     } catch (error) {
-      toast.error("Password reset failed.", {
+      toast.error("Error resetting password.", {
         position: "top-right",
       });
       setSubmitting(false);

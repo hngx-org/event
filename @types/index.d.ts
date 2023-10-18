@@ -7,6 +7,25 @@ export type SuccessProps = {
   button: string;
 };
 
+export type SignupData = {
+  name: string;
+  email: string;
+  password: string;
+};
+
+export type LoginData = {
+  email: string;
+  password: string;
+};
+
+export type User = {
+  avatar: string;
+  email: string;
+  id: string;
+  token: string;
+  username: string;
+};
+
 export type EventCardProps = {
   img: StaticImageData | string;
   title: string;

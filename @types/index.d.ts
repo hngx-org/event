@@ -4,7 +4,7 @@ export type SuccessProps = {
   title: string;
   text: string;
   route: string;
-  button: string;
+  button: strng;
 };
 
 export type SignupData = {

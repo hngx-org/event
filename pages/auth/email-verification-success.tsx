@@ -1,3 +1,4 @@
+import Header from '@/components/web/header';
 import React from 'react'
 
 const CheckCircleSVG = () => (
@@ -20,22 +21,29 @@ const CheckCircleSVG = () => (
 
 const EmailVerificationSuccess = () => {
     return (
-        <div className="w-full min-h-screen bg-[#FEFEFE] sm:p-6 flex items-center justify-center">
-            <div className="max-w-[398px] w-full text-center">
-                <h1 className="text-[#3B3B3B] font-montserrat font-bold text-[32px] sm:text-[40px]">
-                    Email Verification Successful
-                </h1>
-                <div className="p-6 border-[10px] border-[#E6FCDE] rounded-full w-min bg-[#CCFABD] mx-auto mt-8">
-                    <CheckCircleSVG />
-                </div>
-                <p className="text-[#757575] mt-6 text-base font-semibold">
-                    Congratulations! Your email has been verified
-                </p>
-                <button className="w-full mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold active:scale-[0.99]">
-                    Go to EventWave Timeline
-                </button>
+        <>
+            <div className="sm:hidden">
+                <Header />
             </div>
-        </div>
+            <div className="w-full min-h-[80vh] sm:min-h-screen bg-[#FEFEFE] p-6 sm:p-0 flex items-center justify-center">
+                <div className="max-w-[605px] w-full text-center">
+                    <h1 className="text-[#3B3B3B] font-montserrat font-bold text-[32px] sm:text-[40px]">
+                        Email Verification Successful
+                    </h1>
+                    <div className="max-w-[398px] mx-auto">
+                        <div className="p-6 border-[10px] border-[#E6FCDE] rounded-full w-min bg-[#CCFABD] mx-auto mt-8">
+                            <CheckCircleSVG />
+                        </div>
+                        <p className="text-[#757575] mt-6 text-base font-semibold font-sans">
+                            Congratulations! Answer a few questions to customize your event timeline and make it uniquely yours
+                        </p>
+                        <button className="w-full mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold active:scale-[0.99] font-sans">
+                            Proceed
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </>
     )
 }
 

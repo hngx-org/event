@@ -19,7 +19,7 @@ const HeroSection = () => {
         alt='spiral'
         className='absolute top-10 object-contain left-0'
       />
-      <div className='h-[93vh] w-4/12 absolute bg-red right-0 z-2 hidden md:block'></div>
+      <div className='h-[93vh] w-4/12 absolute bg-secondary-300 right-0 z-2 hidden md:block'></div>
       <div className='relative max-w-[508px]'>
         <Image
           src={vectorImg}
@@ -33,7 +33,7 @@ const HeroSection = () => {
           Join our vibrant community and never miss out on the best events
           happening in your area.
         </p>
-        <button className='rounded-md px-5 py-2 bg-red text-white'>
+        <button className='rounded-md px-5 py-2 bg-secondary-300 text-white'>
           Join an Event
         </button>
       </div>

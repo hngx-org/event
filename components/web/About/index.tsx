@@ -69,7 +69,7 @@ const About = () => {
       </div>
 
       <div className='w-full flex justify-center mt-16'>
-        <button className='bg-red rounded-lg text-center text-white px-4 py-2'>
+        <button className='bg-secondary-300 rounded-lg text-center text-white px-4 py-2'>
           Create an account
         </button>
       </div>

@@ -8,10 +8,10 @@ export default function EventLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="w-full">
+    <>
       <EventHeader />
-      <div className="w-full"> {children} </div>
+      {children}
       <Footer />
-    </div>
+    </>
   );
 }

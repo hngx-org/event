@@ -5,7 +5,10 @@ import Input from "./input";
 import InputPassword from "./inputPassword";
 import ClipLoader from "react-spinners/ClipLoader";
 import * as yup from "yup";
-// import {toast} from "react-toastify";
+import service from "@/lib/auth/signInWithCredentials";
+import {toast} from "react-toastify";
+import {useRouter} from "next/navigation";
+import Cookies from "js-cookie";
 
 const override: CSSProperties = {
   borderWidth: "3px",
@@ -22,21 +25,26 @@ const validationSchema = yup.object().shape({
 });
 
 export default function LoginForm() {
+  const router = useRouter();
   const onSubmit = async (values: typeof initialValues, setSubmitting: any) => {
-    console.log(values);
-    // try {
-    // } catch (error: any) {
-    //   if (error && error.response) {
-    //     toast.error(error.response.data.message, {
-    //       position: "top-right",
-    //     });
-    //   } else {
-    //     toast.error("Something went wrong!", {
-    //       position: "top-right",
-    //     });
-    //   }
-    //   setSubmitting(false);
-    // }
+    try {
+      const response = await service.signin(values);
+      if (response.statusCode === 200) {
+        Cookies.set("token", response.token);
+        Cookies.set("user", JSON.stringify(response.user));
+        toast.success("Log in successful");
+        setTimeout(() => {
+          router.push("/");
+        }, 1000);
+      }
+    } catch (error: any) {
+      if (error && error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+      setSubmitting(false);
+    }
   };
 
   return (

@@ -5,38 +5,45 @@ import Input from "./input";
 import InputPassword from "./inputPassword";
 import ClipLoader from "react-spinners/ClipLoader";
 import * as yup from "yup";
-// import {toast} from "react-toastify";
+import {toast} from "react-toastify";
+import service from "@/lib/auth/signup";
+import {useRouter} from "next/navigation";
 
 const override: CSSProperties = {
   borderWidth: "3px",
 };
 
 const initialValues = {
+  name: "",
   email: "",
   password: "",
 };
 
 const validationSchema = yup.object().shape({
+  name: yup.string().required("Please enter your full name"),
   email: yup.string().email("Invalid Email").required("Email is required"),
   password: yup.string().min(8).required("Password is required"),
 });
 
 export default function SignupForm() {
+  const router = useRouter();
   const onSubmit = async (values: typeof initialValues, setSubmitting: any) => {
-    console.log(values);
-    // try {
-    // } catch (error: any) {
-    //   if (error && error.response) {
-    //     toast.error(error.response.data.message, {
-    //       position: "top-right",
-    //     });
-    //   } else {
-    //     toast.error("Something went wrong!", {
-    //       position: "top-right",
-    //     });
-    //   }
-    //   setSubmitting(false);
-    // }
+    try {
+      const response = await service.signup(values);
+      if (response.ok) {
+        toast.success("User created successfully");
+        setTimeout(() => {
+          router.push("/auth/signup-successful");
+        }, 1000);
+      }
+    } catch (error: any) {
+      if (error && error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -50,6 +57,14 @@ export default function SignupForm() {
           return (
             <Form action="" autoComplete="off">
               <div className="grid grid-cols-1 gap-5">
+                {/* Name */}
+                <Input
+                  name="name"
+                  label="Name"
+                  type="name"
+                  placeholder="Full name"
+                />
+
                 {/* Email */}
                 <Input
                   name="email"
@@ -62,7 +77,7 @@ export default function SignupForm() {
                 <InputPassword
                   name="password"
                   label="Password"
-                  placeholder="Enter your password"
+                  placeholder="password"
                 />
 
                 <div className="w-full">

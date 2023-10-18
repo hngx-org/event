@@ -22,7 +22,7 @@ export default function EventCard({
           alt={"title"}
           className="rounded-t-md w-full h-[240px] 2xl:h-[280px]"
         />
-        <div className="mt-5 mr-5 absolute top-0 right-0 bg-white hover:bg-gray-100 hover:cursor-pointer active:bg-gray-200 w-max rounded-bg p-0.5 rounded-full">
+        <button className="mt-5 mr-5 absolute top-0 right-0 bg-white hover:bg-gray-100 active:bg-gray-200 w-max rounded-bg p-0.5 rounded-full">
           <svg
             width="24"
             height="24"
@@ -64,7 +64,7 @@ export default function EventCard({
               </clipPath>
             </defs>
           </svg>
-        </div>
+        </button>
       </div>
       <div className="p-5">
         <div className="flex justify-between">

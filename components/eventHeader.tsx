@@ -21,7 +21,7 @@ const EventHeader = () => {
 
   return (
     <div>
-      <div className="w-full flex px-[20px] md:px-[40px] justify-between items-center py-[20px] gap-3 relative">
+      <div className="w-full flex justify-between items-center py-[20px] gap-3 relative">
         <div className="flex items-center gap-[40px]">
           <Image
             src={Logo}
@@ -33,7 +33,7 @@ const EventHeader = () => {
           <div className="w-full md:flex hidden items-center gap-4 border border-black/20 p-[10px] max-w-[350px] rounded-lg">
             <Image src={search} alt="search" className="h-4 w-4" />
             <input
-              onChange={handleChange}
+              onKeyDown={handleChange}
               type="text"
               placeholder="Search Input"
               className="w-full border-none outline-none"
@@ -52,7 +52,7 @@ const EventHeader = () => {
         </div>
       </div>
       {showSearch && (
-        <div className="md:hidden mx-[20px] mb-2.5 items-center gap-4 border border-black/20 p-[10px] rounded-lg">
+        <div className="md:hidden mb-2.5 items-center gap-4 border border-black/20 p-[10px] rounded-lg">
           <input
             value={searchQuery}
             onChange={handleChange}

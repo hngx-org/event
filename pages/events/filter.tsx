@@ -4,19 +4,17 @@ import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import filterIcon from "@/public/assets/images/filter.svg";
 import multiply from "@/public/assets/images/multiply.svg";
 import Image from "next/image";
-import EventCard from "@/components/eventCard";
-import Footer from "@/components/web/footer";
-import EventHeader from "@/components/eventHeader";
 import { useRouter } from "next/router";
+import eventImage from "@/public/images/event-image.png";
 import { useSearchParams } from "next/navigation";
-import { string } from "yup";
 import EventLayout from "@/components/layout/eventLayout";
+import EventCard from "@/components/eventCard";
 
 interface filterParam {
-  location?: string;
-  date?: string;
-  category?: string;
-  fee?: string;
+  location?: string | null;
+  date?: string | null;
+  category?: string | null;
+  fee?: string | null;
 }
 
 const Filter = () => {
@@ -27,51 +25,134 @@ const Filter = () => {
   const category = searchParams.get("category");
   const date = searchParams.get("date");
   const fee = searchParams.get("fee");
-  console.log(fee);
+
+  const remove = (keyToRemove: keyof filterParam) => {
+    if (params) {
+      const newParams = { ...params };
+      delete newParams[keyToRemove];
+      setParams(newParams);
+
+      if (
+        !newParams.location &&
+        !newParams.category &&
+        !newParams.date &&
+        !newParams.fee
+      ) {
+        router.push("/timeline");
+      }
+    }
+  };
+
+  const removeAll = () => {
+    setParams({
+      location: null,
+      date: null,
+      category: null,
+      fee: null,
+    });
+    router.push("/timeline");
+  };
+
+  useEffect(() => {
+    setParams({
+      location,
+      category,
+      date,
+      fee,
+    });
+  }, [location, category, date, fee]);
+
+  const stringWithoutSingleQuotes = (data: string) => data.replace(/'/g, "");
+
   return (
     <EventLayout>
       <div className="w-full grid gap-4">
-        <div className="px-[20px] md:px-[40px] grid gap-4">
-          <div className="w-full md:mt-0 mt-2 flex justify-between flex-wrap gap-[15px]">
-            <div className="gap-[16px] flex items-center">
-              <Image
-                src={arrow_back_ios}
-                alt="arrow"
-                className="w-[24px] h-[24px]"
-              />
-              <h3 className="font-montserrat text-xl md:text-[24px] text-gray-600">
-                Search results for{" "}
-                <span className="font-bold">“search input”</span>
-              </h3>
+        <div className=" grid gap-4">
+          <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
+            <div className="w-full md:mt-0 mt-2 flex justify-between flex-wrap gap-[15px]">
+              <div className=" flex gap-4 flex-wrap items-center">
+                {params?.location && (
+                  <button
+                    className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg"
+                    onClick={() => remove("location")}
+                  >
+                    <p>{stringWithoutSingleQuotes(params.location)}</p>
+                    <Image src={multiply} alt="close" />
+                  </button>
+                )}
+                {params?.date && (
+                  <button
+                    className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg"
+                    onClick={() => remove("date")}
+                  >
+                    <p>{stringWithoutSingleQuotes(params.date)}</p>
+                    <Image src={multiply} alt="close" />
+                  </button>
+                )}
+                {params?.category && (
+                  <button
+                    className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg"
+                    onClick={() => remove("category")}
+                  >
+                    <p>{stringWithoutSingleQuotes(params.category)}</p>
+                    <Image src={multiply} alt="close" />
+                  </button>
+                )}
+                {params?.fee && (
+                  <button
+                    className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg"
+                    onClick={() => remove("fee")}
+                  >
+                    <p>{stringWithoutSingleQuotes(params.fee)}</p>
+                    <Image src={multiply} alt="close" />
+                  </button>
+                )}
+                <button
+                  className="underline text-secondary-300 cursor-pointer"
+                  onClick={removeAll}
+                >
+                  Remove All
+                </button>
+              </div>
+              <button className="text-base font-bold text-white bg-secondary-300 py-4 px-8 flex gap-[8px] items-center rounded-lg">
+                <Image src={filterIcon} alt="filter" />
+                <p>Filter</p>
+              </button>
             </div>
-            <button className="text-base font-bold text-white bg-secondary-300 py-4 px-8 flex gap-[8px] items-center rounded-lg">
-              <Image src={filterIcon} alt="filter" />
-              <p>Filter</p>
-            </button>
           </div>
-          <div className="w-full flex gap-4 flex-wrap">
-            <button className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg">
-              <p>Location</p>
-              <Image src={multiply} alt="close" />
-            </button>
-            <button className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg">
-              <p>Date</p>
-              <Image src={multiply} alt="close" />
-            </button>
-            <button className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg">
-              <p>Category</p>
-              <Image src={multiply} alt="close" />
-            </button>
-            <button className="text-base text-black border border-black py-[14px] px-3 flex gap-[1px] items-center rounded-lg">
-              <p>Paid/Free</p>
-              <Image src={multiply} alt="close" />
-            </button>
-          </div>
-          <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-[30px]">
-            <EventCard />
-            <EventCard />
-            <EventCard />
-            <EventCard />
+          <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
+            <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <EventCard
+                title="Event Name"
+                location="Event Location"
+                time="Event Time"
+                month="OCT"
+                day="08"
+                cost={0}
+                img={eventImage}
+                isLive={true}
+              />
+              <EventCard
+                title="Event Name"
+                location="Event Location"
+                time="Event Time"
+                month="OCT"
+                day="08"
+                cost={0}
+                img={eventImage}
+                isLive={false}
+              />
+              <EventCard
+                title="Event Name"
+                location="Event Location"
+                time="Event Time"
+                month="OCT"
+                day="08"
+                cost={0}
+                img={eventImage}
+                isLive={true}
+              />
+            </div>
           </div>
         </div>
       </div>

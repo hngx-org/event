@@ -62,7 +62,7 @@ const Events = () => {
               <p>Filter</p>
             </Link>
           </div>
-          <div className="w-full flex gap-4 flex-wrap">
+          {/* <div className="w-full flex gap-4 flex-wrap">
             <button className="text-base text-black border border-black py-[14px] px-3 flex gap-[10px] items-center rounded-lg">
               <p>Location</p>
               <Image src={multiply} alt="close" />
@@ -79,7 +79,7 @@ const Events = () => {
               <p>Paid/Free</p>
               <Image src={multiply} alt="close" />
             </button>
-          </div>
+          </div> */}
           <div className="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[30px]">
             <EventCard
               title="Event Name"

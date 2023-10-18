@@ -11,7 +11,7 @@ const Paid = () => {
   return (
     <EventLayout>
       <div className="w-full grid gap-4">
-        <div className="px-[20px] md:px-[40px] grid gap-4 mt-5">
+        <div className="grid gap-4 mt-5">
           <div className="gap-[16px] flex items-center">
             <Image
               src={arrow_back_ios}
@@ -31,7 +31,7 @@ const Paid = () => {
             className="w-full h-full object-cover"
           />
         </div>
-        <div className="w-full px-[20px] md:px-[40px] gap-6 grid md:grid-cols-[1fr_0.5fr] grid-cols-1 my-10">
+        <div className="w-full  gap-6 grid md:grid-cols-[1fr_0.5fr] grid-cols-1 my-10">
           <div className="w-full grid md:grid-cols-2 grid-cols-1  gap-6">
             <div className="w-full grid gap-2">
               <label htmlFor="firstName" className="font-medium text-gray-500">

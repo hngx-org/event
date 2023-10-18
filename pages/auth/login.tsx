@@ -1,6 +1,6 @@
+import GoogleSignin from "@/components/form/googleSignin";
 import LoginForm from "@/components/form/loginForm";
 import AuthenticationLayout from "@/components/layout/authenticationLayout";
-import {GoogleIcon} from "@/public/assets/icons/socialIcons";
 import Link from "next/link";
 import React from "react";
 
@@ -15,14 +15,7 @@ export default function Login() {
           Please enter the correct details
         </p>
         <LoginForm />
-        <button className="mt-6 mb-8 lg:mb-12 flex gap-4 items-center justify-center border rounded-lg border-secondary-300 w-full py-3">
-          <span>
-            <GoogleIcon />
-          </span>
-          <span className="font-bold text-secondary-300">
-            Sign in with Google
-          </span>
-        </button>
+        <GoogleSignin />
         <p className="text-center font-medium text-grey-200">
           <span>Already have an account?</span>
           <Link

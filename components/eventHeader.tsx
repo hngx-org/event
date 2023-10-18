@@ -8,7 +8,7 @@ const EventHeader = () => {
   const [showSearch, setShowSearch] = useState(false);
   const toggleSearch = (prev: boolean) => setShowSearch(!prev);
   return (
-    <div className="w-full flex justify-between items-center py-[20px] gap-3 relative">
+    <div className="w-full flex px-[20px] md:px-[40px] justify-between items-center py-[20px] gap-3 relative">
       <div
         className={`w-full ${
           showSearch ? "flex" : "hidden"

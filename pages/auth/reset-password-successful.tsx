@@ -8,7 +8,7 @@ export default function ResetPassWordSuccesful() {
         <Header />
       </div>
       <SuccessPage
-        route="login"
+        route="auth/login"
         title="Reset password successful" 
         text="Your password has been successfully reset. Click below to log in."
         button="Back to Login" 

@@ -1,7 +1,5 @@
-import AccountSummary from "@/components/accountSummary";
-import EventHeader from "@/components/eventHeader";
 import EventLayout from "@/components/layout/eventLayout";
-import Footer from "@/components/web/footer";
+import RegisterSuccessful from "@/components/modals/register-successful";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import Image from "next/image";
@@ -9,6 +7,7 @@ import React, { useState } from "react";
 
 const Free = () => {
   const [num, setNum] = useState<number>(1);
+  const [showModal, setShowModal] = useState<boolean>(false)
   const increment = () => {
     setNum(num + 1);
   };
@@ -18,6 +17,12 @@ const Free = () => {
       setNum(num - 1);
     }
   };
+
+  const onsubmit = (e: any) => {
+    e.preventDefault()
+    setShowModal(true)
+  }
+
   return (
     <EventLayout>
       <div className="w-full">
@@ -40,8 +45,11 @@ const Free = () => {
           className="w-full max-h-[458px] h-full object-cover  mt-11"
         />
 
-        <form className="container mx-auto px-[20px] md:px-[40px] gap-10 md:gap-6 md:justify-between flex flex-col sm:flex-row mt-8">
-          <div className="max-w-[735px] w-full">
+        <form
+          onSubmit={onsubmit}
+          className="container mx-auto px-[20px] md:px-[40px] gap-10 md:gap-6 md:justify-between flex flex-col sm:flex-row mt-8">
+          <div className="max-w-[735px] w-full"
+          >
             <h1 className="text-[3B3B3B] font-montserrat text-2xl font-bold">Contact Information</h1>
             {/* FIRST AND LAST NAME */}
             <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
@@ -122,7 +130,7 @@ const Free = () => {
                     <option value="+1">+1</option>
                   </select>
                   <input
-                    type="number"
+                    type="tel"
                     placeholder="8123456789"
                     className="w-full py-3 px-[10px] focus-visible:outline-none"
                     required
@@ -230,6 +238,15 @@ const Free = () => {
         </div>
         <hr />
       </div>
+      {/* Modal */}
+      {showModal && (
+        <RegisterSuccessful
+          title="Register Successful"
+          text="You’re officially registered for the event. Your ticket has been sent to your mail. Check your inbox for confirmation."
+          route="timeline"
+          button="Back to Timeline"
+        />
+      )}
     </EventLayout>
   );
 };

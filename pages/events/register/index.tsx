@@ -43,7 +43,7 @@ const Register = () => {
   return (
     <EventLayout>
       <div className="w-full grid gap-4">
-        <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
+        <div className="px-8 sm:px-12 md:px-16 lg:px-20">
           <div className="grid gap-4 mt-5">
             <div className="gap-[16px] flex items-center">
               <Image

@@ -1,14 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import filterIcon from "@/public/assets/images/filter.svg";
 import multiply from "@/public/assets/images/multiply.svg";
 import Image from "next/image";
-import { useRouter } from "next/router";
-import eventImage from "@/public/images/event-image.png";
 import { useSearchParams } from "next/navigation";
 import EventLayout from "@/components/layout/eventLayout";
 import EventCard from "@/components/eventCard";
+import { EventProps } from "@/@types";
 
 interface filterParam {
   location?: string | null;
@@ -16,16 +14,21 @@ interface filterParam {
   category?: string | null;
   fee?: string | null;
 }
+type ApiResponse = {
+  message: string;
+  data: EventProps[];
+};
 
 const Filter = () => {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const [removeAlltxt, setRemoveAlltxt] = useState(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const [params, setParams] = useState<filterParam>();
+  const [removeAlltxt, setRemoveAlltxt] = useState(true);
   const location = searchParams.get("location");
   const category = searchParams.get("category");
   const date = searchParams.get("date");
   const fee = searchParams.get("fee");
+  const [filteredEvents, setFilteredEvents] = useState<EventProps[] | null>();
 
   const remove = (keyToRemove: keyof filterParam) => {
     if (params) {
@@ -51,7 +54,40 @@ const Filter = () => {
       category: null,
       fee: null,
     });
-    router.push("/timeline");
+    setRemoveAlltxt(false);
+  };
+
+  const fetchEvents = async () => {
+    setLoading(true);
+    try {
+      if (!params) {
+        return;
+        setLoading(false);
+      }
+
+      const url = new URL("https://wetindeysup-api.onrender.com/api/events");
+      const queryParams = new URLSearchParams();
+
+      if (params.location) queryParams.set("location", params.location);
+      if (params.date) queryParams.set("date", params.date);
+      if (params.category) queryParams.set("category", params.category);
+      if (params.fee) queryParams.set("fee", params.fee);
+
+      url.search = queryParams.toString();
+
+      const response = await fetch(url.toString());
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+        setLoading(false);
+      }
+
+      const data: ApiResponse = await response.json();
+      setFilteredEvents(data.data);
+      setLoading(false);
+    } catch (error) {
+      console.error(error);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -62,6 +98,10 @@ const Filter = () => {
       fee,
     });
   }, [location, category, date, fee]);
+
+  useEffect(() => {
+    fetchEvents();
+  }, [params]);
 
   const stringWithoutSingleQuotes = (data: string) => data.replace(/'/g, "");
 
@@ -108,14 +148,17 @@ const Filter = () => {
                     <Image src={multiply} alt="close" />
                   </button>
                 )}
-                {removeAlltxt && (
-                  <button
-                    className="underline text-secondary-300 cursor-pointer"
-                    onClick={removeAll}
-                  >
-                    Remove All
-                  </button>
-                )}
+                {params?.location !== null &&
+                  params?.date !== null &&
+                  params?.fee !== null &&
+                  params?.category !== null && (
+                    <button
+                      className="underline text-secondary-300 cursor-pointer"
+                      onClick={removeAll}
+                    >
+                      Remove All
+                    </button>
+                  )}
               </div>
               <button className="text-base font-bold text-white bg-secondary-300 py-4 px-8 flex gap-[8px] items-center rounded-lg">
                 <Image src={filterIcon} alt="filter" />
@@ -125,36 +168,21 @@ const Filter = () => {
           </div>
           <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
             <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              <EventCard
-                title="Event Name"
-                location="Event Location"
-                time="Event Time"
-                month="OCT"
-                day="08"
-                cost={0}
-                img={eventImage}
-                isLive={true}
-              />
-              <EventCard
-                title="Event Name"
-                location="Event Location"
-                time="Event Time"
-                month="OCT"
-                day="08"
-                cost={0}
-                img={eventImage}
-                isLive={false}
-              />
-              <EventCard
-                title="Event Name"
-                location="Event Location"
-                time="Event Time"
-                month="OCT"
-                day="08"
-                cost={0}
-                img={eventImage}
-                isLive={true}
-              />
+              {filteredEvents &&
+                filteredEvents.map((event) => (
+                  <EventCard
+                    key={event.id}
+                    title={event.name}
+                    location={event.location}
+                    startTime={event.startTime}
+                    month={event.startDate}
+                    endTime={event.endTime}
+                    cost={event.ticketPrice || 0}
+                    img={event.image || ""}
+                    id={event.id}
+                  />
+                ))}
+              {loading && <p>Loading events...</p>}
             </div>
           </div>
         </div>

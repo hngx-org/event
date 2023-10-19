@@ -30,11 +30,11 @@ export type EventCardProps = {
   img: StaticImageData | string;
   title: string;
   location: string;
-  time: string;
+  startTime: string;
   month: string;
-  day: string;
-  isLive: boolean;
   cost: number;
+  endTime: string;
+  id: string;
 };
 
 export interface initialValues {
@@ -45,4 +45,24 @@ export interface initialValues {
   gender: string;
   howDidYouHear: string;
   paymentMethod: string;
+}
+
+export interface EventProps {
+  id: string;
+  name: string;
+  description: string;
+  image: string;
+  startTime: string;
+  endTime: string;
+  startDate: string;
+  endDate: string;
+  tags: string[];
+  ticketPrice: number;
+  isPaidEvent: boolean;
+  eventType: string;
+  location: string;
+  eventLink: string | null;
+  registrationClosingDate: string;
+  numberOfAvailableTickets: number;
+  organizerId: string;
 }

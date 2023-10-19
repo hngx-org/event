@@ -30,9 +30,6 @@ export type EventCardProps = {
   img: StaticImageData | string;
   title: string;
   location: string;
-  time: string;
-  month: string;
-  day: string;
-  isLive: boolean;
+  dateString: string;
   cost: number;
 };

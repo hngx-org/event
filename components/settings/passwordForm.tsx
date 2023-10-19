@@ -3,7 +3,7 @@ import React, {CSSProperties, useState} from "react";
 import {Formik, Form} from "formik";
 import ClipLoader from "react-spinners/ClipLoader";
 import * as yup from "yup";
-import service from "@/lib/auth/signInWithCredentials";
+import service from "@/lib/auth/changePassword";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import Cookies from "js-cookie";
@@ -16,13 +16,20 @@ const override: CSSProperties = {
 };
 
 const initialValues = {
-  password: "",
+  currentPassword: "",
   newPassword: "",
+  confirmNewPassword: "",
 };
 
 const validationSchema = yup.object().shape({
-  password: yup.string().required("Password is required"),
-  newPassword: yup.string().required("Password is required"),
+  currentPassword: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters"),
+  newPassword: yup
+    .string()
+    .required("Password is required")
+    .min(8, "Password must be at least 8 characters"),
   confirmNewPassword: yup
     .string()
     .oneOf([yup.ref("newPassword"), ""], "Password must match")
@@ -37,24 +44,19 @@ export default function PasswordForm() {
     setToggle((prevState) => !prevState);
   };
   const onSubmit = async (values: typeof initialValues, setSubmitting: any) => {
-    // try {
-    //   const response = await service.signin(values);
-    //   if (response.statusCode === 200) {
-    //     Cookies.set("token", response.token);
-    //     Cookies.set("user", JSON.stringify(response.user));
-    //     toast.success("Log in successful");
-    //     setTimeout(() => {
-    //       router.push("/timeline");
-    //     }, 1000);
-    //   }
-    // } catch (error: any) {
-    //   if (error && error.message) {
-    //     toast.error(error.message);
-    //   } else {
-    //     toast.error("Something went wrong!");
-    //   }
-    //   setSubmitting(false);
-    // }
+    try {
+      const response = await service.forgotPassword(values);
+      if (response.success) {
+        toast.success("Your password has been changed");
+      }
+    } catch (error: any) {
+      if (error && error.message) {
+        toast.error(error.message);
+      } else {
+        toast.error("Something went wrong!");
+      }
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -73,7 +75,7 @@ export default function PasswordForm() {
                   {" "}
                   {/* Password */}
                   <InputPassword
-                    name="password"
+                    name="currentPassword"
                     label="Enter current password"
                     placeholder="Password"
                   />

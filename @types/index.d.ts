@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+import {StaticImageData} from "next/image";
 
 export type SuccessProps = {
   title: string;
@@ -36,6 +36,12 @@ export type SignupData = {
 export type LoginData = {
   email: string;
   password: string;
+};
+
+export type ForgotPasswordData = {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
 };
 
 export type User = {

@@ -209,7 +209,7 @@ const Free = () => {
             </div>
             <div className="my-8 flex justify-between gap-4 items-center text-[#1C1C1C] text-base font-sans">
               <h3 className="font-semibold">Sub-total</h3>
-              <h3 className="font-medium">₦20,000</h3>
+              <h3 className="font-medium">₦0.00</h3>
             </div>
             <hr />
             <div className="mt-8 flex justify-between gap-4 items-center">

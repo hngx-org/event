@@ -4,11 +4,11 @@ import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import similarImage from "@/public/images/eventimage.jpg"
 import { LocationSVG, TimerSVG, CalendarSVG } from '@/public/assets/icons/event-management-svg';
-import Image, { StaticImageData } from "next/image";
+import Image from "next/image";
 import React, { useState } from 'react'
 import EventManagementModal from '@/components/modals/event-management-modal';
 
-const Cancel = () => {
+const Delete = () => {
     const [showModal, setShowModal] = useState<boolean>(false)
     const eventTags: Array<String> = ["Technology", "AI", "Workshops", "Networking", "Innovation", "About me", "About me"]
     const similarEvents: SimilarEventsType[] = [
@@ -67,13 +67,21 @@ const Cancel = () => {
                             Tech Innovators Summit
                         </h3>
                     </div>
-                    <button
-                        onClick={() => setShowModal(true)}
-                        type="button"
-                        className="px-8 py-[18px] rounded-lg bg-[#800000] text-[#FEFEFE] font-bold active:scale-[0.99]"
-                    >
-                        Cancel Registration
-                    </button>
+                    <div className="flex gap-6 items-center">
+                        <button
+                            onClick={() => setShowModal(true)}
+                            type="button"
+                            className="px-8 py-[18px] rounded-lg bg-transparent text-[#800000] border border-[#800000] font-bold active:scale-[0.99]"
+                        >
+                            Delete Event
+                        </button>
+                        <button
+                            type="button"
+                            className="px-8 py-[18px] rounded-lg bg-[#800000] text-[#FEFEFE] font-bold active:scale-[0.99]"
+                        >
+                            Edit Event Details
+                        </button>
+                    </div>
                 </div>
                 {/* Banner */}
                 <Image
@@ -184,4 +192,4 @@ const Cancel = () => {
     )
 }
 
-export default Cancel
+export default Delete

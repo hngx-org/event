@@ -42,9 +42,9 @@ const Delete = () => {
     ]
 
     const modalMessage: EventManagementModalType = {
-        title: "Registration Cancelled",
+        title: "Event Deleted",
         message: "Are you sure you want to delete this event? This action cannot be undone.",
-        text: "Your event registration has been successfully canceled. If you change your mind, you can always register again.",
+        text: "Your event has been successfully deleted. Thank you for using our platform.",
         route: "event/event-details",
         button: "Back to Event Management",
         onclose: () => setShowModal(false),

@@ -1,6 +1,13 @@
 import React, { useState } from "react";
-
-const AccountSummary = () => {
+import { initialValues } from "@/@types";
+interface AccountSummaryProps {
+  handleSubmit: (e?: React.FormEvent<HTMLFormElement>) => void;
+  formValues: initialValues;
+}
+const AccountSummary: React.FC<AccountSummaryProps> = ({
+  handleSubmit,
+  formValues,
+}) => {
   const [num, setNum] = useState<number>(1);
   const increment = () => {
     setNum(num + 1);
@@ -52,7 +59,16 @@ const AccountSummary = () => {
         <h3 className="text-2xl text-secondary-300 font-bold">₦20,000</h3>
       </div>
       <div className="w-full flex items-center justify-center">
-        <button className="text-base font-bold text-white bg-secondary-300 py-4 px-8 flex gap-[8px] items-center rounded-lg">
+        <button
+          type="submit"
+          onClick={(e) => {
+            e.preventDefault();
+            handleSubmit({
+              currentTarget: e.target,
+            } as React.FormEvent<HTMLFormElement>);
+          }}
+          className="text-base font-bold text-white bg-secondary-300 py-4 px-8 flex gap-[8px] items-center rounded-lg"
+        >
           <p>Register for this event</p>
         </button>
       </div>

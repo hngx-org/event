@@ -36,3 +36,13 @@ export type EventCardProps = {
   isLive: boolean;
   cost: number;
 };
+
+export interface initialValues {
+  firstName: string;
+  lastName: string;
+  email: string;
+  phoneNumber: string;
+  gender: string;
+  howDidYouHear: string;
+  paymentMethod: string;
+}

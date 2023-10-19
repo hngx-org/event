@@ -1,38 +1,79 @@
 import Header from "@/components/web/header";
 import { useRouter } from "next/router";
-import { useState } from "react";
+import { CSSProperties } from "react";
+import { Formik, Form, Field, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
+import InputPassword from "@/components/form/inputPassword";
+import {toast} from "react-toastify";
+import ClipLoader from "react-spinners/ClipLoader";
 
-const OpenEyeIcon = () => {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      width="25"
-      height="24"
-      viewBox="0 0 25 24"
-      fill="none"
-    >
-      <path
-        d="M3.77489 15.2957C2.92496 14.1915 2.5 13.6394 2.5 12C2.5 10.3606 2.92496 9.80853 3.77489 8.70433C5.47196 6.49956 8.31811 4 12.5 4C16.6819 4 19.528 6.49956 21.2251 8.70433C22.075 9.80853 22.5 10.3606 22.5 12C22.5 13.6394 22.075 14.1915 21.2251 15.2957C19.528 17.5004 16.6819 20 12.5 20C8.31811 20 5.47196 17.5004 3.77489 15.2957Z"
-        stroke="#666666"
-        stroke-width="1.5"
-      />
-      <path
-        d="M15.5 12C15.5 13.6569 14.1569 15 12.5 15C10.8431 15 9.5 13.6569 9.5 12C9.5 10.3431 10.8431 9 12.5 9C14.1569 9 15.5 10.3431 15.5 12Z"
-        stroke="#666666"
-        stroke-width="1.5"
-      />
-    </svg>
-  );
+const override: CSSProperties = {
+  borderWidth: "3px",
 };
 
 export default function ResetPassword() {
-  const [visibleNewPassword, setVisibleNewPassword] = useState<boolean>(false);
-  const [visibleConfirmPassword, setVisibleConfirmPassword] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleClick = (e: any) => {
-    e.preventDefault();
-    router.push("/login");
+  const validationSchema = Yup.object().shape({
+    newPassword: Yup.string()
+      .min(8, 'Password must be at least 8 characters')
+      .required('Password is required'),
+    confirmPassword: Yup.string()
+    .test('passwords-match', 'Passwords must match', function (value) {
+      if (!this.resolve(Yup.ref('newPassword')) || this.resolve(Yup.ref('newPassword')) === null) {
+        return true; 
+      }
+      return value === this.resolve(Yup.ref('newPassword'));
+    })
+    .required('Confirm Password is required')
+  });
+
+  const initialValues = {
+    newPassword: '',
+    confirmPassword: '',
+  };
+
+  const onSubmit = async (values: typeof initialValues, { setSubmitting }: any) => {
+
+    try {
+      setSubmitting(true);
+
+      const { newPassword, confirmPassword } = values;
+      const { token } = router.query;
+
+      if (newPassword === confirmPassword) {
+        
+        const data = {
+          resetToken: token,
+          password: newPassword,
+        };
+
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        });
+
+        if (response.ok) {
+          toast.success("Password reset successful!");
+          setTimeout(() => {
+            router.push("/auth/reset-password-successful");
+          }, 1000);
+        } else {
+          toast.error("Password reset failed.");
+        }
+      } 
+    } catch (error) {
+      toast.error("Error resetting password.", {
+        position: "top-right",
+      });
+      setSubmitting(false);
+      console.error(error);
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -51,41 +92,45 @@ export default function ResetPassword() {
             </p>
           </div>
           <div className="mt-8">
-            <div className="flex flex-col gap-2 font-base font-medium">
-              <label className="text-grey-500" htmlFor="new-password">
-                Enter a new password
-              </label>
-              <div className="w-full relative">
-                <span onClick={() => setVisibleNewPassword(!visibleNewPassword)} className="pr-2 absolute top-3 right-0 cursor-pointer"><OpenEyeIcon /></span>
-                <input
-                  type={visibleNewPassword ? "text" : "password"}
-                  placeholder="Password"
-                  className="p-3 w-full text-grey-50 border border-grey-70 rounded-lg"
-                  required
-                />
-              </div>
-            </div>
-            <div className="flex flex-col gap-2 font-base font-medium mt-5">
-              <label className="text-grey-500" htmlFor="confirm-password">
-                Confirm password
-              </label>
-              <div className="w-full relative">
-                <span onClick={() => setVisibleConfirmPassword(!visibleConfirmPassword)} className="pr-2 absolute top-3 right-0 cursor-pointer"><OpenEyeIcon /></span>
-                <input
-                  type={visibleConfirmPassword ? "text" : "password"}
-                  placeholder="Password"
-                  className="p-3 w-full text-grey-50 border border-grey-70 rounded-lg"
-                  required
-                />
-              </div>
-            </div>
-            <button
-              onClick={handleClick}
-              className="py-[18px] mt-6 text-[#FEFEFE] font-bold bg-secondary-300 rounded-lg text-center w-full"
-              type="button"
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={onSubmit}
             >
-              Submit
-            </button>
+              {({ isSubmitting }) => (
+                <Form>
+                  <div className="flex flex-col gap-2 font-base font-medium">
+                    <InputPassword
+                      name="newPassword"
+                      label="Enter a new password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <div className="flex flex-col gap-2 font-base font-medium mt-5">
+                    <InputPassword
+                      name="confirmPassword"
+                      label="Password"
+                      placeholder="Password"
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="py-[18px] mt-6 text-[#FEFEFE] font-bold bg-secondary-300 rounded-lg text-center w-full"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? (
+                      <ClipLoader
+                        color="white"
+                        size={23}
+                        cssOverride={override}
+                      />
+                    ) : (
+                      "Submit"
+                    )}
+                  </button>
+                </Form>
+              )}
+            </Formik>
           </div>
         </div>
       </div>

@@ -8,6 +8,8 @@ import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import Cookies from "js-cookie";
 import InputPassword from "../form/inputPassword";
+import FAModal from "./2fa";
+import Disable2FAModal from "./disable2FA";
 
 const override: CSSProperties = {
   borderWidth: "3px",
@@ -20,10 +22,20 @@ const initialValues = {
 
 const validationSchema = yup.object().shape({
   password: yup.string().required("Password is required"),
+  newPassword: yup.string().required("Password is required"),
+  confirmNewPassword: yup
+    .string()
+    .oneOf([yup.ref("newPassword"), ""], "Password must match")
+    .required("Password is required"),
 });
 
 export default function PasswordForm() {
   const router = useRouter();
+  const [toggle, setToggle] = useState(false);
+
+  const toggleCheckbox = () => {
+    setToggle((prevState) => !prevState);
+  };
   const onSubmit = async (values: typeof initialValues, setSubmitting: any) => {
     // try {
     //   const response = await service.signin(values);
@@ -56,6 +68,7 @@ export default function PasswordForm() {
           return (
             <Form action="" autoComplete="off">
               <div className="">
+                {/* Password */}
                 <div className="grid grid-cols-1 gap-5 w-[380px]">
                   {" "}
                   {/* Password */}
@@ -70,12 +83,60 @@ export default function PasswordForm() {
                     placeholder="Password"
                   />
                   <InputPassword
-                    name="password"
+                    name="confirmNewPassword"
                     label="Confirm new Password"
                     placeholder="Password"
                   />
                 </div>
+
+                {/* 2FA */}
+                <div className="mt-10">
+                  <div className="flex gap-4 items-center mb-3">
+                    {/* checkbox */}
+                    <label
+                      className={`relative cursor-pointer  w-10 h-6 border-2    rounded-2xl ${
+                        toggle
+                          ? "bg-grey-50 border-grey-50"
+                          : "bg-secondary-300 border-secondary-300"
+                      }`}
+                    >
+                      <input
+                        type="checkbox"
+                        id="toggle"
+                        checked={toggle}
+                        className="hidden"
+                      />
+                      <span
+                        className={`w-5 h-5 rounded-full absolute  top-0 z-10 transition-all duration-300 ease-in-out bg-white ${
+                          toggle ? "left-0 " : "right-0"
+                        }`}
+                      ></span>
+                    </label>
+                    <h5 className="text-xl font-bold font-montserrat text-grey-500 ">
+                      Two factor authentication (2FA)
+                    </h5>
+                    {toggle ? (
+                      <FAModal toggle={toggle} toggleFn={toggleCheckbox} />
+                    ) : (
+                      <Disable2FAModal
+                        toggle={toggle}
+                        toggleFn={toggleCheckbox}
+                      />
+                    )}
+                  </div>
+
+                  <p className="text-grey-200 mb-12">
+                    Setting up a 2FA adds an extra layer of security to protect
+                    your account.
+                  </p>
+                  {/* <div className=" mt-8  flex gap-4 items-center">
+                    <p className="text-xl text-grey-400">
+                      Enable Two-Factor authentication (2FA)
+                    </p>
+                  </div> */}
+                </div>
               </div>
+
               <div className="flex justify-center gap-6">
                 <button
                   type="submit"

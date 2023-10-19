@@ -3,8 +3,8 @@ import { EventManagementModalType, SimilarEventsType } from '@/@types';
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import similarImage from "@/public/images/eventimage.jpg"
-import { LocationSVG, TimerSVG, CalendarSVG } from '@/public/assets/icons/event-management-svg';
-import Image, { StaticImageData } from "next/image";
+import { LocationSVG, TimerSVG, CalendarSVG, OptionSVG } from '@/public/assets/icons/event-management-svg';
+import Image from "next/image";
 import React, { useState } from 'react'
 import EventManagementModal from '@/components/modals/event-management-modal';
 
@@ -48,7 +48,7 @@ const Cancel = () => {
         route: "event/event-details",
         button: "Back to Event Management",
         onclose: () => setShowModal(false),
-        onNext: () => {}
+        onNext: () => { }
     }
 
     return (
@@ -90,6 +90,21 @@ const Cancel = () => {
                             <p className="mt-6 text-[#666666] text-lg font-medium text-justify">
                                 Dive into the world of cutting-edge technology at the Tech Innovators Summit. This immersive event is designed for tech enthusiasts, entrepreneurs, and innovators alike. Join us for a day filled with inspiring keynote speakers, hands-on workshops, and networking opportunities with industry leaders. Discover the latest trends in artificial intelligence, blockchain, cybersecurity, and more. Whether you're a tech veteran or just starting your journey, the Tech Innovators Summit is the ultimate destination to explore, learn, and connect in the dynamic tech landscape.
                             </p>
+                            {/* Event Tags */}
+                            <div className="max-w-[653px] mt-8">
+                                <h1 className="font-bold font-montserrat text-[#3B3B3B] text-2xl">Event Tags</h1>
+                                <div className="mt-6 flex flex-wrap gap-y-4 gap-x-8">
+                                    {eventTags?.map((event, index) => (
+                                        <button
+                                            key={index}
+                                            type='button'
+                                            className="py-2 text-center px-3 border rounded-lg text-[#3B3B3B]"
+                                        >
+                                            {event}
+                                        </button>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
                         {/* Date */}
                         <div className="lg:max-w-[437px] w-full h-max p-6 rounded-2xl bg-[#FAFAFA]">
@@ -99,7 +114,9 @@ const Cancel = () => {
                             </div>
                             <div className="mt-6 text-[#1C1C1C] font-semibold">
                                 <div className="flex gap-2">
-                                    <LocationSVG />
+                                    <div>
+                                        <LocationSVG />
+                                    </div>
                                     <p>Ultimate Garden, By Mobil Junction Lokogoma Expressway Gaduwa Abuja, Federal Capital Territory 900109</p>
                                 </div>
                                 <div className="flex gap-2 mt-4">
@@ -113,21 +130,6 @@ const Cancel = () => {
                             </div>
                         </div>
                     </div>
-                    {/* Event Tags */}
-                    <div className="max-w-[653px] mt-8">
-                        <h1 className="font-bold font-montserrat text-[#3B3B3B] text-2xl">Event Tags</h1>
-                        <div className="mt-6 flex flex-wrap gap-y-4 gap-x-8">
-                            {eventTags?.map((event, index) => (
-                                <button
-                                    key={index}
-                                    type='button'
-                                    className="py-2 text-center px-3 border rounded-lg text-[#3B3B3B]"
-                                >
-                                    {event}
-                                </button>
-                            ))}
-                        </div>
-                    </div>
                     {/* Similar Events */}
                     <div className="mt-[72px]">
                         <h1 className="text-[#3B3B3B] font-montserrat font-bold text-2xl">Similar Events</h1>
@@ -135,8 +137,15 @@ const Cancel = () => {
                             {similarEvents?.map(({ imgSrc, name, location, time, live, amount, date }, index) => (
                                 <div
                                     key={index}
-                                    className="max-w-[405px] w-full border bg-[#FAFAFA] rounded-2xl"
+                                    className="relative max-w-[405px] w-full border bg-[#FAFAFA] rounded-2xl"
                                 >
+                                    <button
+                                        type='button'
+                                        title='option'
+                                        className="absolute top-6 right-6 p-1 rounded-full bg-[#FAFAFA]"
+                                    >
+                                        <OptionSVG />
+                                    </button>
                                     <Image alt={name} src={imgSrc} />
                                     <div className="p-6 flex justify-between gap-4">
                                         <div>

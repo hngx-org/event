@@ -16,7 +16,7 @@ export default function Privacy() {
         </h1>
         <p className="font-sans text-grey-400">
           As an integral part of our ongoing dedication to safeguarding your
-          privacy, we`&rsquo;`ve made it easy for you to obtain your data from
+          privacy, we&rsquo;ve made it easy for you to obtain your data from
           Eventwave. Once you make a request for your data, a notification will
           be sent to your email address{" "}
           <span className="font-bold">(Johndoe@gmail.com)</span> containing a

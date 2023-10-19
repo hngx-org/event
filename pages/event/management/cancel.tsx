@@ -1,25 +1,17 @@
 import EventLayout from '@/components/layout/eventLayout'
+import { EventManagementModalType, SimilarEventsType } from '@/@types';
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import similarImage from "@/public/images/eventimage.jpg"
 import { LocationSVG, TimerSVG, CalendarSVG } from '@/public/assets/icons/event-management-svg';
-
 import Image, { StaticImageData } from "next/image";
-import React from 'react'
-
-type similarEventsType = {
-    imgSrc: StaticImageData | string,
-    name: string,
-    location: string,
-    time: string,
-    date: string,
-    live: string,
-    amount: string
-}
+import React, { useState } from 'react'
+import EventManagementModal from '@/components/modals/event-management-modal';
 
 const Cancel = () => {
+    const [showModal, setShowModal] = useState<boolean>(false)
     const eventTags: Array<String> = ["Technology", "AI", "Workshops", "Networking", "Innovation", "About me", "About me"]
-    const similarEvents = [
+    const similarEvents: SimilarEventsType[] = [
         {
             imgSrc: similarImage,
             name: "Event Name",
@@ -48,6 +40,17 @@ const Cancel = () => {
             amount: "#20,000"
         },
     ]
+
+    const modalMessage: EventManagementModalType = {
+        title: "Registration Cancelled",
+        message: "Are you sure you want to delete this event? This action cannot be undone.",
+        text: "Your event registration has been successfully canceled. If you change your mind, you can always register again.",
+        route: "event/event-details",
+        button: "Back to Event Management",
+        onclose: () => setShowModal(false),
+        onNext: () => {}
+    }
+
     return (
         <EventLayout>
             <div className="w-full">
@@ -65,6 +68,7 @@ const Cancel = () => {
                         </h3>
                     </div>
                     <button
+                        onClick={() => setShowModal(true)}
                         type="button"
                         className="px-8 py-[18px] rounded-lg bg-[#800000] text-[#FEFEFE] font-bold active:scale-[0.99]"
                     >
@@ -173,6 +177,7 @@ const Cancel = () => {
                 </div>
                 <hr />
             </div>
+            {showModal && <EventManagementModal {...modalMessage} />}
         </EventLayout>
     )
 }

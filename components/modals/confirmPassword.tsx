@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
 
-const CloseIcon = () => {
+export const CloseIcon = () => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -34,13 +34,14 @@ const CloseIcon = () => {
 
 type ConfirmPasswordProp = {
   onClose: ()=>{} | void,
+  setCloseAccountModalOpen: (value: boolean)=>{} | void
 }
 
 const override: CSSProperties = {
   borderWidth: "3px",
 };
 
-export default function ConfirmPasswordModal({ onClose }: (ConfirmPasswordProp)) {
+export default function ConfirmPasswordModal({ onClose, setCloseAccountModalOpen }: (ConfirmPasswordProp)) {
   const router = useRouter();
 
   const validationSchema = Yup.object().shape({
@@ -57,7 +58,10 @@ export default function ConfirmPasswordModal({ onClose }: (ConfirmPasswordProp))
     values: typeof initialValues,
     { setSubmitting }: any
   ) => {
-    
+    setTimeout(()=>{
+      setCloseAccountModalOpen(true);
+      onClose()
+    }, 1000)
   };
 
   return (

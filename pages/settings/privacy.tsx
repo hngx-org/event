@@ -1,10 +1,12 @@
 import AccountLayout from "@/components/layout/accountLayout";
+import CloseAccountModal from "@/components/modals/closeAccount";
 import ConfirmPasswordModal from "@/components/modals/confirmPassword";
 import { useState } from "react";
 
 export default function Privacy() {
 
   const [isConfirmPasswordModalOpen, setConfirmPasswordModalOpen] = useState(false);
+  const [isCloseAccountModalOpen, setCloseAccountModalOpen] = useState(false);
 
   return (
     <AccountLayout title="Privacy settings">
@@ -52,9 +54,14 @@ export default function Privacy() {
         </button>
           {
             isConfirmPasswordModalOpen && (
-              <ConfirmPasswordModal onClose={() => setConfirmPasswordModalOpen(false)} />
+              <ConfirmPasswordModal onClose={() => setConfirmPasswordModalOpen(false)} setCloseAccountModalOpen={()=>setCloseAccountModalOpen(true)}/>
+            )
+          }{
+            isCloseAccountModalOpen && (
+              <CloseAccountModal onClose={() => setCloseAccountModalOpen(false)} />
             )
           }
+
       </div>
     </AccountLayout>
   );

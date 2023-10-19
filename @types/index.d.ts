@@ -36,3 +36,7 @@ export type EventCardProps = {
   isLive: boolean;
   cost: number;
 };
+
+export type EventMagementProps = {
+  children?: React.ReactNode;
+}

@@ -5,6 +5,7 @@ export default function EventDetails() {
     return (
         <>
             <div className="max-w-7xl md:mx-auto flex flex-col md:flex-row justify-between mb-6 mt-40 md:mt-24">
+
                 <div className="flex gap-4 items-center">
                     <ArrowBackIcon />
                     <h3 className="text-grey-500 text-2xl font-bold">Tech Innovators Summit</h3>
@@ -15,7 +16,6 @@ export default function EventDetails() {
             <div className="w-full">
                 <img src="/assets/images/herobg.png" alt="hero" className="w-full"/>
             </div>
-
             <div className="max-w-7xl mx-auto mt-8 p-4 lg::p-0">
                 <div className="flex flex-col md:flex-row gap-6 justify-between">
                     <div className="flex flex-col gap-8">
@@ -23,7 +23,6 @@ export default function EventDetails() {
                             <h1 className="text-grey-500 text-2xl font-bold">Event Description</h1>
                             <p className="text-[#666] text-justify font-medium text-lg">Dive into the world of cutting-edge technology at the Tech Innovators Summit. This immersive event is designed for tech enthusiasts, entrepreneurs, and innovators alike. Join us for a day filled with inspiring keynote speakers, hands-on workshops, and networking opportunities with industry leaders. Discover the latest trends in artificial intelligence, blockchain, cybersecurity, and more. Whether you&aptos;re a tech veteran or just starting your journey, the Tech Innovators Summit is the ultimate destination to explore, learn, and connect in the dynamic tech landscape.</p>
                         </div>
-
                         <div className="inline-flex md:hidden p-6 items-start gap-6 rounded-2xl bg-[#FAFAFA] max-w-[437px] max-h-[252px]">
                         <div className="flex flex-col gap-6">
                             <div>
@@ -98,7 +97,7 @@ export default function EventDetails() {
                         </div>
                     </div>
                 </div>
-                
+ 
                 <div className="flex flex-col gap-1 mt-[72px] mb-28">
                     <h1 className="text-grey-500 text-2xl font-bold">Similar Event</h1>
                     <div className="grid md:grid-cols-3 gap-5 grid-flow-col overflow-x-scroll snap-x scroll-p-4">

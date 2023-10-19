@@ -4,3 +4,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.card {
+    display: grid;
+    grid-template-columns: auto auto auto;
+}

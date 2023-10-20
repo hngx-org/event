@@ -18,9 +18,7 @@ const DropdownInput: React.FC<Input> = ({ name, label }) => {
           name={name}
           className="w-full p-3 rounded-lg border border-grey-70  outline-none font-medium"
         >
-          <option value="" selected>
-            Mrs
-          </option>
+          <option value="Mrs">Mrs</option>
           <option value="Mr">Mr</option>
           <option value="Miss">Miss</option>
         </Field>
@@ -35,56 +33,3 @@ const DropdownInput: React.FC<Input> = ({ name, label }) => {
 };
 
 export default DropdownInput;
-
-// import { ErrorMessage, FieldInputProps, FormikProps } from "formik";
-
-// interface DropdownProps {
-//   field: FieldInputProps<string>;
-//   form: FormikProps<{ prefix: string }>;
-//   label: string;
-//   options: { value: string; label: string }[];
-// }
-
-// const Dropdown: React.FC<DropdownProps> = ({
-//   field,
-//   form,
-//   label,
-//   options,
-//   ...rest
-// }) => (
-//   <div>
-//     <label className="font-medium text-grey-500 mb-2" htmlFor={field.name}>{label}</label>
-//     <select {...field} {...rest}>
-//       {options.map((option) => (
-//         <option key={option.value} value={option.value}>
-//           {option.label}
-//         </option>
-//       ))}
-//     </select>
-//     <ErrorMessage
-//       name={field.name}
-//       component="p"
-//       className="text-sm text-red-700"
-//     />
-//   </div>
-// );
-
-// export default Dropdown;
-
-// {/* <Field
-//   name="prefix"
-//   className="w-full p-3 rounded-lg border border-grey-70 placeholder:text-grey-70 outline-none font-medium"
-//   render={({ field }) => (
-//     <Dropdown
-//       field={field}
-//       form={field.form}
-//       label="Prefix"
-//       options={[
-//         { value: "Mrs", label: "Mrs" },
-//         { value: "Mr", label: "Mr" },
-//         { value: "Miss", label: "Miss" },
-//         { value: "Dr", label: "Dr" },
-//       ]}
-//     />
-//   )}
-// /> */}

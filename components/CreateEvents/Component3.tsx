@@ -84,8 +84,8 @@ const Component3: React.FC<Component3Props> = ({ onBack, onProceed, updateFormDa
                     <div className='h-full flex flex-wrap'>
                         <div className="flex flex-wrap justify-between gap-2 ">
                             {tags.map((word, index) => (
-                                <div key={index} className="px-3 py-2 m-2 bg-stone-200 rounded-lg border
-                                border-stone-400 justify-center items-center gap-1 flex">
+                                <div key={index} className="px-3 py-2 m-2 bg-secondary-75 rounded-lg border
+                                border-secondary-75 justify-center items-center gap-1 flex">
                                     <h2 className="text-center text-zinc-900 text-base font-semibold font-['Nunito'] leading-none">{word}</h2>
                                     <button
                                         onClick={() => handleRemoveWord(index)}

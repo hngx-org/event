@@ -3,12 +3,14 @@ import Component1 from '@/components/CreateEvents/Component1';
 import Component2 from '@/components/CreateEvents/Component2';
 import Component3 from '@/components/CreateEvents/Component3';
 import Component4 from '@/components/CreateEvents/Component4';
+import Component4s from '@/components/CreateEvents/Component4s';
 import Component5 from '@/components/CreateEvents/Component5';
+import http from '@/http/interceptor';
 import { FormState } from '@/@types';
 import axios, { Axios, post } from 'axios';
-
 const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
   const [currentComponent, setCurrentComponent] = useState(1);
+  const [selectedId, setSelectedId] = useState<number | null>(null);
   const [formData, setFormData] = useState<FormState>({
     location: '',
     isPaidEvent: 'Free',
@@ -24,6 +26,8 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
     endTime: '',
     tags: []
   })
+  const formDataEntries = Object.entries(formData);
+  const eventData = { ...Object.fromEntries(formDataEntries)};
   const [allRequirementsMet, setAllRequirementsMet] = useState(false);
   const handleComponent3Update = (tags: string[]) => {
     setFormData({ ...formData, tags }); // Update formData with enteredWords
@@ -68,8 +72,6 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
   //       console.error('Error sending data to API:', error);
   //     });
   // };
-
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
  
@@ -90,7 +92,7 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
     if (requirementsMet) {
       setAllRequirementsMet(true);
       handleProceed();
-      axios.post('https://wetindeysup-api.onrender.com/api/events', {formData}).
+      http.post('/events', {eventData}).
       then(response => console.log(response))
       .catch(err => console.log(err))
     } else {
@@ -107,7 +109,7 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
   const getComponentByIndex = (index: number) => {
     switch (index) {
       case 1:
-        return <Component1 onBack={handleBack} onProceed={handleProceed} />;
+        return <Component1 onBack={handleBack} onProceed={handleProceed} onIdSelected={setSelectedId}/>;
       case 2:
         return <Component2 onBack={handleBack}
         onProceed={handleProceed}
@@ -119,10 +121,13 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
         onProceed={handleProceed} 
         updateFormData={handleComponent3Update}/>
       case 4:
-        return <Component4 onBack={handleBack}
+        return selectedId === 1 ? (<Component4s onBack={handleBack}
         onProceed={handleSubmit}
         handleChange={handleChange}
-        data={formData}/>;
+        data={formData}/>) : (<Component4 onBack={handleBack}
+        onProceed={handleSubmit}
+        handleChange={handleChange}
+        data={formData}/>);
       case 5:
         return <Component5 onBack={handleBack} onProceed={handleProceed} />;
       default:

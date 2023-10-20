@@ -1,12 +1,19 @@
 // Component1.tsx
 import React from 'react';
 import { useState } from 'react';
+import Image from 'next/image';
+import BlackPhysical from '@/public/images/black-physical.png';
+import BlackVirtual from '@/public/images/black-virtual.png';
+import RedPhysical from '@/public/images/red-physical.png';
+import RedVirtual from '@/public/images/red-virtual.png';
 
-const Component1: React.FC<{ onBack: () => void, onProceed: () => void }> = ({ onBack, onProceed }) => {
+const Component1: React.FC<{ onBack: () => void, onProceed: () => void, onIdSelected: (id: number) => void }> 
+= ({ onBack, onProceed, onIdSelected}) => {
     const [selectedButton, setSelectedButton] = useState<number | null>(2);
 
   const handleButtonClick = (buttonId:number) => {
     setSelectedButton(buttonId);
+    onIdSelected(buttonId);
   };
 
   const isButtonSelected = (buttonId:number) => {
@@ -32,11 +39,8 @@ const Component1: React.FC<{ onBack: () => void, onProceed: () => void }> = ({ o
           } flex flex-col justify-center items-center gap-8 xs:block`}
           onClick={() => handleButtonClick(1)}
         >
-          <div className="w-16 h-16 relative">
-            <div className="w-16 h-20 left-[2.11px] top-[-8.75px] absolute">
-              <div className="origin-top-left -rotate-45 w-8 h-8 left-[10.38px] top-[23.51px] absolute"></div>
-            </div>
-          </div>
+          <div></div>
+          <Image src={selectedButton === 1 ? RedPhysical : BlackPhysical} alt='physical' height={40} width={40}/>
           <div className="flex flex-col justify-center items-start gap-2">
             <div className={`self-stretch ${
             selectedButton === 1 ? 'text-red-900 ' : 'text-zinc-400 '
@@ -58,13 +62,11 @@ const Component1: React.FC<{ onBack: () => void, onProceed: () => void }> = ({ o
           } flex flex-col justify-center items-center gap-8 xs:block`}
           onClick={() => handleButtonClick(2)}
         >
-          <div className="w-16 h-16 relative"></div>
+          <Image src={selectedButton === 2 ? RedVirtual : BlackVirtual} alt='physical' height={40} width={40}/>
           <div className="flex flex-col justify-center items-center gap-1">
-            <div className="flex flex-col justify-start items-start gap-1">
               <div className={`self-stretch ${
             selectedButton === 2 ? 'text-red-900 ' : 'text-zinc-400 '
           } text-red-900 text-2xl font-bold font-montserrat leading-loose`}>Virtual Event</div>
-            </div>
             <div className={`text-center ${
             selectedButton === 2 ? 'text-red-900 ' : 'text-zinc-400 '
           } text-base font-semibold font-nunito leading-normal`}>

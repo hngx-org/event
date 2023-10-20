@@ -4,7 +4,7 @@ import vectorImg from "../../../public/images/Ellipse.png";
 
 const AboutCard = ({title, subtitle}: any) => {
   return (
-    <div className='flex flex-col items-center '>
+    <div className='flex flex-col items-center'>
       <Image
         src={vectorImg}
         alt='vector-img'

@@ -9,6 +9,7 @@ import service from "@/lib/auth/signInWithCredentials";
 import {toast} from "react-toastify";
 import {useRouter} from "next/navigation";
 import Cookies from "js-cookie";
+import Link from "next/link";
 
 const override: CSSProperties = {
   borderWidth: "3px",
@@ -65,13 +66,20 @@ export default function LoginForm() {
                   type="email"
                   placeholder="Enter your email address"
                 />
-
                 {/* Password */}
-                <InputPassword
-                  name="password"
-                  label="Password"
-                  placeholder="Enter your password"
-                />
+                <div className="flex flex-col gap-2">
+                  <InputPassword
+                    name="password"
+                    label="Password"
+                    placeholder="Enter your password"
+                  />
+                  <Link
+                    className="text-secondary-300 font-bold "
+                    href="/auth/forgot-password"
+                  >
+                    Forgot Password?
+                  </Link>
+                </div>
 
                 <div className="w-full">
                   <button

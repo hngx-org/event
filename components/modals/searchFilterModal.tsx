@@ -80,7 +80,7 @@ const SearchFilterModal = ({ setIsFilterOpen }: SearchFilterProps) => {
 						<span>Cancel</span>
 					</button>
 					<Link
-						href="/filter"
+						href="/events/filter"
 						className="flex items-center px-5 py-3 gap-2 text-lg justify-center md:justify-start font-medium rounded-lg border bg-secondary-300 text-white transition-all duration-200 hover:bg-secondary-100"
 					>
 						<Image src={filterIcon} alt="filter" />

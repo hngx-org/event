@@ -1,66 +1,109 @@
-import { CalendarIcon, ClockIcon, LocationIcon, ArrowBackIcon, ElipseIcon, OptionIcon } from "@/components/icons/EventDetails/SocialIcons";
+import DashboardHeader from "@/components/Dashboard/Dashboardheader";
+import Footer from "@/components/web/footer";
+import { useRouter } from 'next/router';
 import Link from "next/link";
 import { useState, useEffect } from 'react';
+import { CalendarIcon, ClockIcon, LocationIcon, ArrowBackIcon, ElipseIcon, OptionIcon } from "@/components/icons/EventDetails/SocialIcons";
+import { EventDetails } from "@/@types";
 
-interface EventDetailsProps {
-    eventId: string;
-  }
+export default function EventDetailsPage({
+    description,
+    endDate,
+    endTime,
+    eventLink,
+    eventType,
+    image,
+    isPaidEvent,
+    location,
+    name,
+    numberOfAvailableTickets,
+    organizerId,
+    registrationClosingDate,
+    startDate,
+    startTime,
+    tags,
+    ticketPrice,
+  }: EventDetails) {
+     const router = useRouter();
+    const { id } = router.query;
 
-export default function EventDetails({ eventId }: EventDetailsProps) {
-    const [eventDetails, setEventDetails] = useState({});
-    const [similarEvents, setSimilarEvents] = useState([]);
+    const [eventDetails, setEventDetails] = useState<EventDetails>({
+        description: "",
+        endDate: "",
+        endTime: "",
+        eventLink: "",
+        eventType: "",
+        image: "",
+        isPaidEvent: false,
+        location: "",
+        name: "",
+        numberOfAvailableTickets: 0,
+        organizerId: "",
+        registrationClosingDate: "",
+        startDate: "",
+        startTime: "",
+        tags: [],
+        ticketPrice: 0,
+    });
+    const [similarEvents, setSimilarEvents] = useState<EventDetails[]>([]);
 
     useEffect(() => {
-        // Fetch event details
-        fetch(`https://wetindeysup-api.onrender.com//api/events/${eventId}`)
-          .then((response) => {
-            if (response.status === 200) {
-              return response.json();
-            } else {
-              throw new Error('Event not found');
-            }
-          })
-          .then((data) => {
-            setEventDetails(data); 
-            console.log('Event details successfully fetched:', data);
-          })
-          .catch((error) => {
-            console.error('Error fetching event details:', error);
-          });
-    
-        // Fetch similar events
-        fetch('https://wetindeysup-api.onrender.com//api/events')
-          .then((response) => {
-            if (response.status === 200) {
-              return response.json();
-            } else {
-              throw new Error('No events found');
-            }
-          })
-          .then((data) => {
-            setSimilarEvents(data);
-            console.log('Similar events successfully fetched:', data);
-          })
-          .catch((error) => {
-            console.error('Error fetching similar events:', error);
-          });
-    }, [eventId]);
+        if (id) {
+            // Fetch event details
+            fetch(`https://wetindeysup-api.onrender.com/api/events/${id}`)
+                .then((response) => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        throw new Error('Event not found');
+                    }
+                })
+                .then((data) => {
+                    setEventDetails(data);
+                    console.log('Event details successfully fetched:', data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching event details:', error);
+                });
 
+            // Fetch similar events
+            fetch('https://wetindeysup-api.onrender.com/api/events')
+                .then((response) => {
+                    if (response.status === 200) {
+                        return response.json();
+                    } else {
+                        throw new Error('No events found');
+                    }
+                })
+                .then((data) => {
+                    setSimilarEvents(data);
+                    console.log('Similar events successfully fetched:', data);
+                })
+                .catch((error) => {
+                    console.error('Error fetching similar events:', error);
+                });
+        }
+    }, [id]);
+
+    const eventId = Array.isArray(id) ? id[0] : id;
     return (
         <>
+            <DashboardHeader />
             <div className="max-w-7xl md:mx-auto flex flex-col md:flex-row justify-between mb-6 mt-40 md:mt-24">
 
-                <div className="flex gap-4 items-center">
+                <div className="flex gap-4 items-center" onClick={() => router.back()}>
+                    <button>
                     <ArrowBackIcon />
-                    <h3 className="text-grey-500 text-2xl font-bold">Tech Innovators Summit</h3>
+                    </button>
+                    <h3 className="text-grey-500 text-2xl font-bold">Tech Innovation</h3>
                 </div>
                 <Link href='/Checkout' className="w-[200px] ml-4 md:w-auto bg-secondary-300 text-white text-base font-bold flex justify-center items-center px-2 py-4 md:py-[18px] md:px-8 rounded-lg mt-10">Register for this event</Link>
-            </div>
-            
-            <div className="w-full">
+                </div>
+
+                <div className="w-full">
                 <img src="/assets/images/herobg.png" alt="hero" className="w-full"/>
-            </div>
-            <div className="max-w-7xl mx-auto mt-8 p-4 lg::p-0">
+                </div>
+                <div className="max-w-7xl mx-auto mt-8 p-4 lg::p-0">
                 <div className="flex flex-col md:flex-row gap-6 justify-between">
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-6 max-w-[733px]">
@@ -141,7 +184,7 @@ export default function EventDetails({ eventId }: EventDetailsProps) {
                         </div>
                     </div>
                 </div>
- 
+
                 <div className="flex flex-col gap-1 mt-[72px] mb-28">
                     <h1 className="text-grey-500 text-2xl font-bold">Similar Event</h1>
                     <div className="grid md:grid-cols-3 gap-5 grid-flow-col overflow-x-scroll snap-x scroll-p-4">
@@ -264,7 +307,8 @@ export default function EventDetails({ eventId }: EventDetailsProps) {
                         </div>
                     </div>
                 </div>
-            </div>
+                </div>
+            <Footer />
         </>
     )
 }

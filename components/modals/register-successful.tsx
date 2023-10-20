@@ -11,7 +11,7 @@ export default function RegisterSuccessful({ title, text, route, button }: Succe
 
     return (
         <div className="w-full h-screen fixed top-0 left-0 border flex justify-center items-center bg-[rgba(59,59,59,0.65)]">
-            <div className="max-w-[586px] w-full h-max px-14 py-12 rounded-2xl bg-[#FEFEFE] flex flex-col gap-8 justify-center items-center ">
+            <div className="w-max h-max px-14 py-12 rounded-2xl bg-[#FEFEFE] flex flex-col gap-8 justify-center items-center ">
                 <h1 className="font-montserrat text-[40px] text-center font-bold text-grey-500">{title}</h1>
                 <div className="max-w-[363px] flex flex-col gap-6 items-center">
                     <span className="p-6 flex items-center justify-center rounded-full border-[10px] border-[#E6FCDE] bg-[#CCFABD]">

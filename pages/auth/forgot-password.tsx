@@ -30,7 +30,7 @@ export default function ForgotPassword(){
 
       const formData = {
         email: values.email,
-        resetUrl: `${process.env.NEXT_PUBLIC_API_URL}/auth/reset-password`,
+        resetUrl: `https://event-tan-iota.vercel.app/auth/reset-password`,
       };
       
       const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/forgot-password`, {

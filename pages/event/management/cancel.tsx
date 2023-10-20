@@ -88,7 +88,7 @@ const Cancel = () => {
                         <div className="max-w-[733px] w-full">
                             <h1 className="text-[#3B3B3B] text-2xl font-bold font-montserrat">Event Description</h1>
                             <p className="mt-6 text-[#666666] text-lg font-medium text-justify">
-                                Dive into the world of cutting-edge technology at the Tech Innovators Summit. This immersive event is designed for tech enthusiasts, entrepreneurs, and innovators alike. Join us for a day filled with inspiring keynote speakers, hands-on workshops, and networking opportunities with industry leaders. Discover the latest trends in artificial intelligence, blockchain, cybersecurity, and more. Whether you're a tech veteran or just starting your journey, the Tech Innovators Summit is the ultimate destination to explore, learn, and connect in the dynamic tech landscape.
+                                Dive into the world of cutting-edge technology at the Tech Innovators Summit. This immersive event is designed for tech enthusiasts, entrepreneurs, and innovators alike. Join us for a day filled with inspiring keynote speakers, hands-on workshops, and networking opportunities with industry leaders. Discover the latest trends in artificial intelligence, blockchain, cybersecurity, and more. Whether you&apos;re a tech veteran or just starting your journey, the Tech Innovators Summit is the ultimate destination to explore, learn, and connect in the dynamic tech landscape.
                             </p>
                             {/* Event Tags */}
                             <div className="max-w-[653px] mt-8">

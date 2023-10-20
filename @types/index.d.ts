@@ -59,3 +59,23 @@ export type EventCardProps = {
   dateString: string;
   cost: number;
 };
+
+
+export type  EventDetails = {
+  description: string;
+  endDate: string;
+  endTime: string;
+  eventLink: string | null;
+  eventType: string;
+  image: string;
+  isPaidEvent: boolean;
+  location: string;
+  name: string;
+  numberOfAvailableTickets: number;
+  organizerId: string;
+  registrationClosingDate: string;
+  startDate: string;
+  startTime: string;
+  tags: string[];
+  ticketPrice: number;
+}

@@ -1,4 +1,4 @@
-import { StaticImageData } from "next/image";
+import {StaticImageData} from "next/image";
 import { ReactNode } from "react";
 
 export type SuccessProps = {
@@ -7,6 +7,26 @@ export type SuccessProps = {
 	route: string;
 	button: string;
 };
+
+export type EventManagementModalType = {
+  title: string;
+  text: string;
+  route: string;
+  button: string;
+  message: string;
+  onclose: () => void;
+  onNext: () => void;
+};
+
+export type SimilarEventsType = {
+  imgSrc: StaticImageData | string,
+  name: string,
+  location: string,
+  time: string,
+  date: string,
+  live: string,
+  amount: string
+}
 
 export type SignupData = {
 	name: string;
@@ -17,6 +37,12 @@ export type SignupData = {
 export type LoginData = {
 	email: string;
 	password: string;
+};
+
+export type ForgotPasswordData = {
+  currentPassword: string;
+  newPassword: string;
+  confirmNewPassword: string;
 };
 
 export type User = {

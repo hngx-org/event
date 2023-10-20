@@ -12,7 +12,7 @@ const EventsPageTitle = ({
 		<div className="px-[20px] md:px-[40px] grid gap-4">
 			<div className="w-full mt-4 flex min-[480px]:justify-between min-[480px]:items-center flex-col min-[480px]:flex-row gap-[15px]">
 				<div className="gap-[16px] flex items-center">
-					<button onClick={() => router.push(".")}>
+					<button onClick={() => router.back()}>
 						<Image
 							src="/images/backarrow.svg"
 							alt="back arrow icon"

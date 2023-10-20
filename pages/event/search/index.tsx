@@ -33,17 +33,17 @@ export default function SearchResults() {
 	return (
 		<div className="max-w-7xl w-full h-full mx-auto my-10 ">
 			<EventHeader />
-			<div className="w-full mt-6 flex justify-between">
-				<EventsPageTitle
-					setIsFilterOpen={setIsFilterOpen}
-					isFilterOpen={isFilterOpen}
-				>
-					<p className="text-2xl font-medium">
-						Search results for{" "}
-						<span className="font-bold">{searchQuery}</span>
-					</p>
-				</EventsPageTitle>
-			</div>
+
+			<EventsPageTitle
+				setIsFilterOpen={setIsFilterOpen}
+				isFilterOpen={isFilterOpen}
+			>
+				<h3 className="font-montserrat text-lg md:text-[24px] text-[#2E2E2E] font-medium">
+					Search results for{" "}
+					<span className="font-bold">{searchQuery}</span>
+				</h3>
+			</EventsPageTitle>
+
 			<div className="px-[20px] md:px-[40px] mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{events.length > 0 ? (
 					events.map((event: any) => (

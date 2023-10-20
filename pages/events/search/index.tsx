@@ -6,9 +6,12 @@ import EventLayout from "@/components/layout/eventLayout";
 import SearchFilterModal from "@/components/modals/searchFilterModal";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import filterIcon from "@/public/assets/images/filter.svg";
+import multiply from "@/public/assets/images/multiply.svg";
 import Event from "@/public/images/event-image.png";
 import axios from "axios";
 import Image from "next/image";
+import Link from "next/link";
+import { useSearchParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -20,9 +23,17 @@ interface filterParam {
 	fee?: string;
 }
 
-const Events = () => {
+const Filter = () => {
+	const searchParams = useSearchParams();
+	const search = searchParams.get("search");
 	const router = useRouter();
+	const [params, setParams] = useState<filterParam>();
+	const location = searchParams.get("location");
+	const category = searchParams.get("category");
+	const date = searchParams.get("date");
+	const fee = searchParams.get("fee");
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
+
 	const [events, setEvents] = useState([]);
 
 	useEffect(() => {
@@ -42,8 +53,11 @@ const Events = () => {
 					setIsFilterOpen={setIsFilterOpen}
 					isFilterOpen={isFilterOpen}
 				>
-					<h3 className="font-montserrat text-lg md:text-[24px] text-[#2E2E2E] font-bold">
-						Explore other Events
+					<h3 className="font-montserrat text-sm md:text-[24px] text-gray-600">
+						Search results for{" "}
+						<span className="font-bold text-ellipsis">
+							“{search}”
+						</span>
 					</h3>
 				</EventsPageTitle>
 
@@ -68,37 +82,11 @@ const Events = () => {
 					)}
 				</div>
 				{isFilterOpen && (
-					<SearchFilterModal
-						setIsFilterOpen={setIsFilterOpen}
-						
-					/>
+					<SearchFilterModal setIsFilterOpen={setIsFilterOpen} />
 				)}
 			</div>
 		</EventLayout>
 	);
 };
 
-export default Events;
-
-{
-	/* <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.length > 0 ? (
-            events.map((event: any) => (
-              <EventCard
-                key={event.id}
-                title={event.name || "Event Name"}
-                location={event.location || "Not Specified"}
-                img={event.image || Event}
-                cost={event.ticketPrice || 0}
-                dateString={event.startTime}
-              />
-            ))
-          ) : (
-            <>
-              <EventCardLoading />
-              <EventCardLoading />
-              <EventCardLoading />
-            </>
-          )}
-        </div> */
-}
+export default Filter;

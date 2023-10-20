@@ -4,15 +4,16 @@ import RedMultiply from "../icons/RedMultiply";
 import filterIcon from "@/public/assets/images/filter.svg";
 import Image from "next/image";
 import Link from "next/link";
+import { SearchFilterProps } from "@/@types";
 
-const SearchFilterModal = () => {
+const SearchFilterModal = ({ setIsFilterOpen }: SearchFilterProps) => {
 	return (
 		<div className="fixed z-50 inset-0 flex justify-center items-center bg-grey-500/40 p-4">
-			<form className="bg-white p-4 rounded-2xl w-full max-w-3xl font-sans">
+			<form className="bg-white p-4 rounded-2xl w-full max-w-lg md:max-w-3xl font-sans">
 				<h3 className="text-2xl font-bold font-montserrat">
 					Search Filter
 				</h3>
-				<div className="grid md:grid-cols-2 mt-6 mb-8 gap-4">
+				<div className="grid md:grid-cols-2 mt-6 mb-10 md:mb-8 gap-4">
 					<div className="flex flex-col space-y-1">
 						<label
 							htmlFor="location"
@@ -21,22 +22,8 @@ const SearchFilterModal = () => {
 							Location
 						</label>
 						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 text-center font-medium text-grey-200">
-								Location Filter
-							</span>
-							<ArrowDownIcon />
-						</div>
-					</div>
-					<div className="flex flex-col space-y-1">
-						<label
-							htmlFor="location"
-							className="font-bold text-grey-500"
-						>
-							Category
-						</label>
-						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 text-center font-medium text-grey-200">
-								Category Filter
+							<span className="flex-1 font-medium text-grey-200">
+								All, Lagos, Abuja
 							</span>
 							<ArrowDownIcon />
 						</div>
@@ -49,7 +36,21 @@ const SearchFilterModal = () => {
 							Date
 						</label>
 						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 text-center font-medium text-grey-200">
+							<span className="flex-1 font-medium text-grey-200">
+								All, Today, 2 weeks, a month
+							</span>
+							<ArrowDownIcon />
+						</div>
+					</div>
+					<div className="flex flex-col space-y-1">
+						<label
+							htmlFor="location"
+							className="font-bold text-grey-500"
+						>
+							All, Physical, Virtual
+						</label>
+						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
+							<span className="flex-1 font-medium text-grey-200">
 								Date Filter
 							</span>
 							<ArrowDownIcon />
@@ -60,24 +61,27 @@ const SearchFilterModal = () => {
 							htmlFor="location"
 							className="font-bold text-grey-500"
 						>
-							Event Type
+							Event Pricing
 						</label>
 						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 text-center font-medium text-grey-200">
-								Event Type Filter
+							<span className="flex-1 font-medium text-grey-200">
+								All, Free, Paid
 							</span>
 							<ArrowDownIcon />
 						</div>
 					</div>
 				</div>
-				<div className="flex justify-center gap-6">
-					<button className="flex items-center px-6 py-3 md:py-4 gap-2 text-lg font-medium rounded-lg border border-secondary-300 text-secondary-500 transition-all duration-200 hover:bg-secondary-75/50 ">
+				<div className="flex justify-center flex-col md:flex-row gap-4 md:gap-6">
+					<button
+						onClick={() => setIsFilterOpen(false)}
+						className="flex items-center px-5 py-3 gap-2 text-lg justify-center md:justify-start font-medium rounded-lg border border-secondary-300 text-secondary-500 transition-all duration-200 hover:bg-secondary-75/50 "
+					>
 						<RedMultiply />
 						<span>Cancel</span>
 					</button>
 					<Link
-						href="/"
-						className="flex items-center px-6 py-3 md:py-4 gap-2 text-lg font-medium rounded-lg border bg-secondary-300 text-white transition-all duration-200 hover:bg-secondary-100"
+						href="/filter"
+						className="flex items-center px-5 py-3 gap-2 text-lg justify-center md:justify-start font-medium rounded-lg border bg-secondary-300 text-white transition-all duration-200 hover:bg-secondary-100"
 					>
 						<Image src={filterIcon} alt="filter" />
 						<span>Apply Filter</span>

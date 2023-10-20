@@ -23,8 +23,8 @@ export default function EventDetailsPage({
     startTime,
     tags,
     ticketPrice,
-  }: EventDetails) {
-     const router = useRouter();
+}: EventDetails) {
+    const router = useRouter();
     const { id } = router.query;
 
     const [eventDetails, setEventDetails] = useState<EventDetails>({
@@ -93,17 +93,17 @@ export default function EventDetailsPage({
 
                 <div className="flex gap-4 items-center" onClick={() => router.back()}>
                     <button>
-                    <ArrowBackIcon />
+                        <ArrowBackIcon />
                     </button>
                     <h3 className="text-grey-500 text-2xl font-bold">Tech Innovation</h3>
                 </div>
-                <Link href='/Checkout' className="w-[200px] ml-4 md:w-auto bg-secondary-300 text-white text-base font-bold flex justify-center items-center px-2 py-4 md:py-[18px] md:px-8 rounded-lg mt-10">Register for this event</Link>
-                </div>
+                <Link href={eventDetails.isPaidEvent ? '/event/register/paid' : '/event/register/free'} className="w-[200px] ml-4 md:w-auto bg-secondary-300 text-white text-base font-bold flex justify-center items-center px-2 py-4 md:py-[18px] md:px-8 rounded-lg mt-10">Register for this event</Link>
+            </div>
 
-                <div className="w-full">
-                <img src="/assets/images/herobg.png" alt="hero" className="w-full"/>
-                </div>
-                <div className="max-w-7xl mx-auto mt-8 p-4 lg::p-0">
+            <div className="w-full">
+                <img src="/assets/images/herobg.png" alt="hero" className="w-full" />
+            </div>
+            <div className="max-w-7xl mx-auto mt-8 p-4 lg::p-0">
                 <div className="flex flex-col md:flex-row gap-6 justify-between">
                     <div className="flex flex-col gap-8">
                         <div className="flex flex-col gap-6 max-w-[733px]">
@@ -111,35 +111,35 @@ export default function EventDetailsPage({
                             <p className="text-[#666] text-justify font-medium text-lg">Dive into the world of cutting-edge technology at the Tech Innovators Summit. This immersive event is designed for tech enthusiasts, entrepreneurs, and innovators alike. Join us for a day filled with inspiring keynote speakers, hands-on workshops, and networking opportunities with industry leaders. Discover the latest trends in artificial intelligence, blockchain, cybersecurity, and more. Whether you&aptos;re a tech veteran or just starting your journey, the Tech Innovators Summit is the ultimate destination to explore, learn, and connect in the dynamic tech landscape.</p>
                         </div>
                         <div className="inline-flex md:hidden p-6 items-start gap-6 rounded-2xl bg-[#FAFAFA] max-w-[437px] max-h-[252px]">
-                        <div className="flex flex-col gap-6">
-                            <div>
-                                <div className="flex justify-between">
-                                <h1 className="text-secondary-300 font-bold text-xl">08-10 October, 2023</h1>
-                                <h1 className="text-grey-700 font-bold text-xl">&#8358;20,000</h1>
+                            <div className="flex flex-col gap-6">
+                                <div>
+                                    <div className="flex justify-between">
+                                        <h1 className="text-secondary-300 font-bold text-xl">08-10 October, 2023</h1>
+                                        <h1 className="text-grey-700 font-bold text-xl">&#8358;20,000</h1>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="flex flex-col gap-4">
-                                <div className="flex gap-2 items-start">
-                                    <LocationIcon />
-                                    <h4 className="text-grey-700 text-base font-semibold">
-                                        Ultimate Garden, By Mobil Junction Lokogoma Expressway Gaduwa Abuja, Federal Capital Territory 900109
-                                    </h4>
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <ClockIcon />
-                                    <h4 className="text-grey-700 text-base font-semibold">
-                                        9AM Daily
-                                    </h4>
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <CalendarIcon />
-                                    <h4 className="text-grey-700 text-base font-semibold">
-                                        In 2 weeks
-                                    </h4>
+                                <div className="flex flex-col gap-4">
+                                    <div className="flex gap-2 items-start">
+                                        <LocationIcon />
+                                        <h4 className="text-grey-700 text-base font-semibold">
+                                            Ultimate Garden, By Mobil Junction Lokogoma Expressway Gaduwa Abuja, Federal Capital Territory 900109
+                                        </h4>
+                                    </div>
+                                    <div className="flex gap-2 items-center">
+                                        <ClockIcon />
+                                        <h4 className="text-grey-700 text-base font-semibold">
+                                            9AM Daily
+                                        </h4>
+                                    </div>
+                                    <div className="flex gap-2 items-center">
+                                        <CalendarIcon />
+                                        <h4 className="text-grey-700 text-base font-semibold">
+                                            In 2 weeks
+                                        </h4>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
                         <div className="flex flex-col gap-6">
                             <h1 className="text-grey-500 text-2xl font-bold">Event Tags</h1>
                             <div className="flex flex-wrap gap-x-8 gap-y-4 max-w-[653px]">
@@ -157,8 +157,8 @@ export default function EventDetailsPage({
                         <div className="flex flex-col gap-6">
                             <div>
                                 <div className="flex justify-between">
-                                <h1 className="text-secondary-300 font-bold text-xl">08-10 October, 2023</h1>
-                                <h1 className="text-grey-700 font-bold text-xl">&#8358;20,000</h1>
+                                    <h1 className="text-secondary-300 font-bold text-xl">08-10 October, 2023</h1>
+                                    <h1 className="text-grey-700 font-bold text-xl">&#8358;20,000</h1>
                                 </div>
                             </div>
                             <div className="flex flex-col gap-4">
@@ -194,9 +194,9 @@ export default function EventDetailsPage({
                             </button>
                             <div className="w-full h-[235px] ">
                                 <img
-                                src='/assets/images/similarevent.png'
-                                alt="event"
-                                className="w-full h-full object-cover rounded-t-lg"
+                                    src='/assets/images/similarevent.png'
+                                    alt="event"
+                                    className="w-full h-full object-cover rounded-t-lg"
 
                                 />
                             </div>
@@ -211,18 +211,18 @@ export default function EventDetailsPage({
                                         <ClockIcon />
                                         <p>Event Time</p>
                                     </div>
-                                    </div>
-                                <div>
-                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
-                                    <p className="text-secondary-200 font-bold">OCT</p>
-                                    <h3 className="text-2xl font-extrabold">08</h3>
                                 </div>
+                                <div>
+                                    <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
+                                        <p className="text-secondary-200 font-bold">OCT</p>
+                                        <h3 className="text-2xl font-extrabold">08</h3>
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-full flex justify-between px-[24px] py-3">
                                 <div className="flex gap-2 items-center">
-                                <ElipseIcon />
-                                <p className="text-[#30980C]">Free</p>
+                                    <ElipseIcon />
+                                    <p className="text-[#30980C]">Free</p>
                                 </div>
                                 <p className="font-bold px-2">Live</p>
                             </div>
@@ -233,35 +233,35 @@ export default function EventDetailsPage({
                             </button>
                             <div className="w-full h-[235px] ">
                                 <img
-                                src='/assets/images/similarevent.png'
-                                alt="event"
-                                className="w-full h-full object-cover rounded-t-lg"
+                                    src='/assets/images/similarevent.png'
+                                    alt="event"
+                                    className="w-full h-full object-cover rounded-t-lg"
 
                                 />
                             </div>
                             <div className="grid md:grid-cols-[1fr_0.4fr] gap-1 p-1 md:p-[24px]">
                                 <div className="grid gap-[10px]">
-                                <h3 className="md:text-2xl font-bold">Event Name</h3>
-                                <div className="flex gap-2 items-center">
-                                    <LocationIcon />
-                                    <p className="">Event Location</p>
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <ClockIcon />
-                                    <p>Event Time</p>
-                                </div>
+                                    <h3 className="md:text-2xl font-bold">Event Name</h3>
+                                    <div className="flex gap-2 items-center">
+                                        <LocationIcon />
+                                        <p className="">Event Location</p>
+                                    </div>
+                                    <div className="flex gap-2 items-center">
+                                        <ClockIcon />
+                                        <p>Event Time</p>
+                                    </div>
                                 </div>
                                 <div>
-                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
-                                    <p className="text-secondary-200 font-bold">OCT</p>
-                                    <h3 className="text-2xl font-extrabold">08</h3>
-                                </div>
+                                    <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
+                                        <p className="text-secondary-200 font-bold">OCT</p>
+                                        <h3 className="text-2xl font-extrabold">08</h3>
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-full flex justify-between px-[24px] py-3">
                                 <div className="flex gap-2 items-center">
-                                <ElipseIcon />
-                                <p className="text-[#30980C]">Free</p>
+                                    <ElipseIcon />
+                                    <p className="text-[#30980C]">Free</p>
                                 </div>
                                 <p className="font-bold px-2">Live</p>
                             </div>
@@ -272,42 +272,42 @@ export default function EventDetailsPage({
                             </button>
                             <div className="w-full h-[235px] ">
                                 <img
-                                src='/assets/images/similarevent.png'
-                                alt="event"
-                                className="w-full h-full object-cover rounded-t-lg"
+                                    src='/assets/images/similarevent.png'
+                                    alt="event"
+                                    className="w-full h-full object-cover rounded-t-lg"
 
                                 />
                             </div>
                             <div className="grid md:grid-cols-[1fr_0.4fr] gap-1 p-1 md:p-[24px]">
                                 <div className="grid gap-[10px]">
-                                <h3 className="md:text-2xl font-bold">Event Name</h3>
-                                <div className="flex gap-2 items-center">
-                                    <LocationIcon />
-                                    <p className="">Event Location</p>
-                                </div>
-                                <div className="flex gap-2 items-center">
-                                    <ClockIcon />
-                                    <p>Event Time</p>
-                                </div>
+                                    <h3 className="md:text-2xl font-bold">Event Name</h3>
+                                    <div className="flex gap-2 items-center">
+                                        <LocationIcon />
+                                        <p className="">Event Location</p>
+                                    </div>
+                                    <div className="flex gap-2 items-center">
+                                        <ClockIcon />
+                                        <p>Event Time</p>
+                                    </div>
                                 </div>
                                 <div>
-                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
-                                    <p className="text-secondary-200 font-bold">OCT</p>
-                                    <h3 className="text-2xl font-extrabold">08</h3>
-                                </div>
+                                    <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
+                                        <p className="text-secondary-200 font-bold">OCT</p>
+                                        <h3 className="text-2xl font-extrabold">08</h3>
+                                    </div>
                                 </div>
                             </div>
                             <div className="w-full flex justify-between px-[24px] py-3">
                                 <div className="flex gap-2 items-center">
-                                <ElipseIcon />
-                                <p className="text-[#30980C]">Free</p>
+                                    <ElipseIcon />
+                                    <p className="text-[#30980C]">Free</p>
                                 </div>
                                 <p className="font-bold px-2">Live</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                </div>
+            </div>
             <Footer />
         </>
     )

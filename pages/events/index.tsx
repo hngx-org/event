@@ -37,7 +37,7 @@ const Events = () => {
 
 	return (
 		<EventLayout>
-			<div className="w-full grid gap-4">
+			<div className="w-full grid gap-4 mb-20">
 				<EventsPageTitle
 					setIsFilterOpen={setIsFilterOpen}
 					isFilterOpen={isFilterOpen}
@@ -68,10 +68,7 @@ const Events = () => {
 					)}
 				</div>
 				{isFilterOpen && (
-					<SearchFilterModal
-						setIsFilterOpen={setIsFilterOpen}
-						
-					/>
+					<SearchFilterModal setIsFilterOpen={setIsFilterOpen} />
 				)}
 			</div>
 		</EventLayout>
@@ -79,26 +76,3 @@ const Events = () => {
 };
 
 export default Events;
-
-{
-	/* <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {events.length > 0 ? (
-            events.map((event: any) => (
-              <EventCard
-                key={event.id}
-                title={event.name || "Event Name"}
-                location={event.location || "Not Specified"}
-                img={event.image || Event}
-                cost={event.ticketPrice || 0}
-                dateString={event.startTime}
-              />
-            ))
-          ) : (
-            <>
-              <EventCardLoading />
-              <EventCardLoading />
-              <EventCardLoading />
-            </>
-          )}
-        </div> */
-}

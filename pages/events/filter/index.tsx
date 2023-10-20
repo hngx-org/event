@@ -45,7 +45,7 @@ const Filter = () => {
 
 	return (
 		<EventLayout>
-			<div className="w-full grid gap-4">
+			<div className="w-full grid gap-4 mb-20">
 				<EventsPageTitle
 					setIsFilterOpen={setIsFilterOpen}
 					isFilterOpen={isFilterOpen}

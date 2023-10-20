@@ -1,4 +1,5 @@
 "use client";
+import { AllEvents } from "@/@types";
 import EventCardLoading from "@/components/eventCardLoading";
 import EventCard from "@/components/eventCardTimeline";
 import EventsPageTitle from "@/components/eventsPageTitle";
@@ -25,22 +26,26 @@ interface filterParam {
 
 const Filter = () => {
 	const searchParams = useSearchParams();
-	const search = searchParams.get("search");
-	const router = useRouter();
-	const [params, setParams] = useState<filterParam>();
-	const location = searchParams.get("location");
-	const category = searchParams.get("category");
-	const date = searchParams.get("date");
-	const fee = searchParams.get("fee");
+	const search = searchParams.get("value");
+	// const router = useRouter();
+	// const [params, setParams] = useState<filterParam>();
+	// const location = searchParams.get("location");
+	// const category = searchParams.get("category");
+	// const date = searchParams.get("date");
+	// const fee = searchParams.get("fee");
 	const [isFilterOpen, setIsFilterOpen] = useState(false);
-
-	const [events, setEvents] = useState([]);
+	const [events, setEvents] = useState<AllEvents>([]);
+	const searchResults = events.filter(
+		(event) => event.name.toLowerCase() === search?.toLowerCase()
+	);
 
 	useEffect(() => {
 		try {
 			axios
 				.get("https://wetindeysup-api.onrender.com/api/events/upcoming")
-				.then((res) => setEvents(res.data.data));
+				.then((res) => {
+					setEvents(res.data.data);
+				});
 		} catch (error: any) {
 			toast.error(error.message);
 		}
@@ -48,7 +53,7 @@ const Filter = () => {
 
 	return (
 		<EventLayout>
-			<div className="w-full grid gap-4">
+			<div className="w-full grid gap-4 mb-20">
 				<EventsPageTitle
 					setIsFilterOpen={setIsFilterOpen}
 					isFilterOpen={isFilterOpen}

@@ -1,4 +1,4 @@
-import {StaticImageData} from "next/image";
+import { StaticImageData } from "next/image";
 import { ReactNode } from "react";
 
 export type SuccessProps = {
@@ -9,24 +9,24 @@ export type SuccessProps = {
 };
 
 export type EventManagementModalType = {
-  title: string;
-  text: string;
-  route: string;
-  button: string;
-  message: string;
-  onclose: () => void;
-  onNext: () => void;
+	title: string;
+	text: string;
+	route: string;
+	button: string;
+	message: string;
+	onclose: () => void;
+	onNext: () => void;
 };
 
 export type SimilarEventsType = {
-  imgSrc: StaticImageData | string,
-  name: string,
-  location: string,
-  time: string,
-  date: string,
-  live: string,
-  amount: string
-}
+	imgSrc: StaticImageData | string;
+	name: string;
+	location: string;
+	time: string;
+	date: string;
+	live: string;
+	amount: string;
+};
 
 export type SignupData = {
 	name: string;
@@ -40,9 +40,9 @@ export type LoginData = {
 };
 
 export type ForgotPasswordData = {
-  currentPassword: string;
-  newPassword: string;
-  confirmNewPassword: string;
+	currentPassword: string;
+	newPassword: string;
+	confirmNewPassword: string;
 };
 
 export type User = {
@@ -69,4 +69,26 @@ export type EventCardProps = {
 	location: string;
 	dateString: string;
 	cost: number;
+};
+
+export type AllEvents = SingleEventProps[];
+
+type SingleEventProps = {
+	description: string;
+	endDate: string;
+	endTime: string;
+	eventLink: string;
+	eventType: string;
+	id: string;
+	image: string;
+	isPaidEvent: boolean;
+	location: string;
+	name: string;
+	numberOfAvailableTickets: number;
+	organizerId: string;
+	registrationClosingDate: string;
+	startDate: string;
+	startTime: string;
+	tags: string[];
+	ticketPrice: number;
 };

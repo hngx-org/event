@@ -1,18 +1,23 @@
-import EventCard from "@/components/eventCardTimeline";
 import EventHeader from "@/components/eventHeader";
 import EventManagement from "@/components/events/EventManagement";
 import Footer from "@/components/web/footer";
 import similarevent from "../../../public/assets/images/similarevent.png";
 import chevoronRight from "../../../public/assets/images/chevron_right.png";
+import EventCard from "@/components/eventCardTimeline";
+
 import React, { useState } from "react";
 import Image from "next/image";
 
 const RegisteredEven = () => {
   const [toggleRegisterEvent, setToggleRegisterEvent] = useState(true);
+
+  const currntDate = () => {
+    Date()
+  }
   return (
     <>
       <div className="max-w-7xl mx-auto">
-        <EventHeader />
+       <EventHeader />
       </div>
       {toggleRegisterEvent ? (
         <div>
@@ -51,36 +56,7 @@ const RegisteredEven = () => {
                 </button>
               </div>
               <div className="flex justify-between flex-wrap">
-                <EventCard
-                  title="Event Name"
-                  location="Event Location"
-                  time="Event Time"
-                  month="OCT"
-                  day="08"
-                  cost={0}
-                  img={similarevent}
-                  isLive={false}
-                />
-                <EventCard
-                  title="Event Name"
-                  location="Event Location"
-                  time="Event Time"
-                  month="OCT"
-                  day="08"
-                  cost={0}
-                  img={similarevent}
-                  isLive={false}
-                />
-                <EventCard
-                  title="Event Name"
-                  location="Event Location"
-                  time="Event Time"
-                  month="OCT"
-                  day="08"
-                  cost={0}
-                  img={similarevent}
-                  isLive={false}
-                />
+                <EventCard img={similarevent} title={"Event Name"} location={"Event Location"} dateString={"Event time"} cost={10000}                />
               </div>
             </div>
           </EventManagement>
@@ -122,7 +98,7 @@ const RegisteredEven = () => {
                 </button>
               </div>
               <div className="flex justify-between flex-wrap">
-                <EventCard
+                {/* <EventCard
                   title="Event Name"
                   location="Event Location"
                   time="Event Time"
@@ -131,27 +107,17 @@ const RegisteredEven = () => {
                   cost={0}
                   img={similarevent}
                   isLive={true}
-                />
-                <EventCard
-                  title="Event Name"
-                  location="Event Location"
-                  time="Event Time"
+                /> */}
+                {/* <EventCard
+                title={"Event Name"}
+                location="Event Location"
                   month="OCT"
                   day="08"
                   cost={0}
                   img={similarevent}
                   isLive={true}
-                />
-                <EventCard
-                  title="Event Name"
-                  location="Event Location"
-                  time="Event Time"
-                  month="OCT"
-                  day="08"
-                  cost={0}
-                  img={similarevent}
-                  isLive={true}
-                />
+              /> */}
+                
               </div>
             </div>
           </EventManagement>

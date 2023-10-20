@@ -1,17 +1,34 @@
 import { EventCardProps } from "@/@types";
 import Image from "next/image";
 
+function formatDate(dateString: string): {
+  time: string;
+  month: string;
+  day: string;
+  isLive: boolean;
+} {
+  const date = new Date(dateString);
+  const time = date.toLocaleString("en-US", {
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  });
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const day = date.toLocaleString("en-US", { day: "2-digit" });
+
+  const isLive = date < new Date(); // Compare the date with the current date and time
+
+  return { time, month, day, isLive };
+}
+
 export default function EventCard({
   img,
   title,
   location,
-  time,
-  month,
-  day,
-  isLive = false,
+  dateString,
   cost,
 }: EventCardProps) {
-  // I set default values incase props aren't passed
+  const { time, month, day, isLive } = formatDate(dateString);
   return (
     <div className="border border-gray-200 bg-[#FAFAFA] rounded-md">
       <div className="relative">
@@ -69,7 +86,7 @@ export default function EventCard({
       <div className="p-5">
         <div className="flex justify-between">
           <div>
-            <h4 className="font-black text-xl">{title || "Event Name"}</h4>
+            <h4 className="font-black text-xl">{title}</h4>
             <div className="mt-1.5 flex font-semibold">
               <svg
                 width="24"
@@ -92,12 +109,12 @@ export default function EventCard({
                   stroke-width="1.5"
                 />
               </svg>
-              <span>{location || "Event Location"}</span>
+              <span>{location}</span>
             </div>
           </div>
           <div className="text-[#962B2B] bg-[#F2E6E6] px-3 py-0.5 text-center text-lg">
-            <span className="block">{month || "OCT"}</span>
-            <span className="block font-black">{day || "08"}</span>
+            <span className="block">{month}</span>
+            <span className="block font-black">{day}</span>
           </div>
         </div>
         <div className="mt-3 flex">
@@ -126,7 +143,7 @@ export default function EventCard({
               fill="#3B3B3B"
             />
           </svg>{" "}
-          <span className="font-semibold">{time || "Event Time"}</span>
+          <span className="font-semibold">{time}</span>
         </div>
         <div className="mt-4 flex justify-between">
           {isLive ? (

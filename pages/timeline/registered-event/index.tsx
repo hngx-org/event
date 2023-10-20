@@ -56,7 +56,7 @@ const RegisteredEven = () => {
                 </button>
               </div>
               <div className="flex justify-between flex-wrap">
-                <EventCard img={similarevent} title={"Event Name"} location={"Event Location"} dateString={"Event time"} cost={10000}                />
+                <EventCard img={similarevent} title="Event Name" location="Event Location" dateString="Event time" cost={10000}                />
               </div>
             </div>
           </EventManagement>

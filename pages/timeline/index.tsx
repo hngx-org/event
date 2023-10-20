@@ -7,7 +7,6 @@ import Event2 from "@/public/images/event-image-2.png";
 import Event3 from "@/public/images/event-image-3.png";
 import EventHeader from "@/components/eventHeader";
 import Footer from "@/components/web/footer";
-import Link from "next/link";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";

@@ -5,6 +5,7 @@ import Component3 from '@/components/CreateEvents/Component3';
 import Component4 from '@/components/CreateEvents/Component4';
 import Component5 from '@/components/CreateEvents/Component5';
 import { FormState } from '@/@types';
+import { Axios } from 'axios';
 
 const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
   const [currentComponent, setCurrentComponent] = useState(1);

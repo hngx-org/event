@@ -7,9 +7,10 @@ import Event3 from "@/public/images/event-image-3.png";
 import EventHeader from "@/components/eventHeader";
 import Modal from './Modal';
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Footer from "@/components/web/footer";
 
-export default function Dashboard() {
+export default function Timeline() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCloseModal = () => {
@@ -18,6 +19,7 @@ export default function Dashboard() {
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
+  const router =  useRouter()
   return (
     <>
       <div className="max-w-7xl mx-auto">
@@ -35,7 +37,7 @@ export default function Dashboard() {
             Create An Event
           </button>
           
-          <button className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md" 
+          <button  onClick={() => router.push('/event/event-details')} className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md" 
           >
             Explore Other Events
           </button>

@@ -10,6 +10,7 @@ import Footer from "@/components/web/footer";
 import Link from "next/link";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
+import Link from "next/link";
 
 export default function Timeline() {
   const [events, setEvents] = useState([]);
@@ -50,14 +51,15 @@ export default function Timeline() {
         <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.length > 0 ? (
             events.map((event: any) => (
-              <EventCard
-                key={event.id}
-                title={event.name || "Event Name"}
-                location={event.location || "Not Specified"}
-                img={event.image || Event}
-                cost={event.ticketPrice || 0}
-                dateString={event.startTime}
-              />
+              <Link href={`/event/${event.id}`} key={event.id}>
+                  <EventCard
+                    title={event.name || "Event Name"}
+                    location={event.location || "Not Specified"}
+                    img={event.image || Event}
+                    cost={event.ticketPrice || 0}
+                    dateString={event.startTime}
+                  />
+              </Link>
             ))
           ) : (
             <>

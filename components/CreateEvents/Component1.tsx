@@ -1,6 +1,11 @@
 // Component1.tsx
 import React from 'react';
 import { useState } from 'react';
+import blackPhysical from "@/public/images/black-physical.png";
+import redPhysical from "@/public/images/red-physical.png";
+import blackVirtual from "@/public/images/black-virtual.png";
+import redVirtual from "@/public/images/red-virtual.png";
+import Image from 'next/image';
 
 const Component1: React.FC<{ onBack: () => void, onProceed: () => void }> = ({ onBack, onProceed }) => {
     const [selectedButton, setSelectedButton] = useState<number | null>(2);
@@ -32,11 +37,7 @@ const Component1: React.FC<{ onBack: () => void, onProceed: () => void }> = ({ o
           } flex flex-col justify-center items-center gap-8 xs:block`}
           onClick={() => handleButtonClick(1)}
         >
-          <div className="w-16 h-16 relative">
-            <div className="w-16 h-20 left-[2.11px] top-[-8.75px] absolute">
-              <div className="origin-top-left -rotate-45 w-8 h-8 left-[10.38px] top-[23.51px] absolute"></div>
-            </div>
-          </div>
+          <Image src={ selectedButton===1 ? redPhysical : blackPhysical} alt='physical' height={60} width={60}/>
           <div className="flex flex-col justify-center items-start gap-2">
             <div className={`self-stretch ${
             selectedButton === 1 ? 'text-red-900 ' : 'text-zinc-400 '
@@ -58,7 +59,7 @@ const Component1: React.FC<{ onBack: () => void, onProceed: () => void }> = ({ o
           } flex flex-col justify-center items-center gap-8 xs:block`}
           onClick={() => handleButtonClick(2)}
         >
-          <div className="w-16 h-16 relative"></div>
+          <Image src={ selectedButton===2 ? redVirtual : blackVirtual} alt='physical' height={60} width={60}/>
           <div className="flex flex-col justify-center items-center gap-1">
             <div className="flex flex-col justify-start items-start gap-1">
               <div className={`self-stretch ${

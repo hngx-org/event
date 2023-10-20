@@ -6,12 +6,21 @@ import Event2 from "@/public/images/event-image-2.png";
 import Event3 from "@/public/images/event-image-3.png";
 import EventHeader from "@/components/eventHeader";
 import Modal from './Modal';
-import { useState } from "react";
+import Cookies from "js-cookie";
+import { useState, useEffect } from "react";
 import Footer from "@/components/web/footer";
 
 export default function Dashboard() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [token, setToken] = useState("");
+  useEffect(() => {
+    // Retrieve the token from the cookie
+    const storedToken = Cookies.get("token");
+    if (storedToken) {
+      setToken(storedToken);
+    }
+  }, []);
+  console.log(token)
   const handleCloseModal = () => {
     setIsModalOpen(false);
   };

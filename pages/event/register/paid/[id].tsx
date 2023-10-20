@@ -1,11 +1,19 @@
+import AccountSummary from "@/components/accountSummary";
+import EventHeader from "@/components/eventHeader";
 import EventLayout from "@/components/layout/eventLayout";
+import Footer from "@/components/web/footer";
 import RegisterSuccessful from "@/components/modals/register-successful";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import Image from "next/image";
+import { useRouter } from 'next/router';
 import React, { useState } from "react";
 
-const Free = () => {
+
+
+const Paid = () => {
+  const router = useRouter();
+  const { id } = router.query;
   const [num, setNum] = useState<number>(1);
   const [showModal, setShowModal] = useState<boolean>(false)
   const increment = () => {
@@ -18,8 +26,19 @@ const Free = () => {
     }
   };
 
+  const registerAPI = () => {
+    fetch(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log("Event Registration Error", err))
+  }
+
+
   const onsubmit = (e: any) => {
     e.preventDefault()
+    registerAPI()
     setShowModal(true)
   }
 
@@ -47,9 +66,9 @@ const Free = () => {
 
         <form
           onSubmit={onsubmit}
-          className="container mx-auto px-[20px] md:px-[40px] gap-10 md:gap-6 md:justify-between flex flex-col sm:flex-row mt-8">
-          <div className="max-w-[735px] w-full"
-          >
+          className="container mx-auto px-[20px] md:px-[40px] gap-10 md:gap-6 md:justify-between flex flex-col sm:flex-row mt-8"
+        >
+          <div className="max-w-[735px] w-full">
             <h1 className="text-[3B3B3B] font-montserrat text-2xl font-bold">Contact Information</h1>
             {/* FIRST AND LAST NAME */}
             <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
@@ -123,7 +142,7 @@ const Free = () => {
                     title="countryCode"
                     name="country code"
                     id="countryCode"
-                    className="focus-visible:outline-none py-3 ps-[12px] border-e border-[#A3A3A3]"
+                    className="focus-visible:outline-none py-3 ps-4 border-e border-[#A3A3A3]"
                     required
                   >
                     <option value="+234">+234</option>
@@ -132,7 +151,7 @@ const Free = () => {
                   <input
                     type="tel"
                     placeholder="8123456789"
-                    className="w-full py-3 px-[10px] focus-visible:outline-none"
+                    className="w-full py-3 ps-3 pe-4 focus-visible:outline-none"
                     required
                   />
                 </div>
@@ -180,8 +199,44 @@ const Free = () => {
               </div>
             </div>
 
+            {/* PAYMENT DETAILS */}
+            <div className="mt-[56px]">
+              <h1 className="text-[#3B3B3B] font-montserrat text-2xl font-bold">Payment Details</h1>
+              {/* Card or Bank */}
+              <div className="mt-6 flex items-center gap-4">
+                <input
+                  type="checkbox"
+                  title="Pay with Card or Bank"
+                  name="cardOrBank"
+                  id="cardOrBank"
+                  className="w-5 h-5"
+                />
+                <p className="font-sans text-lg font-medium text-[#666]">Pay with Card or Bank</p>
+              </div>
+              {/* Bank Transfer */}
+              <div className="mt-6 flex items-center gap-4">
+                <input
+                  type="checkbox"
+                  title="Pay with Bank Transfer"
+                  name="bankTransfer"
+                  id="bankTransfer"
+                  className="w-5 h-5"
+                />
+                <p className="font-sans text-lg font-medium text-[#666]">Pay with Bank Transfer</p>
+              </div>
+              {/* Chipper Cash */}
+              <div className="mt-6 flex items-center gap-4">
+                <input
+                  type="checkbox"
+                  title="Pay with Chipper Cash"
+                  name="chipperCash"
+                  id="chipperCash"
+                  className="w-5 h-5"
+                />
+                <p className="font-sans text-lg font-medium text-[#666]">Pay with Chipper Cash</p>
+              </div>
+            </div>
           </div>
-
           {/* Order Summary */}
           <div className="md:max-w-[437px] h-max w-full p-6 rounded-2xl bg-[#FAFAFA]">
             <h4 className="text-xl text-center font-sans text-[#800000] mb-6 font-bold">
@@ -209,7 +264,7 @@ const Free = () => {
             </div>
             <div className="my-8 flex justify-between gap-4 items-center text-[#1C1C1C] text-base font-sans">
               <h3 className="font-semibold">Sub-total</h3>
-              <h3 className="font-medium">₦0.00</h3>
+              <h3 className="font-medium">₦20,000</h3>
             </div>
             <hr />
             <div className="mt-8 flex justify-between gap-4 items-center">
@@ -251,4 +306,4 @@ const Free = () => {
   );
 };
 
-export default Free;
+export default Paid;

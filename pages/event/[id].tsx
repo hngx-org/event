@@ -97,7 +97,7 @@ export default function EventDetailsPage({
                     </button>
                     <h3 className="text-grey-500 text-2xl font-bold">Tech Innovation</h3>
                 </div>
-                <Link href={eventDetails.isPaidEvent ? '/event/register/paid' : '/event/register/free'} className="w-[200px] ml-4 md:w-auto bg-secondary-300 text-white text-base font-bold flex justify-center items-center px-2 py-4 md:py-[18px] md:px-8 rounded-lg mt-10">Register for this event</Link>
+                <Link href={eventDetails.isPaidEvent ? `/event/register/paid/${id}` : `/event/register/free/${id}`} className="w-[200px] ml-4 md:w-auto bg-secondary-300 text-white text-base font-bold flex justify-center items-center px-2 py-4 md:py-[18px] md:px-8 rounded-lg mt-10">Register for this event</Link>
             </div>
 
             <div className="w-full">

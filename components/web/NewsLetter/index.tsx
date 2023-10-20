@@ -25,7 +25,7 @@ const NewsLetter = () => {
           placeholder='Enter email address'
         />
         <button
-          className='bg-red rounded-md px-6 text-center'
+          className='bg-primary-400 rounded-md px-6 text-center'
           onClick={() => {
             console.log(email);
           }}

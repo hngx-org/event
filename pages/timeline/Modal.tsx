@@ -5,7 +5,7 @@ import Component3 from '@/components/CreateEvents/Component3';
 import Component4 from '@/components/CreateEvents/Component4';
 import Component5 from '@/components/CreateEvents/Component5';
 import { FormState } from '@/@types';
-import { Axios } from 'axios';
+import axios, { Axios, post } from 'axios';
 
 const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onClose }) => {
   const [currentComponent, setCurrentComponent] = useState(1);
@@ -46,28 +46,28 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
   const handleChange = (name: string, value: string) => {
     setFormData({ ...formData, [name]: value });
   };
-  const sendDataToAPI = (data: FormState) => {
-    fetch('https://wetindeysup-api.onrender.com/api/events', {
-      method: 'POST',
-      headers: {
-        'accept': 'application/json',
-        'Content-Type': 'multipart/form-data'
-      },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((responseData) => {
-        console.log('Data sent to API and response received:', responseData);
-      })
-      .catch((error) => {
-        console.error('Error sending data to API:', error);
-      });
-  };
+  // const sendDataToAPI = (data: FormState) => {
+  //   fetch('https://wetindeysup-api.onrender.com/api/events', {
+  //     method: 'POST',
+  //     headers: {
+  //       'accept': 'application/json',
+  //       'Content-Type': 'multipart/form-data'
+  //     },
+  //     body: JSON.stringify(data),
+  //   })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw new Error('Network response was not ok');
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((responseData) => {
+  //       console.log('Data sent to API and response received:', responseData);
+  //     })
+  //     .catch((error) => {
+  //       console.error('Error sending data to API:', error);
+  //     });
+  // };
 
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -90,7 +90,9 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
     if (requirementsMet) {
       setAllRequirementsMet(true);
       handleProceed();
-      sendDataToAPI(formData);
+      axios.post('https://wetindeysup-api.onrender.com/api/events', {formData}).
+      then(response => console.log(response))
+      .catch(err => console.log(err))
     } else {
       setAllRequirementsMet(false);
     }

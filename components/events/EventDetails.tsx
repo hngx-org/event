@@ -1,7 +1,51 @@
 import { CalendarIcon, ClockIcon, LocationIcon, ArrowBackIcon, ElipseIcon, OptionIcon } from "@/components/icons/EventDetails/SocialIcons";
 import Link from "next/link";
+import { useState, useEffect } from 'react';
 
-export default function EventDetails() {
+interface EventDetailsProps {
+    eventId: string;
+  }
+
+export default function EventDetails({ eventId }: EventDetailsProps) {
+    const [eventDetails, setEventDetails] = useState({});
+    const [similarEvents, setSimilarEvents] = useState([]);
+
+    useEffect(() => {
+        // Fetch event details
+        fetch(`https://wetindeysup-api.onrender.com//api/events/${eventId}`)
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error('Event not found');
+            }
+          })
+          .then((data) => {
+            setEventDetails(data); 
+            console.log('Event details successfully fetched:', data);
+          })
+          .catch((error) => {
+            console.error('Error fetching event details:', error);
+          });
+    
+        // Fetch similar events
+        fetch('https://wetindeysup-api.onrender.com//api/events')
+          .then((response) => {
+            if (response.status === 200) {
+              return response.json();
+            } else {
+              throw new Error('No events found');
+            }
+          })
+          .then((data) => {
+            setSimilarEvents(data);
+            console.log('Similar events successfully fetched:', data);
+          })
+          .catch((error) => {
+            console.error('Error fetching similar events:', error);
+          });
+    }, [eventId]);
+
     return (
         <>
             <div className="max-w-7xl md:mx-auto flex flex-col md:flex-row justify-between mb-6 mt-40 md:mt-24">
@@ -165,7 +209,7 @@ export default function EventDetails() {
                                 </div>
                                 </div>
                                 <div>
-                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-md:col p-[10px] rounded-md ">
+                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
                                     <p className="text-secondary-200 font-bold">OCT</p>
                                     <h3 className="text-2xl font-extrabold">08</h3>
                                 </div>
@@ -204,7 +248,7 @@ export default function EventDetails() {
                                 </div>
                                 </div>
                                 <div>
-                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-md:col p-[10px] rounded-md ">
+                                <div className="w-full bg-secondary-50 flex items-center justify-center flex-col md:p-[10px] rounded-md ">
                                     <p className="text-secondary-200 font-bold">OCT</p>
                                     <h3 className="text-2xl font-extrabold">08</h3>
                                 </div>

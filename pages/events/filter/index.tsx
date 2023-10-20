@@ -57,20 +57,20 @@ const Filter = () => {
 						</span>
 					</h3>
 				</EventsPageTitle>
-				<div className="w-full flex gap-4 flex-wrap">
-					<button className="text-base text-black border border-black py-2 px-4  flex gap-3 items-center rounded-lg">
+				<div className="w-full flex gap-4 flex-wrap px-[20px] md:px-[40px] ">
+					<button className="text-base text-black border border-black py-2 px-4 md:px-5 md:py-3 flex gap-3 items-center rounded-lg">
 						<p>Location</p>
 						<Image src={multiply} alt="close" />
 					</button>
-					<button className="text-base text-black border border-black py-2 px-4  flex gap-3 items-center rounded-lg">
+					<button className="text-base text-black border border-black py-2 px-4 md:px-5 md:py-3 flex gap-3 items-center rounded-lg">
 						<p>Date</p>
 						<Image src={multiply} alt="close" />
 					</button>
-					<button className="text-base text-black border border-black py-2 px-4  flex gap-3 items-center rounded-lg">
+					<button className="text-base text-black border border-black py-2 px-4 md:px-5 md:py-3 flex gap-3 items-center rounded-lg">
 						<p>Category</p>
 						<Image src={multiply} alt="close" />
 					</button>
-					<button className="text-base text-black border border-black py-2 px-4  flex gap-[1px] items-center rounded-lg">
+					<button className="text-base text-black border border-black py-2 px-4 md:px-5 md:py-3 flex gap-[1px] items-center rounded-lg">
 						<p>Paid/Free</p>
 						<Image src={multiply} alt="close" />
 					</button>

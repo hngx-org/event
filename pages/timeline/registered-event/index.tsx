@@ -4,20 +4,31 @@ import Footer from "@/components/web/footer";
 import similarevent from "../../../public/assets/images/similarevent.png";
 import chevoronRight from "../../../public/assets/images/chevron_right.png";
 import EventCard from "@/components/eventCardTimeline";
+import { toast } from "react-toastify";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import axios from "axios";
+import EventCardLoading from "@/components/eventCardLoading";
 
 const RegisteredEven = () => {
   const [toggleRegisterEvent, setToggleRegisterEvent] = useState(true);
 
-  const currntDate = () => {
-    Date()
-  }
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    try {
+      axios
+        .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
+        .then((res) => setEvents(res.data.data));
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }, []);
+
   return (
     <>
       <div className="max-w-7xl mx-auto">
-       <EventHeader />
+        <EventHeader />
       </div>
       {toggleRegisterEvent ? (
         <div>
@@ -44,10 +55,16 @@ const RegisteredEven = () => {
               </div>
               <div className="flex justify-between">
                 <div className="flex gap-3 my-8">
-                  <button className="text-[#800000] font-bold underline" onClick={() => setToggleRegisterEvent(true)}>
+                  <button
+                    className="text-[#800000] font-bold underline"
+                    onClick={() => setToggleRegisterEvent(true)}
+                  >
                     Created Event
                   </button>
-                  <button className="text-[#3B3B3B] text-sm" onClick={() => setToggleRegisterEvent(prev => !prev)}>
+                  <button
+                    className="text-[#3B3B3B] text-sm"
+                    onClick={() => setToggleRegisterEvent((prev) => !prev)}
+                  >
                     Registered Event
                   </button>
                 </div>
@@ -55,8 +72,38 @@ const RegisteredEven = () => {
                   View All <Image src={chevoronRight} alt="view_more" />
                 </button>
               </div>
-              <div className="flex justify-between flex-wrap">
-                <EventCard img={similarevent} title="Event Name" location="Event Location" dateString="Event time" cost={10000}                />
+              <div>
+                {events.length > 0 ? (
+                  events.map((event: any) => (
+                    <div key={event.id} className="flex justify-between flex-wrap">
+                      <EventCard
+                        title={event.name || "Event Name"}
+                        location={event.location || "Event location"}
+                        img={event.image || similarevent}
+                        dateString={event.startTime}
+                        cost={event.ticketPrice || 0}
+                      />
+                      <EventCard
+                        title={event.name || "Event Name"}
+                        location={event.location || "Event location"}
+                        img={event.image || similarevent}
+                        dateString={event.startTime}
+                        cost={event.ticketPrice || 0}
+                      />
+                      <EventCard
+                        title={event.name || "Event Name"}
+                        location={event.location || "Event location"}
+                        img={event.image || similarevent}
+                        dateString={event.startTime}
+                        cost={event.ticketPrice || 0}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <>
+                  <EventCardLoading />
+                  </>
+                )}
               </div>
             </div>
           </EventManagement>
@@ -86,10 +133,16 @@ const RegisteredEven = () => {
               </div>
               <div className="flex justify-between">
                 <div className="flex gap-3 my-8">
-                  <button className="text-[#3B3B3B] text-sm" onClick={() => setToggleRegisterEvent(true)}>
+                  <button
+                    className="text-[#3B3B3B] text-sm"
+                    onClick={() => setToggleRegisterEvent(true)}
+                  >
                     Created Event
                   </button>
-                  <button className="text-[#800000] font-bold underline" onClick={() => setToggleRegisterEvent(prev => !prev)}>
+                  <button
+                    className="text-[#800000] font-bold underline"
+                    onClick={() => setToggleRegisterEvent((prev) => !prev)}
+                  >
                     Registered Event
                   </button>
                 </div>
@@ -97,27 +150,38 @@ const RegisteredEven = () => {
                   View All <Image src={chevoronRight} alt="view_more" />
                 </button>
               </div>
-              <div className="flex justify-between flex-wrap">
-                {/* <EventCard
-                  title="Event Name"
-                  location="Event Location"
-                  time="Event Time"
-                  month="OCT"
-                  day="08"
-                  cost={0}
-                  img={similarevent}
-                  isLive={true}
-                /> */}
-                {/* <EventCard
-                title={"Event Name"}
-                location="Event Location"
-                  month="OCT"
-                  day="08"
-                  cost={0}
-                  img={similarevent}
-                  isLive={true}
-              /> */}
-                
+              <div>
+              {events.length > 0 ? (
+                  events.map((event: any) => (
+                    <div key={event.id} className="flex justify-between flex-wrap">
+                      <EventCard
+                        title={event.name || "Event Name"}
+                        location={event.location || "Event location"}
+                        img={event.image || similarevent}
+                        dateString={event.startTime}
+                        cost={event.ticketPrice}
+                      />
+                      <EventCard
+                        title={event.name || "Event Name"}
+                        location={event.location || "Event location"}
+                        img={event.image || similarevent}
+                        dateString={event.startTime}
+                        cost={event.ticketPrice}
+                      />
+                      <EventCard
+                        title={event.name || "Event Name"}
+                        location={event.location || "Event location"}
+                        img={event.image || similarevent}
+                        dateString={event.startTime}
+                        cost={event.ticketPrice}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <>
+                  <EventCardLoading />
+                  </>
+                )}
               </div>
             </div>
           </EventManagement>

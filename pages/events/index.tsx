@@ -11,7 +11,7 @@ import { useSearchParams } from "next/navigation";
 import { string } from "yup";
 import EventLayout from "@/components/layout/eventLayout";
 import Link from "next/link";
-import SearchFilterModal from "@/components/searchFilterModal";
+import SearchFilterModal from "@/components/modals/searchFilterModal";
 
 interface filterParam {
 	location?: string;

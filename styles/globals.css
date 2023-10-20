@@ -9,6 +9,7 @@
   display: grid;
   grid-template-columns: auto auto auto;
 }
+
 .noSelect {
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;

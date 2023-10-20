@@ -1,13 +1,27 @@
-import WebLayout from "@/components/layout/webLayout";
+import { useState, useEffect } from "react";
 import BG from "@/public/assets/images/dashboardBg.png";
 import EventCard from "@/components/eventCardTimeline";
+import EventCardLoading from "@/components/eventCardLoading";
 import Event from "@/public/images/event-image.png";
 import Event2 from "@/public/images/event-image-2.png";
 import Event3 from "@/public/images/event-image-3.png";
 import EventHeader from "@/components/eventHeader";
 import Footer from "@/components/web/footer";
+import axios, { AxiosError } from "axios";
+import { toast } from "react-toastify";
+import Link from "next/link";
 
-export default function Dashboard() {
+export default function Timeline() {
+  const [events, setEvents] = useState([]);
+  useEffect(() => {
+    try {
+      axios
+        .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
+        .then((res) => setEvents(res.data.data));
+    } catch (error: any) {
+      toast.error(error.message);
+    }
+  }, []);
   return (
     <>
       <div className="max-w-7xl mx-auto">
@@ -32,66 +46,25 @@ export default function Dashboard() {
       <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
         <h4 className="text-2xl font-bold">Upcoming Events Near You</h4>
         <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <EventCard
-            title="Event Name"
-            location="Event Location"
-            time="Event Time"
-            month="OCT"
-            day="08"
-            cost={0}
-            img={Event}
-            isLive={true}
-          />
-          <EventCard
-            title="Event Name"
-            location="Event Location"
-            time="Event Time"
-            month="OCT"
-            day="08"
-            cost={0}
-            img={Event2}
-            isLive={false}
-          />
-          <EventCard
-            title="Event Name"
-            location="Event Location"
-            time="Event Time"
-            month="OCT"
-            day="08"
-            cost={0}
-            img={Event3}
-            isLive={true}
-          />
-          <EventCard
-            title="Event Name"
-            location="Event Location"
-            time="Event Time"
-            month="OCT"
-            day="08"
-            cost={0}
-            img={Event}
-            isLive={true}
-          />
-          <EventCard
-            title="Event Name"
-            location="Event Location"
-            time="Event Time"
-            month="OCT"
-            day="08"
-            cost={0}
-            img={Event}
-            isLive={true}
-          />
-          <EventCard
-            title="Event Name"
-            location="Event Location"
-            time="Event Time"
-            month="OCT"
-            day="08"
-            cost={0}
-            img={Event}
-            isLive={true}
-          />
+          {events.length > 0 ? (
+            events.map((event: any) => (
+              <Link href={`/event/${event.id}`} key={event.id}>
+                  <EventCard
+                    title={event.name || "Event Name"}
+                    location={event.location || "Not Specified"}
+                    img={event.image || Event}
+                    cost={event.ticketPrice || 0}
+                    dateString={event.startTime}
+                  />
+              </Link>
+            ))
+          ) : (
+            <>
+              <EventCardLoading />
+              <EventCardLoading />
+              <EventCardLoading />
+            </>
+          )}
         </div>
       </div>
       <Footer />

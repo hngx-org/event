@@ -9,6 +9,7 @@ import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import EventsPageTitle from "@/components/eventsPageTitle";
+import SearchFilterModal from "@/components/modals/searchFilterModal";
 
 export default function SearchResults() {
 	const search = useSearchParams();
@@ -63,6 +64,9 @@ export default function SearchResults() {
 					</>
 				)}
 			</div>
+			{isFilterOpen && (
+				<SearchFilterModal setIsFilterOpen={setIsFilterOpen} />
+			)}
 			<Footer />
 		</div>
 	);

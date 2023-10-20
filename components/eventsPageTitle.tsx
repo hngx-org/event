@@ -26,7 +26,12 @@ const EventsPageTitle = ({
 					onClick={() => setIsFilterOpen(!isFilterOpen)}
 					className="w-full flex justify-center max-w-sm min-[480px]:max-w-none mx-auto min-[480px]:mx-0 min-[480px]:justify-start min-[480px]:w-auto items-center px-5 py-3 gap-2 text-lg font-medium rounded-lg border bg-secondary-300 text-white transition-all duration-200 hover:bg-secondary-100"
 				>
-					<Image src="assets/images/filter.svg" alt="filter" />
+					<Image
+						src="/assets/images/filter.svg"
+						width={20}
+						height={20}
+						alt="filter"
+					/>
 					<p>Filter</p>
 				</button>
 			</div>

@@ -4,7 +4,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-<<<<<<< HEAD
 
 .card {
   display: grid;
@@ -19,5 +18,3 @@
   -ms-user-select: none;
   user-select: none;
 }
-=======
->>>>>>> f3a1479277e4a217276d7ad7b54fd9ffe5aa3d12

@@ -3,8 +3,6 @@ import BG from "@/public/assets/images/dashboardBg.png";
 import EventCard from "@/components/eventCardTimeline";
 import EventCardLoading from "@/components/eventCardLoading";
 import Event from "@/public/images/event-image.png";
-import Event2 from "@/public/images/event-image-2.png";
-import Event3 from "@/public/images/event-image-3.png";
 import EventHeader from "@/components/eventHeader";
 import Footer from "@/components/web/footer";
 import axios, { AxiosError } from "axios";
@@ -35,14 +33,18 @@ export default function Timeline() {
         className="bg-cover w-full px-8 sm:px-12 md:px-16 lg:px-20"
       >
         <div className="pt-[275px] sm:pt-[325px] font-bold">
-          <Link href='/timeline/create-event'>
-          <button className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md">
+          <Link
+            href="/timeline/create-event"
+            className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md"
+          >
             Create An Event
-          </button>
           </Link>
-          <button className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md">
+          <Link
+            href="/event/explore"
+            className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md"
+          >
             Explore Other Events
-          </button>
+          </Link>
         </div>
       </div>
       <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
@@ -51,13 +53,13 @@ export default function Timeline() {
           {events.length > 0 ? (
             events.map((event: any) => (
               <Link href={`/event/${event.id}`} key={event.id}>
-                  <EventCard
-                    title={event.name || "Event Name"}
-                    location={event.location || "Not Specified"}
-                    img={event.image || Event}
-                    cost={event.ticketPrice || 0}
-                    dateString={event.startTime}
-                  />
+                <EventCard
+                  title={event.name || "Event Name"}
+                  location={event.location || "Not Specified"}
+                  img={event.image || Event}
+                  cost={event.ticketPrice || 0}
+                  dateString={event.startTime}
+                />
               </Link>
             ))
           ) : (

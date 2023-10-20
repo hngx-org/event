@@ -1,4 +1,5 @@
 import Header from '@/components/web/header';
+import { useRouter } from 'next/router';
 import React from 'react'
 
 const CheckCircleSVG = () => (
@@ -20,6 +21,7 @@ const CheckCircleSVG = () => (
 );
 
 const EmailVerificationSuccess = () => {
+    const router = useRouter();
     return (
         <>
             <div className="sm:hidden">
@@ -37,7 +39,7 @@ const EmailVerificationSuccess = () => {
                         <p className="text-[#757575] mt-6 text-base font-semibold font-sans">
                             Congratulations! Answer a few questions to customize your event timeline and make it uniquely yours
                         </p>
-                        <button className="w-full mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold active:scale-[0.99] font-sans">
+                        <button onClick={() => router.push(`/timeline`)} className="w-full mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold active:scale-[0.99] font-sans">
                             Proceed
                         </button>
                     </div>

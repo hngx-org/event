@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import search from "@/public/images/search.svg";
+import searchImg from "@/public/images/search.svg";
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
@@ -20,7 +20,7 @@ const SearchInput = () => {
       return;
     }
 
-    router.push(`/event/search?q=${searchQuery}`);
+    router.push(`/event/event-search?q=${searchQuery}`);
   };
 
   return (
@@ -28,6 +28,7 @@ const SearchInput = () => {
       onSubmit={onSearch}
       className="w-full md:flex hidden items-center gap-4 border border-black/20 p-[10px] max-w-[350px] rounded-lg"
     >
+      <Image src={searchImg} alt="search" className="h-4 w-4" />
       <input
         value={searchQuery || ""}
         onChange={(event) => setSearchQuery(event.target.value)}

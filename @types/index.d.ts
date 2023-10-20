@@ -36,3 +36,18 @@ export type EventCardProps = {
   isLive: boolean;
   cost: number;
 };
+export type FormState = {
+  name: string;
+  event_image?: string | undefined;
+  description: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+  location: string;
+  isPaidEvent: string;
+  ticketPrice: string;
+  numberOfAvailableTickets: string;
+  registrationClosingDate: string;
+  tags: Array<string>;
+}

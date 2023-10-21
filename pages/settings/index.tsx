@@ -100,7 +100,7 @@ export default function Profile() {
   };
   return (
     <AccountLayout title='Profile information'>
-      <div className='flex flex-col gap-8 font-sans'>
+      <div className='flex flex-col items-center lg:items-start gap-8 font-sans'>
         <h1 className='font-bold font-montserrat text-xl text-grey-500'>
           Profile photo
         </h1>
@@ -167,7 +167,7 @@ export default function Profile() {
         </div>
       </div>
       {/* Contact Information */}
-      <div className='w-[758px] mt-20'>
+      <div className='max-w-[758px] mt-20'>
         <h1 className='text-grey-500 text-xl font-bold font-montserrat'>
           Contact Information
         </h1>
@@ -179,7 +179,7 @@ export default function Profile() {
           >
             {(formik) => (
               <Form>
-                <div className='grid grid-cols-2 gap-x-6 gap-y-8'>
+                <div className='grid lg:grid-cols-2 gap-x-6 gap-y-8'>
                   <DropdownInput label='Prefix' name='prefix' />
                   <Input
                     name='fullName'

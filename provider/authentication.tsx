@@ -15,8 +15,12 @@ export default function Authentication({
   useEffect(() => {
     if (token || user) {
       router.push("/timeline");
+    } else if (!token || !user) {
+      Cookies.remove("token");
+      Cookies.remove("user");
+      router.push("/auth/login");
     }
   }, []);
 
-  return children;
+  return <div>{children}</div>;
 }

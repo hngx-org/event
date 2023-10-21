@@ -11,10 +11,13 @@ import axios, {AxiosError} from "axios";
 import {toast} from "react-toastify";
 import Link from "next/link";
 import Authentication from "../../provider/authentication";
+import AuthProvider from "@/provider/authProvider";
+import http from "@/http/interceptor";
 
 export default function Timeline() {
   const [events, setEvents] = useState<any>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setIsLoading] = useState(true);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -28,12 +31,15 @@ export default function Timeline() {
       axios
         .get("https://wetindeysup-api.onrender.com/api/events")
         .then((res) => setEvents(res.data.data));
+      setIsLoading(false);
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
   return (
-    <Authentication>
+    <AuthProvider>
       <div className='max-w-7xl mx-auto'>
         <EventHeader />
       </div>
@@ -49,7 +55,7 @@ export default function Timeline() {
             onClick={handleOpenModal}
             className='w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md'
           >
-            Create An Event s{" "}
+            Create An Events{" "}
           </button>
           <Link
             href='/event/explore'
@@ -59,39 +65,42 @@ export default function Timeline() {
           </Link>
         </div>
       </div>
-      <div className='mt-7 px-8 sm:px-12 md:px-16 lg:px-20'>
+      <div className='mt-7 px-8 sm:px-12 md:px-16 lg:px-20 w-full'>
         <h4 className='text-2xl font-bold'>Upcoming Events Near You</h4>
-        {events !== null && (
-          <div className='mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-            {events.length > 0 ? (
-              events.map((event: any) => (
-                <Link href={`/event/${event.id}`} key={event.id}>
-                  <EventCard
-                    title={event.name || "Event Name"}
-                    location={event.location || "Not Specified"}
-                    img={event.image || Event}
-                    cost={event.ticketPrice || 0}
-                    dateString={event.startTime}
-                  />
-                </Link>
-              ))
-            ) : (
-              <>
-                <EventCardLoading />
-                <EventCardLoading />
-                <EventCardLoading />
-              </>
-            )}
-          </div>
-        )}
-        {events === null && (
-          <div className='w-full h-40 flex items-center justify-center text-4xl'>
-            No Upcoming Events
-          </div>
-        )}
+
+        <div className='mt-7 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full'>
+          {loading ? (
+            <>
+              <EventCardLoading />
+              <EventCardLoading />
+              <EventCardLoading />
+            </>
+          ) : events.length > 0 ? (
+            events.map((event: any) => (
+              <div className='px-5 md:px-10 mt-7 gap-6' key={event.id}>
+                <EventCard
+                  title={event.name || "Event Name"}
+                  location={event.location || "Not Specified"}
+                  img={event.image || Event}
+                  cost={event.ticketPrice || 0}
+                  dateString={event.startTime}
+                />
+              </div>
+            ))
+          ) : (
+            <div className='py-12 w-screen text-center flex flex-col items-center justify-center'>
+              <h2 className='font-montserrat text-6xl text-center text-[#2E2E2E] font-bold mb-2'>
+                Oops!!!
+              </h2>
+              <p className='font-montserrat text-base md:text-xl text-center text-[#2E2E2E] font-medium'>
+                No event with the name
+              </p>
+            </div>
+          )}
+        </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />
-    </Authentication>
+    </AuthProvider>
   );
 }

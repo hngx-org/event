@@ -4,13 +4,25 @@ import EventCard from "@/components/eventCardTimeline";
 import EventCardLoading from "@/components/eventCardLoading";
 import Event from "@/public/images/event-image.png";
 import EventHeader from "@/components/eventHeader";
+import Modal from './Modal';
+import { useRouter } from "next/router";
 import Footer from "@/components/web/footer";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
 
+
 export default function Timeline() {
   const [events, setEvents] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const router =  useRouter()
   useEffect(() => {
     try {
       axios
@@ -33,7 +45,7 @@ export default function Timeline() {
         className="bg-cover w-full px-8 sm:px-12 md:px-16 lg:px-20"
       >
         <div className="pt-[275px] sm:pt-[325px] font-bold">
-          <button className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md">
+          <button onClick={handleOpenModal} className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md">
             Create An Event
           </button>
           <Link
@@ -68,6 +80,7 @@ export default function Timeline() {
           )}
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />
     </>
   );

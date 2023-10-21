@@ -69,7 +69,21 @@ export type EventCardProps = {
   dateString: string;
   cost: number;
 };
-
+export type FormState = {
+  name: string;
+  event_image?: string | undefined;
+  description: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+  location: string;
+  isPaidEvent: string;
+  ticketPrice: string;
+  numberOfAvailableTickets: string;
+  registrationClosingDate: string;
+  tags: Array<string>;
+}
 
 export type  EventDetails = {
   description: string;

@@ -2,9 +2,11 @@ import AccountLayout from "@/components/layout/accountLayout";
 import CloseAccountModal from "@/components/modals/closeAccount";
 import ConfirmPasswordModal from "@/components/modals/confirmPassword";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function Privacy() {
 
+  const {user} = useAuth();
   const [isConfirmPasswordModalOpen, setConfirmPasswordModalOpen] = useState(false);
   const [isCloseAccountModalOpen, setCloseAccountModalOpen] = useState(false);
 
@@ -19,7 +21,7 @@ export default function Privacy() {
           privacy, we&rsquo;ve made it easy for you to obtain your data from
           Eventwave. Once you make a request for your data, a notification will
           be sent to your email address{" "}
-          <span className="font-bold">(Johndoe@gmail.com)</span> containing a
+          <span className="font-bold">({user?.email})</span> containing a
           link to access the data archive.<br></br>
           <br></br> For a comprehensive understanding of how we handle your
           data, please take a moment to review our{" "}

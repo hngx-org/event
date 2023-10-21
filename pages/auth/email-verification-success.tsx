@@ -1,4 +1,5 @@
 import Header from '@/components/web/header';
+import Authentication from '@/provider/authentication';
 import { useRouter } from 'next/router';
 import React from 'react'
 
@@ -23,7 +24,7 @@ const CheckCircleSVG = () => (
 const EmailVerificationSuccess = () => {
     const router = useRouter();
     return (
-        <>
+        <Authentication>
             <div className="sm:hidden">
                 <Header />
             </div>
@@ -45,7 +46,7 @@ const EmailVerificationSuccess = () => {
                     </div>
                 </div>
             </div>
-        </>
+        </Authentication>
     )
 }
 

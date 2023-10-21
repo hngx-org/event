@@ -4,13 +4,25 @@ import EventCard from "@/components/eventCardTimeline";
 import EventCardLoading from "@/components/eventCardLoading";
 import Event from "@/public/images/event-image.png";
 import EventHeader from "@/components/eventHeader";
+import Modal from './Modal';
+import { useRouter } from "next/router";
 import Footer from "@/components/web/footer";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
+import Authentication from "@/provider/authentication";
 
 export default function Timeline() {
   const [events, setEvents] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+  const router =  useRouter()
   useEffect(() => {
     try {
       axios
@@ -21,7 +33,8 @@ export default function Timeline() {
     }
   }, []);
   return (
-    <>
+    
+    <Authentication>
       <div className="max-w-7xl mx-auto">
         <EventHeader />
       </div>
@@ -33,9 +46,9 @@ export default function Timeline() {
         className="bg-cover w-full px-8 sm:px-12 md:px-16 lg:px-20"
       >
         <div className="pt-[275px] sm:pt-[325px] font-bold">
-          <button className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md">
+          <button onClick={handleOpenModal} className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md">
             Create An Event
-          </button>
+         s </button>
           <Link
             href="/event/explore"
             className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md"
@@ -68,7 +81,8 @@ export default function Timeline() {
           )}
         </div>
       </div>
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />
-    </>
+      </Authentication>
   );
 }

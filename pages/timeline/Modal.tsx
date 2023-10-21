@@ -74,8 +74,12 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
   // };
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
- 
-    console.log(formData)
+    const isPaid = formData.isPaidEvent === 'Paid'
+    const eventData = {
+      ...formData,
+      isPaidEvent: isPaid,
+    };
+    console.log(eventData)
     // Check if all requirements are met
     const requirementsMet = (
         formData.name.trim() !== '' &&
@@ -88,11 +92,24 @@ const Modal: React.FC<{ isOpen: boolean, onClose: () => void }> = ({ isOpen, onC
         formData.ticketPrice.trim() !== '' &&
         formData.registrationClosingDate.trim() !== ''
       );
-    
     if (requirementsMet) {
       setAllRequirementsMet(true);
       handleProceed();
-      http.post('/events', {eventData}).
+      http.post('/events', {
+        name: formData.name,
+        description:formData.description,
+        startDate: formData.startDate,
+        startTime: formData.startTime,
+        endDate: formData.endDate,
+        endTime: formData.endTime,
+        location: formData.location,
+        tags: formData.tags,
+        isPaidEvent: eventData.isPaidEvent, 
+        eventLink: formData.location,
+        ticketPrice: formData.ticketPrice,
+        numberOfAvailableTickets: parseInt(formData.numberOfAvailableTickets),
+        registrationClosingDate: formData.registrationClosingDate
+      }).
       then(response => console.log(response))
       .catch(err => console.log(err))
     } else {

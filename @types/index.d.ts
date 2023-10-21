@@ -52,12 +52,24 @@ export type User = {
   username: string;
 };
 
+export type SearchFilterProps = {
+	setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export type EventsPageTitleProps = {
+	children: ReactNode;
+	setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isFilterOpen: boolean;
+};
+
 export type EventCardProps = {
   img: StaticImageData | string;
   title: string;
   location: string;
   dateString: string;
   cost: number;
+  showTicketSales?: boolean;
+  ticketSales?: number;
 };
 export type FormState = {
   name: string;

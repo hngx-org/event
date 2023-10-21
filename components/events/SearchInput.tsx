@@ -20,7 +20,7 @@ const SearchInput = () => {
       return;
     }
 
-    router.push(`/event/event-search?q=${searchQuery}`);
+    router.push(`/event/search?q=${searchQuery}`);
   };
 
   return (

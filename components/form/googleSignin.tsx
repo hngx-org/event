@@ -11,8 +11,8 @@ export default function GoogleSignin() {
   const router = useRouter();
   const clientId =
     "69712066400-eu3ddnj8njs960htlnbh9hlgrvfg6ke9.apps.googleusercontent.com";
-  // const redirectUri = "http://localhost:3000";
-  const redirectUri = "https://event-tan-iota.vercel.app/";
+  //   const redirectUri = "http://localhost:3000";
+  const redirectUri = "https://event-tan-iota.vercel.app/timeline";
 
   const signInWithGoogle = () => {
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=email profile&access_type=offline`;
@@ -21,8 +21,7 @@ export default function GoogleSignin() {
 
   const authorizeUser = async (authorizationCode: any) => {
     try {
-      const callBackURL =
-        "https://wetindeysup-api.onrender.com/api/auth/callback";
+      const callBackURL = "https://wetindeysup-api.onrender.com/api/auth/login";
       const response = await fetch(`${callBackURL}?code=${authorizationCode}`, {
         method: "GET",
         headers: {
@@ -34,7 +33,7 @@ export default function GoogleSignin() {
         const data: any = response.json();
         Cookies.set("token", data.token);
         Cookies.set("user", JSON.stringify(data.user));
-        router.push("/");
+        router.push("/timeline");
       } else {
         toast.error("Google sign-in failed");
       }
@@ -46,7 +45,7 @@ export default function GoogleSignin() {
   useEffect(() => {
     const token = Cookies.get("token");
     if (token) {
-      router.push("/");
+      router.push("/timeline");
     } else {
       const queryParams = new URLSearchParams(window.location.search);
       const authorizationCode = queryParams.get("code");

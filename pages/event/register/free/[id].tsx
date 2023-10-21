@@ -26,7 +26,9 @@ const Free = () => {
 
   const registerAPI = () => {
 
-    http.get(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
+    http.post(`/events/register/${id}`, {
+      "numberOfTickets": num
+    })
       .then(res => {
         console.log(res)
       })
@@ -34,13 +36,6 @@ const Free = () => {
         toast.error(err);
         console.log("Event Registration Error", err)
       })
-
-    // fetch(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
-    //   .then(res => res.json())
-    //   .then(res => {
-    //     console.log(res)
-    //   })
-    //   .catch(err => console.log("Event Registration Error", err))
   }
 
   const onsubmit = (e: any) => {

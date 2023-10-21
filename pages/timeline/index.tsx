@@ -26,7 +26,7 @@ export default function Timeline() {
   useEffect(() => {
     try {
       axios
-        .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
+        .get("https://wetindeysup-api.onrender.com/api/events")
         .then((res) => setEvents(res.data.data));
     } catch (error: any) {
       toast.error(error.message);

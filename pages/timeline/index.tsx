@@ -28,7 +28,7 @@ export default function Timeline() {
   const router = useRouter();
   useEffect(() => {
     try {
-      http
+      axios
         .get("https://wetindeysup-api.onrender.com/api/events")
         .then((res) => setEvents(res.data.data));
       setIsLoading(false);

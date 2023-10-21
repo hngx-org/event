@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Google from "@/public/assets/icon/Google.svg";
 import Twitter from "@/public/assets/icon/Twitter.svg";
-import {useRouter} from "next/navigation";
-import {toast} from "react-toastify";
+import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import {GoogleIcon} from "@/public/assets/icons/socialIcons";
+import { GoogleIcon } from "@/public/assets/icons/socialIcons";
 
 export default function GoogleSignin() {
   const router = useRouter();

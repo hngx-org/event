@@ -11,9 +11,6 @@ const Component2: React.FC<Component2Props> =
   const [isTimeInput, setIsTimeInput] = useState<boolean>(false);
   const [file, setFile] = useState("");
   const [uploadedFile, setUploadedFile] = useState<any>("");
-  const [image, setImage] = useState<string | null>("null");
-  const [imageName, setImageName] = useState<string>("");
-
   const isRequiredFieldsFilled = () => {
     // Define an array of required fields
     const requiredFields = ['name', 'description', 'startDate', 'startTime', 'endDate', 'endTime'];
@@ -28,34 +25,7 @@ const Component2: React.FC<Component2Props> =
       alert('Please fill in all required fields.'); // Show an error message or take any other desired action
     }
   };
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const uploadedFile = event.target.files?.[0];
 
-    if (uploadedFile) {
-      const fileSize = uploadedFile.size / 1024 / 1024; //To convert to MB
-      if (fileSize > 5) {
-        alert("File size must be greater than 5MB.");
-        event.target.value = "";
-      } else {
-        setFile(URL.createObjectURL(uploadedFile));
-        setImageName(uploadedFile.name);
-        setUploadedFile(uploadedFile);
-        // console.log(uploadedFile);
-      }
-    }
-  };
-
-  const handleImageRemove = () => {
-    setImage(null);
-    setFile("");
-    setImageName("");
-    const input = document.getElementById(
-      "image-upload-input",
-    ) as HTMLInputElement;
-    if (input) {
-      input.value = "";
-    }
-  };
 
   return (
     <div className='w-full'>

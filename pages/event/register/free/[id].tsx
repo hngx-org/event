@@ -54,13 +54,17 @@ const Free = () => {
       <div className="w-full">
         <hr />
         <div className="mt-8 ps-[20px] md:px-[40px] gap-4 flex items-center">
-         
-          <Image
-            src={arrow_back_ios}
-            alt="arrow"
-            className="w-[24px] h-[24px]"
-          />
-      
+          <button
+            onClick={() => router.back()}
+            title="back button"
+          >
+            <Image
+              src={arrow_back_ios}
+              alt="arrow"
+              className="w-[24px] h-[24px]"
+            />
+          </button>
+
           <h3 className="font-montserrat text-xl md:text-2xl text-[#4A4A4A] font-normal">
             Tech Innovators Summit \
             <span className="font-bold text-[#3B3B3B]"> Checkout</span>

@@ -4,6 +4,32 @@ import RedMultiply from "../icons/EventDetails/RedMultiply";
 import Image from "next/image";
 import Link from "next/link";
 import { SearchFilterProps } from "@/@types";
+import SearchFilterDropdown from "../searchFilterDropdown";
+
+const dropDownFields = [
+	{
+		type: "Location",
+		values: ["All, Lagos, Abuja", "All", "Lagos", "Abuja"],
+	},
+	{
+		type: "Date",
+		values: [
+			"All, Today, 2 weeks, a month",
+			"All",
+			"Today",
+			"2 weeks",
+			"1 month",
+		],
+	},
+	{
+		type: "Event Type",
+		values: ["All, Physical, Virtual", "All", "Physical", "Virtual"],
+	},
+	{
+		type: "Event Pricing",
+		values: ["All, Free, Paid", "All", "Free", "Paid"],
+	},
+];
 
 const SearchFilterModal = ({ setIsFilterOpen }: SearchFilterProps) => {
 	return (
@@ -13,62 +39,13 @@ const SearchFilterModal = ({ setIsFilterOpen }: SearchFilterProps) => {
 					Search Filter
 				</h3>
 				<div className="grid md:grid-cols-2 mt-6 mb-10 md:mb-8 gap-4">
-					<div className="flex flex-col space-y-1">
-						<label
-							htmlFor="location"
-							className="font-bold text-grey-500"
-						>
-							Location
-						</label>
-						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 font-medium text-grey-200">
-								All, Lagos, Abuja
-							</span>
-							<ArrowDownIcon />
-						</div>
-					</div>
-					<div className="flex flex-col space-y-1">
-						<label
-							htmlFor="location"
-							className="font-bold text-grey-500"
-						>
-							Date
-						</label>
-						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 font-medium text-grey-200">
-								All, Today, 2 weeks, a month
-							</span>
-							<ArrowDownIcon />
-						</div>
-					</div>
-					<div className="flex flex-col space-y-1">
-						<label
-							htmlFor="location"
-							className="font-bold text-grey-500"
-						>
-							All, Physical, Virtual
-						</label>
-						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 font-medium text-grey-200">
-								Date Filter
-							</span>
-							<ArrowDownIcon />
-						</div>
-					</div>
-					<div className="flex flex-col space-y-1">
-						<label
-							htmlFor="location"
-							className="font-bold text-grey-500"
-						>
-							Event Pricing
-						</label>
-						<div className="flex justify-between border border-grey-90 rounded-lg  py-2 px-3 md:py-3 md:px-5">
-							<span className="flex-1 font-medium text-grey-200">
-								All, Free, Paid
-							</span>
-							<ArrowDownIcon />
-						</div>
-					</div>
+					{dropDownFields.map((field, index) => (
+						<SearchFilterDropdown
+							key={index}
+							dropDownTitle={field.type}
+							listItems={field.values}
+						/>
+					))}
 				</div>
 				<div className="flex justify-center flex-col md:flex-row gap-4 md:gap-6">
 					<button

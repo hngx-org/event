@@ -4,6 +4,9 @@ import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import Image from "next/image";
 import { useRouter } from 'next/router';
+import Link from "next/link";
+import http from "@/http/interceptor";
+import { toast } from "react-toastify";
 import React, { useState } from "react";
 
 const Free = () => {
@@ -22,12 +25,17 @@ const Free = () => {
   };
 
   const registerAPI = () => {
-    fetch(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
-      .then(res => res.json())
+
+    http.post(`/events/register/${id}`, {
+      "numberOfTickets": num
+    })
       .then(res => {
         console.log(res)
       })
-      .catch(err => console.log("Event Registration Error", err))
+      .catch(err => {
+        toast.error(err);
+        console.log("Event Registration Error", err)
+      })
   }
 
   const onsubmit = (e: any) => {
@@ -41,11 +49,17 @@ const Free = () => {
       <div className="w-full">
         <hr />
         <div className="mt-8 ps-[20px] md:px-[40px] gap-4 flex items-center">
-          <Image
-            src={arrow_back_ios}
-            alt="arrow"
-            className="w-[24px] h-[24px]"
-          />
+          <button
+            onClick={() => router.back()}
+            title="back button"
+          >
+            <Image
+              src={arrow_back_ios}
+              alt="arrow"
+              className="w-[24px] h-[24px]"
+            />
+          </button>
+
           <h3 className="font-montserrat text-xl md:text-2xl text-[#4A4A4A] font-normal">
             Tech Innovators Summit \
             <span className="font-bold text-[#3B3B3B]"> Checkout</span>

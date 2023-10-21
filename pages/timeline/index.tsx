@@ -10,7 +10,7 @@ import Footer from "@/components/web/footer";
 import axios, { AxiosError } from "axios";
 import { toast } from "react-toastify";
 import Link from "next/link";
-
+import Authentication from "@/provider/authentication";
 
 export default function Timeline() {
   const [events, setEvents] = useState([]);
@@ -24,23 +24,17 @@ export default function Timeline() {
   };
   const router =  useRouter()
   useEffect(() => {
-   const fetchData = async () => {
-      try {
-        const response = await axios.get("https://wetindeysup-api.onrender.com/api/events/upcoming");
-        if (response.data.length === 0) {
-          setEvents(null);
-        } else {
-          setEvents(response.data.data);
-        }
-      } catch (error) {
-        toast.error(error.message);
-      }
-    };
-
-    fetchData();
+    try {
+      axios
+        .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
+        .then((res) => setEvents(res.data.data));
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   }, []);
   return (
-    <>
+    
+    <Authentication>
       <div className="max-w-7xl mx-auto">
         <EventHeader />
       </div>
@@ -54,18 +48,18 @@ export default function Timeline() {
         <div className="pt-[275px] sm:pt-[325px] font-bold">
           <button onClick={handleOpenModal} className="w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md">
             Create An Event
-          </button>
+         s </button>
           <Link
             href="/event/explore"
             className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md"
           >
-            Explore
+            Explore Other Events
           </Link>
         </div>
       </div>
       <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
         <h4 className="text-2xl font-bold">Upcoming Events Near You</h4>
-            {events !== null && <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.length > 0 ? (
             events.map((event: any) => (
               <Link href={`/event/${event.id}`} key={event.id}>
@@ -85,13 +79,10 @@ export default function Timeline() {
               <EventCardLoading />
             </>
           )}
-        </div>}
-        {events === null && <div className="w-full h-40 flex items-center justify-center text-4xl"> 
-            No Upcoming Events
-         </div>
+        </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />
-    </>
+      </Authentication>
   );
 }

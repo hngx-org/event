@@ -22,5 +22,5 @@ export default function Authentication({
     }
   }, []);
 
-  return children;
+  return <div>{children}</div>;
 }

@@ -21,21 +21,27 @@ export default function Profile() {
   const [file, setFile] = useState("");
   const {user} = useAuth();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required("Name is required"),
     phoneNumber: Yup.string().required("Phone number is required"),
   });
+
   const initialValues = {
+    prefix: "Mrs",
     fullName: "",
     phoneNumber: "",
     avatar: null,
   };
+
   const onSubmit = async (
     values: typeof initialValues,
     {setSubmitting}: any
   ) => {
     try {
       const formData = new FormData();
+
+      formData.append("prefix", values.prefix);
       formData.append("fullName", values.fullName);
       formData.append("phoneNumber", values.phoneNumber);
       image ? formData.append("avatar", image) : formData.append("avatar", "");
@@ -43,7 +49,6 @@ export default function Profile() {
       if (response.success) {
         toast.success("Your profile has been updated");
       }
-      console.log(formData);
     } catch (error: any) {
       if (error && error.message) {
         toast.error(error.message);
@@ -53,6 +58,7 @@ export default function Profile() {
       setSubmitting(false);
     }
   };
+
   const handleDrop = (e: any) => {
     e.preventDefault();
     const file = e.dataTransfer.files[0];
@@ -67,17 +73,21 @@ export default function Profile() {
       reader.readAsDataURL(file);
     }
   };
+
   const handleDragOver = (e: any) => {
     e.preventDefault();
   };
+
   const handleUploadPhoto = () => {
     fileInputRef?.current?.click();
   };
+
   const handleFileUpload = (e: any) => {
     const uploadedFile = e.target.files[0];
-    // console.log(e.target);
+    
     if (uploadedFile) {
-      const fileSize = uploadedFile.size / 1024 / 1024; //To convert to MB
+      //To convert to MB
+      const fileSize = uploadedFile.size / 1024 / 1024;
       if (fileSize > 5) {
         e.target.value = null;
       } else {
@@ -86,9 +96,11 @@ export default function Profile() {
       }
     }
   };
+
   const handleRemoveAvatar = () => {
     setImage(null);
   };
+
   return (
     <AccountLayout title="Profile information">
       <div className="flex flex-col gap-8 font-sans">
@@ -112,7 +124,7 @@ export default function Profile() {
                   type="file"
                   accept="image/jpeg, image/png"
                   onChange={handleFileUpload}
-                  style={{display: "none"}}
+                  className="hidden"
                   ref={fileInputRef}
                 />
                 <label
@@ -137,7 +149,7 @@ export default function Profile() {
                 type="file"
                 accept="image/jpeg, image/png"
                 onChange={handleFileUpload}
-                style={{display: "none"}}
+                className="hidden"
                 ref={fileInputRef}
               />
               <label
@@ -200,7 +212,7 @@ export default function Profile() {
                   <button
                     type="submit"
                     disabled={formik.isSubmitting}
-                    className="py-[13px] px-[23px]   bg-secondary-300 text-white rounded-lg font-bold"
+                    className="py-[13px] px-[23px] bg-secondary-300 text-white rounded-lg font-bold"
                   >
                     {formik.isSubmitting ? (
                       <ClipLoader

@@ -4,9 +4,12 @@ import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import Image from "next/image";
 import { useRouter } from 'next/router';
+<<<<<<< HEAD
 import Link from "next/link";
 import http from "@/http/interceptor";
 import { toast } from "react-toastify";
+=======
+>>>>>>> e0729f7d256f4eb6ec3483b6e29814ab2e4133ca
 import React, { useState } from "react";
 
 const Free = () => {
@@ -25,6 +28,7 @@ const Free = () => {
   };
 
   const registerAPI = () => {
+<<<<<<< HEAD
 
     http.get(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
       .then(res => {
@@ -34,6 +38,14 @@ const Free = () => {
         toast.error(err);
         console.log("Event Registration Error", err)
       })
+=======
+    fetch(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log("Event Registration Error", err))
+>>>>>>> e0729f7d256f4eb6ec3483b6e29814ab2e4133ca
   }
 
   const onsubmit = (e: any) => {

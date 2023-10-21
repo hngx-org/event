@@ -9,17 +9,12 @@ export default function Authentication({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const {token, user} = useAuth();
+  const token = Cookies.get("token");
+  const user = Cookies.get("user");
 
   useEffect(() => {
-    if (token && user) {
+    if (token || user) {
       router.push("/timeline");
-    } else if (token && !user) {
-      Cookies.remove("token");
-      router.push("/auth/login");
-    } else if (!token && user) {
-      Cookies.remove("user");
-      router.push("/auth/login");
     }
   }, []);
 

@@ -68,6 +68,8 @@ export type EventCardProps = {
   location: string;
   dateString: string;
   cost: number;
+  showTicketSales?: boolean;
+  ticketSales?: number;
 };
 export type FormState = {
   name: string;

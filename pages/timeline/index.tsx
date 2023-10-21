@@ -24,13 +24,20 @@ export default function Timeline() {
   };
   const router =  useRouter()
   useEffect(() => {
-    try {
-      axios
-        .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
-        .then((res) => setEvents(res.data.data));
-    } catch (error: any) {
-      toast.error(error.message);
-    }
+   const fetchData = async () => {
+      try {
+        const response = await axios.get("https://wetindeysup-api.onrender.com/api/events/upcoming");
+        if (response.data.length === 0) {
+          setEvents(null);
+        } else {
+          setEvents(response.data.data);
+        }
+      } catch (error) {
+        toast.error(error.message);
+      }
+    };
+
+    fetchData();
   }, []);
   return (
     <>
@@ -52,13 +59,13 @@ export default function Timeline() {
             href="/event/explore"
             className="w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md"
           >
-            Explore Other Events
+            Explore
           </Link>
         </div>
       </div>
       <div className="mt-7 px-8 sm:px-12 md:px-16 lg:px-20">
         <h4 className="text-2xl font-bold">Upcoming Events Near You</h4>
-        <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {events !== null && <div className="mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {events.length > 0 ? (
             events.map((event: any) => (
               <Link href={`/event/${event.id}`} key={event.id}>
@@ -78,7 +85,10 @@ export default function Timeline() {
               <EventCardLoading />
             </>
           )}
-        </div>
+        </div>}
+        {events === null && <div className="w-full h-40 flex items-center justify-center text-4xl"> 
+            No Upcoming Events
+         </div>
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />

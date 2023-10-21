@@ -126,10 +126,7 @@ export default function PreferenceForm() {
               </div>
 
               <div className="flex justify-center gap-6">
-                <button
-                  type="submit"
-                  className="py-[13px] px-[23px] border border-secondary-300 text-secondary-300 hover:bg-secondary-300 hover:text-white rounded-lg font-bold transition-all duration-300 ease-in-out"
-                >
+                <button className="py-[13px] px-[23px] border border-secondary-300 text-secondary-300 hover:bg-secondary-300 hover:text-white rounded-lg font-bold transition-all duration-300 ease-in-out">
                   Cancel
                 </button>
 

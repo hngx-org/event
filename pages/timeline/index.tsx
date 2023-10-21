@@ -10,6 +10,7 @@ import Footer from "@/components/web/footer";
 import axios, {AxiosError} from "axios";
 import {toast} from "react-toastify";
 import Link from "next/link";
+import Authentication from "../../provider/authentication";
 
 export default function Timeline() {
   const [events, setEvents] = useState<any>([]);
@@ -23,25 +24,16 @@ export default function Timeline() {
   };
   const router = useRouter();
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get(
-          "https://wetindeysup-api.onrender.com/api/events/upcoming",
-        );
-        if (response.data.length === 0) {
-          setEvents(null);
-        } else {
-          setEvents(response.data.data);
-        }
-      } catch (error: any) {
-        toast.error(error.message);
-      }
-    };
-
-    fetchData();
+    try {
+      axios
+        .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
+        .then((res) => setEvents(res.data.data));
+    } catch (error: any) {
+      toast.error(error.message);
+    }
   }, []);
   return (
-    <>
+    <Authentication>
       <div className='max-w-7xl mx-auto'>
         <EventHeader />
       </div>
@@ -57,13 +49,13 @@ export default function Timeline() {
             onClick={handleOpenModal}
             className='w-full sm:w-max bg-[#800000] text-white hover:bg-[#800000]/50 sm:mr-3 px-6 py-2.5 rounded-md'
           >
-            Create An Event
+            Create An Event s{" "}
           </button>
           <Link
             href='/event/explore'
             className='w-full sm:w-max border border-[#800000] mt-5 sm:mt-0 sm:ml-3 text-[#800000] hover:bg-[#800000]/25 hover:text-white px-6 py-2.5 rounded-md'
           >
-            Explore
+            Explore Other Events
           </Link>
         </div>
       </div>
@@ -100,6 +92,6 @@ export default function Timeline() {
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />
-    </>
+    </Authentication>
   );
 }

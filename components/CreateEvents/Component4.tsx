@@ -22,6 +22,8 @@ const Component4: React.FC<Component4Props> =
           <div className="w-44 h-3 mr-2 bg-secondary-50 rounded-full"></div>
         </div>
       </div>
+
+
       <div className='mb-3'>
         <form>
           <label htmlFor="event_location" className="text-neutral-700 text-base font-medium font-['Nunito'] leading-normal flex justify-start my-2">

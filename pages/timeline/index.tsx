@@ -11,10 +11,12 @@ import axios, {AxiosError} from "axios";
 import {toast} from "react-toastify";
 import Link from "next/link";
 import Authentication from "../../provider/authentication";
+import AuthProvider from "@/provider/authProvider";
 
 export default function Timeline() {
   const [events, setEvents] = useState<any>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [loading, setIsLoading] = useState(true);
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -28,12 +30,15 @@ export default function Timeline() {
       axios
         .get("https://wetindeysup-api.onrender.com/api/events/upcoming")
         .then((res) => setEvents(res.data.data));
+      setIsLoading(false);
     } catch (error: any) {
       toast.error(error.message);
+    } finally {
+      setIsLoading(false);
     }
   }, []);
   return (
-    <Authentication>
+    <AuthProvider>
       <div className='max-w-7xl mx-auto'>
         <EventHeader />
       </div>
@@ -63,7 +68,7 @@ export default function Timeline() {
         <h4 className='text-2xl font-bold'>Upcoming Events Near You</h4>
         {events !== null && (
           <div className='mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'>
-            {events.length > 0 ? (
+            {events ? (
               events.map((event: any) => (
                 <Link href={`/event/${event.id}`} key={event.id}>
                   <EventCard
@@ -75,23 +80,22 @@ export default function Timeline() {
                   />
                 </Link>
               ))
-            ) : (
+            ) : loading ? (
               <>
                 <EventCardLoading />
                 <EventCardLoading />
                 <EventCardLoading />
               </>
+            ) : (
+              <div className='flex w-screen justify-center items-center text-2xl font-semibold min-h-[200px]'>
+                No event found
+              </div>
             )}
-          </div>
-        )}
-        {events === null && (
-          <div className='w-full h-40 flex items-center justify-center text-4xl'>
-            No Upcoming Events
           </div>
         )}
       </div>
       <Modal isOpen={isModalOpen} onClose={handleCloseModal} />
       <Footer />
-    </Authentication>
+    </AuthProvider>
   );
 }

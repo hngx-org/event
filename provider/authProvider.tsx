@@ -5,19 +5,16 @@ import Cookies from "js-cookie";
 
 export default function AuthProvider({children}: {children: React.ReactNode}) {
   const router = useRouter();
-  const {token, user} = useAuth();
+  const token = Cookies.get("token");
+  const user = Cookies.get("user");
 
   useEffect(() => {
-    if (!token && !user) {
-      router.push("/auth/login");
-    } else if (token && !user) {
+    if (!token || !user) {
       Cookies.remove("token");
-      router.push("/auth/login");
-    } else if (!token && user) {
       Cookies.remove("user");
       router.push("/auth/login");
     }
   }, []);
 
-  return children;
+  return <div>{children}</div>;
 }

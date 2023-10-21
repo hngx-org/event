@@ -6,6 +6,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useSearchParams } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import SearchInput from "./events/SearchInput";
 
 const EventHeader = () => {
   const { user } = useAuth();
@@ -23,14 +24,15 @@ const EventHeader = () => {
             height={16}
             className="h-[16px] w-[133px] object-cover"
           />
-          <div className="w-full md:flex hidden items-center gap-4 border border-black/20 p-[10px] max-w-[350px] rounded-lg">
+          {/* <div className="w-full md:flex hidden items-center gap-4 border border-black/20 p-[10px] max-w-[350px] rounded-lg">
             <Image src={search} alt="search" className="h-4 w-4" />
             <input
               type="text"
               placeholder="Search Input"
               className="w-full border-none outline-none"
             />
-          </div>
+          </div> */}
+          <SearchInput />
         </div>
         <div className="flex items-center gap-[20px]">
           <button

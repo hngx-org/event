@@ -43,16 +43,10 @@ export default function GoogleSignin() {
   };
 
   useEffect(() => {
-    const token = Cookies.get("token");
-    if (token) {
-      router.push("/timeline");
-    } else {
-      const queryParams = new URLSearchParams(window.location.search);
-      const authorizationCode = queryParams.get("code");
-      console.log(authorizationCode);
-      if (authorizationCode) {
-        authorizeUser(authorizationCode);
-      }
+    const queryParams = new URLSearchParams(window.location.search);
+    const authorizationCode = queryParams.get("code");
+    if (authorizationCode) {
+      authorizeUser(authorizationCode);
     }
   }, []);
 

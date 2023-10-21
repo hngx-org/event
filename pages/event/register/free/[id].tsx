@@ -3,9 +3,12 @@ import RegisterSuccessful from "@/components/modals/register-successful";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import Image from "next/image";
+import { useRouter } from 'next/router';
 import React, { useState } from "react";
 
 const Free = () => {
+  const router = useRouter();
+  const { id } = router.query;
   const [num, setNum] = useState<number>(1);
   const [showModal, setShowModal] = useState<boolean>(false)
   const increment = () => {
@@ -18,8 +21,18 @@ const Free = () => {
     }
   };
 
+  const registerAPI = () => {
+    fetch(`https://wetindeysup-api.onrender.com/api/events/register/${id}`)
+      .then(res => res.json())
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => console.log("Event Registration Error", err))
+  }
+
   const onsubmit = (e: any) => {
     e.preventDefault()
+    registerAPI()
     setShowModal(true)
   }
 
@@ -209,7 +222,7 @@ const Free = () => {
             </div>
             <div className="my-8 flex justify-between gap-4 items-center text-[#1C1C1C] text-base font-sans">
               <h3 className="font-semibold">Sub-total</h3>
-              <h3 className="font-medium">₦20,000</h3>
+              <h3 className="font-medium">₦0.00</h3>
             </div>
             <hr />
             <div className="mt-8 flex justify-between gap-4 items-center">

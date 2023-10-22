@@ -21,7 +21,7 @@ export default function AuthenticationLayout({
             className="h-full w-full object-cover object-bottom"
           />
         </section>
-        <section className="w-full lg:w-[60%] lg:flex items-center justify-center overflow-y-auto pt-10">
+        <section className="w-full lg:w-[60%] lg:flex items-center justify-center overflow-y-auto">
           <div className="lg:hidden">
             <Header />
           </div>

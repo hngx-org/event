@@ -11,7 +11,7 @@ export default function Login() {
         <h1 className="text-[32px] lg:text-[40px] font-montserrat font-bold mb-2 text-grey-500">
           Sign In
         </h1>
-        <p className="font-medium text-grey-200 mb-8 lg:mb-12">
+        <p className="font-medium text-grey-200 mb-4">
           Please enter the correct details
         </p>
         <LoginForm />

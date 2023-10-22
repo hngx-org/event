@@ -4,7 +4,7 @@ import {SearchIcon} from "@/public/assets/icons/settingsIcon";
 
 export default function SideBar() {
   return (
-    <aside className="pl-20 pr-14 py-10 w-[408px] min-w-[408px] space-y-9">
+    <aside className="pl-20 pr-14 py-10 w-[408px] min-w-[408px] space-y-9 hidden lg:block">
       <h3 className="text-xl text-grey-500 font-bold">Account Settings</h3>
       {/* Search */}
       <div className="relative">

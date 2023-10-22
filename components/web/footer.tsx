@@ -12,19 +12,19 @@ import {link} from "fs";
 
 const socials = [
   {
-    href: "",
+    href: "#",
     icon: FacebookIcon,
   },
   {
-    href: "",
+    href: "#",
     icon: TwitterIcon,
   },
   {
-    href: "",
+    href: "#",
     icon: InstagramIcon,
   },
   {
-    href: "",
+    href: "#",
     icon: YoutubeIcon,
   },
 ];

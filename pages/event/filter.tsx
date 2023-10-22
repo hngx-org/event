@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import filterIcon from "@/public/assets/images/filter.svg";
 import multiply from "@/public/assets/images/multiply.svg";
@@ -7,9 +7,9 @@ import Image from "next/image";
 import EventCard from "@/components/eventCard";
 import Footer from "@/components/web/footer";
 import EventHeader from "@/components/eventHeader";
-import { useRouter } from "next/router";
-import { useSearchParams } from "next/navigation";
-import { string } from "yup";
+import {useRouter} from "next/router";
+import {useSearchParams} from "next/navigation";
+import {string} from "yup";
 import EventLayout from "@/components/layout/eventLayout";
 
 interface filterParam {
@@ -67,12 +67,12 @@ const Filter = () => {
               <Image src={multiply} alt="close" />
             </button>
           </div>
-          <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-[30px]">
+          {/* <div className="w-full grid md:grid-cols-3 grid-cols-1 gap-[30px]">
             <EventCard />
             <EventCard />
             <EventCard />
             <EventCard />
-          </div>
+          </div> */}
         </div>
       </div>
     </EventLayout>

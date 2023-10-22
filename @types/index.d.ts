@@ -18,14 +18,14 @@ export type EventManagementModalType = {
 };
 
 export type SimilarEventsType = {
-  imgSrc: StaticImageData | string,
-  name: string,
-  location: string,
-  time: string,
-  date: string,
-  live: string,
-  amount: string
-}
+  imgSrc: StaticImageData | string;
+  name: string;
+  location: string;
+  time: string;
+  date: string;
+  live: string;
+  amount: string;
+};
 
 export type SignupData = {
   name: string;
@@ -53,13 +53,13 @@ export type User = {
 };
 
 export type SearchFilterProps = {
-	setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 export type EventsPageTitleProps = {
-	children: ReactNode;
-	setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
-	isFilterOpen: boolean;
+  children: ReactNode;
+  setIsFilterOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  isFilterOpen: boolean;
 };
 
 export type EventCardProps = {
@@ -85,14 +85,15 @@ export type FormState = {
   numberOfAvailableTickets: string;
   registrationClosingDate: string;
   tags: Array<string>;
-}
+};
 
-export type  EventDetails = {
+export type EventDetails = {
   description: string;
   endDate: string;
   endTime: string;
   eventLink: string | null;
   eventType: string;
+  id: string;
   image: string;
   isPaidEvent: boolean;
   location: string;
@@ -104,4 +105,4 @@ export type  EventDetails = {
   startTime: string;
   tags: string[];
   ticketPrice: number;
-}
+};

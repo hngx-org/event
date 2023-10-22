@@ -12,7 +12,8 @@ export default function Login() {
 
   const authorizeUser = async (authorizationCode: any) => {
     try {
-      const callBackURL = "https://wetindeysup-api.onrender.com/api/auth/login";
+      const callBackURL =
+        "https://wetindeysup-api.onrender.com/api/auth/callback";
       const response = await fetch(`${callBackURL}?code=${authorizationCode}`, {
         method: "GET",
         headers: {

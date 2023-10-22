@@ -62,15 +62,6 @@ export type EventsPageTitleProps = {
   isFilterOpen: boolean;
 };
 
-export type EventCardProps = {
-  img: StaticImageData | string;
-  title: string;
-  location: string;
-  dateString: string;
-  cost: number;
-  showTicketSales?: boolean;
-  ticketSales?: number;
-};
 export type FormState = {
   name: string;
   event_image?: string | undefined;
@@ -106,3 +97,7 @@ export type EventDetails = {
   tags: string[];
   ticketPrice: number;
 };
+
+export interface EventCardProps {
+  events: EventDetails;
+}

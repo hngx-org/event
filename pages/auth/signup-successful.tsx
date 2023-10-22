@@ -38,7 +38,7 @@ const SignupSuccessful: React.FC = () => {
             Sign Up process has been completed successfully. A verification link
             has been sent to your mail.
           </p>
-          <button className="w-[377px] mt-6 mx-auto p-[18px] text-center text-white bg-[#800000] rounded-lg text-base font-bold active:scale-[0.99] font-sans">
+          <button className="w-[377px] mt-6 mx-auto p-[18px] text-center text-white bg-secondary-300 rounded-lg text-base font-bold active:scale-[0.99] font-sans">
             Go to your mail
           </button>
         </div>

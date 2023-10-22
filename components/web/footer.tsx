@@ -120,13 +120,16 @@ export default function Footer() {
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
         {/* Logo section */}
         <div className="space-y-4">
-          <Image
-            src={Logo}
-            alt="logo"
-            width={133}
-            height={16}
-            className="h-auto w-auto"
-          />
+          {/* Logo */}
+          <Link href="/">
+            <Image
+              src={Logo}
+              alt="logo"
+              width={133}
+              height={16}
+              className="h-auto w-auto"
+            />
+          </Link>
           <p className="text-grey-80 text-sm">
             © 2012-2023, All Rights Reserved
           </p>

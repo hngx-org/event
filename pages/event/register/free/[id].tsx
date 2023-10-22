@@ -3,17 +3,17 @@ import RegisterSuccessful from "@/components/modals/register-successful";
 import arrow_back_ios from "@/public/assets/images/arrow_back_ios.svg";
 import banner from "@/public/assets/images/banner.svg";
 import Image from "next/image";
-import { useRouter } from 'next/router';
+import {useRouter} from "next/router";
 import Link from "next/link";
 import http from "@/http/interceptor";
-import { toast } from "react-toastify";
-import React, { useState } from "react";
+import {toast} from "react-toastify";
+import React, {useState} from "react";
 
 const Free = () => {
   const router = useRouter();
-  const { id } = router.query;
+  const {id} = router.query;
   const [num, setNum] = useState<number>(1);
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false);
   const increment = () => {
     setNum(num + 1);
   };
@@ -25,34 +25,31 @@ const Free = () => {
   };
 
   const registerAPI = () => {
-
-    http.post(`/events/register/${id}`, {
-      "numberOfTickets": num
-    })
-      .then(res => {
-        console.log(res)
+    http
+      .post(`/events/register/${id}`, {
+        numberOfTickets: num,
       })
-      .catch(err => {
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
         toast.error(err);
-        console.log("Event Registration Error", err)
-      })
-  }
+        console.log("Event Registration Error", err);
+      });
+  };
 
   const onsubmit = (e: any) => {
-    e.preventDefault()
-    registerAPI()
-    setShowModal(true)
-  }
+    e.preventDefault();
+    registerAPI();
+    setShowModal(true);
+  };
 
   return (
     <EventLayout>
       <div className="w-full">
         <hr />
         <div className="mt-8 ps-[20px] md:px-[40px] gap-4 flex items-center">
-          <button
-            onClick={() => router.back()}
-            title="back button"
-          >
+          <button onClick={() => router.back()} title="back button">
             <Image
               src={arrow_back_ios}
               alt="arrow"
@@ -74,17 +71,17 @@ const Free = () => {
 
         <form
           onSubmit={onsubmit}
-          className="container mx-auto px-[20px] md:px-[40px] gap-10 md:gap-6 md:justify-between flex flex-col sm:flex-row mt-8">
-          <div className="max-w-[735px] w-full"
-          >
-            <h1 className="text-[3B3B3B] font-montserrat text-2xl font-bold">Contact Information</h1>
+          className="container mx-auto px-[20px] md:px-[40px] gap-10 md:gap-6 md:justify-between flex flex-col sm:flex-row mt-8"
+        >
+          <div className="max-w-[735px] w-full">
+            <h1 className="text-[3B3B3B] font-montserrat text-2xl font-bold">
+              Contact Information
+            </h1>
             {/* FIRST AND LAST NAME */}
             <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
               {/* First Name */}
               <div className="font-sans font-medium text-base text-[#3B3B3B]">
-                <label htmlFor="firstName">
-                  First Name*
-                </label>
+                <label htmlFor="firstName">First Name*</label>
                 <div className="py-3 px-4 mt-2 flex items-center gap-2 rounded-lg border-[#A3A3A3] border bg-[#FEFEFE]">
                   <input
                     type="text"
@@ -101,9 +98,7 @@ const Free = () => {
               </div>
               {/* Last Name */}
               <div className="font-sans font-medium text-base text-[#3B3B3B]">
-                <label htmlFor="lastName">
-                  Last Name*
-                </label>
+                <label htmlFor="lastName">Last Name*</label>
                 <div className="py-3 px-4 mt-2 flex items-center gap-2 rounded-lg border-[#A3A3A3] border bg-[#FEFEFE]">
                   <input
                     type="text"
@@ -123,9 +118,7 @@ const Free = () => {
             <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
               {/* Email */}
               <div className="font-sans font-medium text-base text-[#3B3B3B]">
-                <label htmlFor="email">
-                  Email*
-                </label>
+                <label htmlFor="email">Email*</label>
                 <div className="py-3 px-4 mt-2 flex items-center gap-2 rounded-lg border-[#A3A3A3] border bg-[#FEFEFE]">
                   <input
                     type="email"
@@ -142,9 +135,7 @@ const Free = () => {
               </div>
               {/* Phone Number */}
               <div className="font-sans font-medium text-base text-[#3B3B3B]">
-                <label htmlFor="phoneNumber">
-                  Phone Number*
-                </label>
+                <label htmlFor="phoneNumber">Phone Number*</label>
                 <div className="mt-2 overflow-hidden flex items-center gap-2 rounded-lg border-[#A3A3A3] border bg-[#FEFEFE]">
                   <select
                     title="countryCode"
@@ -169,9 +160,7 @@ const Free = () => {
             <div className="grid grid-cols-2 sm:grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
               {/* Gender */}
               <div className="font-sans font-medium text-base text-[#3B3B3B]">
-                <label htmlFor="gender">
-                  Gender
-                </label>
+                <label htmlFor="gender">Gender</label>
                 <div className="mt-2 overflow-hidden flex items-center gap-2 rounded-lg border-[#A3A3A3] border bg-[#FEFEFE]">
                   <select
                     title="gender"
@@ -206,26 +195,30 @@ const Free = () => {
                 </div>
               </div>
             </div>
-
           </div>
 
           {/* Order Summary */}
           <div className="md:max-w-[437px] h-max w-full p-6 rounded-2xl bg-[#FAFAFA]">
-            <h4 className="text-xl text-center font-sans text-[#800000] mb-6 font-bold">
+            <h4 className="text-xl text-center font-sans text-secondary-300 mb-6 font-bold">
               Order Summary
             </h4>
             <hr />
             <div className="mt-6 flex items-center justify-between gap-3">
-              <h3 className="text-base font-semibold text-[#1C1C1C]">Tech Innovators Summit Regular Ticket</h3>
+              <h3 className="text-base font-semibold text-[#1C1C1C]">
+                Tech Innovators Summit Regular Ticket
+              </h3>
               <div className="flex items-center gap-4">
                 <a
                   onClick={decrement}
-                  className={`w-8 h-8 flex place-content-center cursor-pointer rounded-lg text-2xl font-bold text-white ${num == 1 ? "bg-[#BFBFBF]" : "bg-[#800000]"
-                    } `}
+                  className={`w-8 h-8 flex place-content-center cursor-pointer rounded-lg text-2xl font-bold text-white ${
+                    num == 1 ? "bg-[#BFBFBF]" : "bg-secondary-300"
+                  } `}
                 >
                   -
                 </a>
-                <p className="text-2xl font-montserrat text-[#800000] font-bold">{num}</p>
+                <p className="text-2xl font-montserrat text-secondary-300 font-bold">
+                  {num}
+                </p>
                 <a
                   onClick={increment}
                   className="w-8 h-8 flex place-content-center cursor-pointer rounded-lg text-2xl font-bold text-white bg-secondary-300"
@@ -240,25 +233,28 @@ const Free = () => {
             </div>
             <hr />
             <div className="mt-8 flex justify-between gap-4 items-center">
-              <h3 className="font-semibold text-[#1C1C1C] text-base font-sans">Total:</h3>
-              <h3 className="font-bold text-2xl font-montserrat text-[#800000]">₦20,000</h3>
+              <h3 className="font-semibold text-[#1C1C1C] text-base font-sans">
+                Total:
+              </h3>
+              <h3 className="font-bold text-2xl font-montserrat text-secondary-300">
+                ₦20,000
+              </h3>
             </div>
             <div className="text-center mt-6">
               <button
                 type="submit"
-                className="text-base font-bold text-white bg-[#800000] py-4 px-8 rounded-lg font-sans"
+                className="text-base font-bold text-white bg-secondary-300 py-4 px-8 rounded-lg font-sans"
               >
                 Register for this event
               </button>
             </div>
           </div>
-
         </form>
         {/* Agrrements */}
         <div className="container mx-auto px-[20px] md:px-[40px] mb-[180px]">
           <p className="mt-[56px] text-[#4A4A4A] font-sans text-lg font-medium">
             By selecting Register, I agree to the{" "}
-            <span className="font-bold text-[#800000] underline">
+            <span className="font-bold text-secondary-300 underline">
               EventWave Terms of Service
             </span>
           </p>

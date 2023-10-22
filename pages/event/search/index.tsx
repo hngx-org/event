@@ -1,6 +1,4 @@
-import EventCard from "@/components/eventCardTimeline";
 import Link from "next/link";
-import Image from "next/image";
 import Footer from "@/components/web/footer";
 import EventHeader from "@/components/eventHeader";
 import EventCardLoading from "@/components/eventCardLoading";
@@ -8,10 +6,10 @@ import {useRouter, useSearchParams} from "next/navigation";
 import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import EventsPageTitle from "@/components/eventsPageTitle";
-import Event from "@/public/images/event-image.png";
 import SearchFilterModal from "@/components/modals/searchFilterModal";
 import AuthProvider from "@/provider/authProvider";
 import http from "@/http/interceptor";
+import EventCard from "@/components/eventCard";
 
 export default function SearchResults() {
   const search = useSearchParams();
@@ -19,25 +17,25 @@ export default function SearchResults() {
   const router = useRouter();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [events, setEvents] = useState([]);
+  const [events, setEvents] = useState<EventsDetails[]>([]);
 
-  useEffect(() => {
+  const fetchData = async () => {
     try {
-      http
-        .get(
-          `https://wetindeysup-api.onrender.com/api/events/search?keyword=${searchQuery}`
-        )
-        .then((res) => setEvents(res.data.data));
-      setLoading(false);
+      const response = await http.get(`/events/search?keyword=${searchQuery}`);
+      setEvents(response.data.data);
+      setIsLoading(false);
     } catch (error: any) {
       toast.error(error.message);
-      setLoading(false);
+      setIsLoading(false);
     }
+  };
+  useEffect(() => {
+    fetchData();
   }, []);
 
   return (
     <AuthProvider>
-      <div className="max-w-7xl w-full h-full mx-auto my-10 ">
+      <div className="max-w-7xl w-full h-full mx-auto">
         <EventHeader />
 
         <EventsPageTitle
@@ -58,15 +56,10 @@ export default function SearchResults() {
             </>
           ) : events.length > 0 ? (
             <div className="px-[20px] md:px-[40px] mt-7 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {events.map((event: any) => (
-                <EventCard
-                  key={event.id}
-                  title={event.name || "Event Name"}
-                  location={event.location || "Not Specified"}
-                  img={event.image || Event}
-                  cost={event.ticketPrice || 0}
-                  dateString={event.startTime}
-                />
+              {events.map((event) => (
+                <Link href={`/event/${event.id}`} key={event.id}>
+                  <EventCard events={event} />
+                </Link>
               ))}
             </div>
           ) : (

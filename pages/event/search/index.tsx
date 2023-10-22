@@ -9,7 +9,6 @@ import {toast} from "react-toastify";
 import {useEffect, useState} from "react";
 import EventsPageTitle from "@/components/eventsPageTitle";
 import Event from "@/public/images/event-image.png";
-
 import SearchFilterModal from "@/components/modals/searchFilterModal";
 import AuthProvider from "@/provider/authProvider";
 import http from "@/http/interceptor";

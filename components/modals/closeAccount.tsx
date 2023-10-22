@@ -24,7 +24,7 @@ export default function CloseAccountModal({ onClose }: CloseProp) {
   return (
     <>
       <div className="flex justify-center items-center w-full fixed top-0 left-0 bg-[rgba(59,59,59,0.65)] h-screen">
-        <div className="px-14 py-12 max-w-[672px] rounded-2xl bg-[#FEFEFE] font-sans">
+        <div className="mx-4 p-6 lg:px-14 lg:py-12 max-w-[672px] rounded-2xl bg-[#FEFEFE] font-sans">
           <div>
             <div className="flex items-center relative">
               <h1 className="font-montserrat text-[40px] font-bold text-grey-500">

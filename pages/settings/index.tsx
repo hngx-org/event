@@ -2,14 +2,14 @@ import AccountLayout from "@/components/layout/accountLayout";
 import ProfileIcon from "@/public/assets/icons/profileIcon";
 import Input from "@/components/form/input";
 import DisabledEmailInput from "@/components/form/disabledEmailInput";
-import {CSSProperties, useState, useRef} from "react";
-import {Formik, Form, ErrorMessage} from "formik";
+import { CSSProperties, useState, useRef } from "react";
+import { Formik, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
 import ClipLoader from "react-spinners/ClipLoader";
 import DropdownInput from "@/components/form/dropdown";
 import Image from "next/image";
-import {useAuth} from "@/hooks/useAuth";
+import { useAuth } from "@/hooks/useAuth";
 import service from "../../lib/auth/updateProfile";
 
 const override: CSSProperties = {
@@ -19,7 +19,7 @@ const override: CSSProperties = {
 export default function Profile() {
   const [image, setImage] = useState<any>("");
   const [file, setFile] = useState("");
-  const {user} = useAuth();
+  const { user } = useAuth();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const validationSchema = Yup.object().shape({
     fullName: Yup.string().required("Name is required"),
@@ -33,7 +33,7 @@ export default function Profile() {
   };
   const onSubmit = async (
     values: typeof initialValues,
-    {setSubmitting}: any
+    { setSubmitting }: any
   ) => {
     if (image) {
       try {
@@ -99,9 +99,9 @@ export default function Profile() {
     setImage(null);
   };
   return (
-    <AccountLayout title="Profile information">
-      <div className="flex flex-col gap-8 font-sans">
-        <h1 className="font-bold font-montserrat text-xl text-grey-500">
+    <AccountLayout title='Profile information'>
+      <div className='flex flex-col items-center lg:items-start gap-8 font-sans'>
+        <h1 className='font-bold font-montserrat text-xl text-grey-500'>
           Profile photo
         </h1>
         {/* Profile Photo */}
@@ -167,8 +167,8 @@ export default function Profile() {
         </div>
       </div>
       {/* Contact Information */}
-      <div className="w-[758px] mt-20">
-        <h1 className="text-grey-500 text-xl font-bold font-montserrat">
+      <div className='max-w-[758px] mt-20'>
+        <h1 className='text-grey-500 text-xl font-bold font-montserrat'>
           Contact Information
         </h1>
         <div className="mt-8">
@@ -179,8 +179,8 @@ export default function Profile() {
           >
             {(formik) => (
               <Form>
-                <div className="grid grid-cols-2 gap-x-6 gap-y-8">
-                  <DropdownInput label="Prefix" name="prefix" />
+                <div className='grid lg:grid-cols-2 gap-x-6 gap-y-8'>
+                  <DropdownInput label='Prefix' name='prefix' />
                   <Input
                     name="fullName"
                     label="Full name*"

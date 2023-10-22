@@ -1,11 +1,7 @@
-import React, {useState, useEffect} from "react";
-import {useRouter} from "next/navigation";
-import {toast} from "react-toastify";
-import Cookies from "js-cookie";
+import React from "react";
 import {GoogleIcon} from "@/public/assets/icons/socialIcons";
 
 export default function GoogleSignin() {
-  const router = useRouter();
   const clientId =
     "69712066400-eu3ddnj8njs960htlnbh9hlgrvfg6ke9.apps.googleusercontent.com";
   //   const redirectUri = "http://localhost:3000";
@@ -15,37 +11,6 @@ export default function GoogleSignin() {
     const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code&scope=email profile&access_type=offline`;
     window.location.href = authUrl;
   };
-
-  const authorizeUser = async (authorizationCode: any) => {
-    try {
-      const callBackURL = "https://wetindeysup-api.onrender.com/api/auth/login";
-      const response = await fetch(`${callBackURL}?code=${authorizationCode}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data: any = response.json();
-        Cookies.set("token", data.token);
-        Cookies.set("user", JSON.stringify(data.user));
-        toast.success("Google sign-in successful");
-        router.push("/timeline");
-      } else {
-      }
-    } catch (error: any) {
-      toast.error("Something went wrong");
-    }
-  };
-
-  useEffect(() => {
-    const queryParams = new URLSearchParams(window.location.search);
-    const authorizationCode = queryParams.get("code");
-    if (authorizationCode) {
-      authorizeUser(authorizationCode);
-    }
-  }, []);
 
   return (
     <button

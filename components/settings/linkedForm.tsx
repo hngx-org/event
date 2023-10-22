@@ -64,7 +64,7 @@ export default function LinkedAccountsForm() {
         {(formik) => {
           return (
             <Form action="" autoComplete="off">
-              <div className="grid grid-cols-2 gap-12">
+              <div className="grid lg:grid-cols-2 gap-4 lg:gap-12">
                 {/* Facebook */}
                 <div className="flex gap-4 items-center justify-between border rounded-lg border-grey-50 py-10 px-6">
                   <div className="flex items-center gap-4">

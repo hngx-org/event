@@ -11,12 +11,12 @@ const links = [
     href: "/",
     name: "Home",
   },
+  //   {
+  //     href: "/groups",
+  //     name: "Upcoming Events",
+  //   },
   {
-    href: "/groups",
-    name: "Upcoming Events",
-  },
-  {
-    href: "/calendar",
+    href: "/timeline",
     name: "Join Event",
   },
   {

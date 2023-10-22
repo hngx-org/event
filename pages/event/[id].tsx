@@ -11,8 +11,10 @@ import {
   OptionIcon,
 } from "@/components/icons/EventDetails/SocialIcons";
 import {EventDetails} from "@/@types";
+import Image from "next/image";
 import AuthProvider from "@/provider/authProvider";
 import EventHeader from "@/components/eventHeader";
+import Herobg from "assets/images/herobg.png";
 
 export default function EventDetailsPage({
   description,
@@ -67,7 +69,7 @@ export default function EventDetailsPage({
           }
         })
         .then((data) => {
-          setEventDetails(data);
+          setEventDetails(data.data);
           console.log("Event details successfully fetched:", data);
         })
         .catch((error) => {
@@ -97,12 +99,14 @@ export default function EventDetailsPage({
   return (
     <AuthProvider>
       <EventHeader />
-      <div className="max-w-7xl md:mx-auto flex flex-col md:flex-row justify-between mb-6 mt-40 md:mt-24">
+      <div className="max-w-7xl md:mx-auto flex flex-col md:flex-row justify-between mb-6 p-4 xl:p-0">
         <div className="flex gap-4 items-center" onClick={() => router.back()}>
           <button>
             <ArrowBackIcon />
           </button>
-          <h3 className="text-grey-500 text-2xl font-bold">Tech Innovation</h3>
+          <h3 className="text-grey-500 text-2xl font-bold">
+            {eventDetails.name}
+          </h3>
         </div>
         <Link
           href={
@@ -117,7 +121,23 @@ export default function EventDetailsPage({
       </div>
 
       <div className="w-full">
-        <img src="/assets/images/herobg.png" alt="hero" className="w-full" />
+        {eventDetails.image ? (
+          <Image
+            src={eventDetails.image}
+            width={2000}
+            height={500}
+            alt="hero"
+            className="w-full"
+          />
+        ) : (
+          <Image
+            src={Herobg}
+            width={2000}
+            height={500}
+            alt="hero"
+            className="w-full"
+          />
+        )}
       </div>
       <div className="max-w-7xl mx-auto mt-8 p-4 lg::p-0">
         <div className="flex flex-col md:flex-row gap-6 justify-between">
@@ -127,16 +147,7 @@ export default function EventDetailsPage({
                 Event Description
               </h1>
               <p className="text-[#666] text-justify font-medium text-lg">
-                Dive into the world of cutting-edge technology at the Tech
-                Innovators Summit. This immersive event is designed for tech
-                enthusiasts, entrepreneurs, and innovators alike. Join us for a
-                day filled with inspiring keynote speakers, hands-on workshops,
-                and networking opportunities with industry leaders. Discover the
-                latest trends in artificial intelligence, blockchain,
-                cybersecurity, and more. Whether you&aptos;re a tech veteran or
-                just starting your journey, the Tech Innovators Summit is the
-                ultimate destination to explore, learn, and connect in the
-                dynamic tech landscape.
+                {eventDetails.description}
               </p>
             </div>
             <div className="inline-flex md:hidden p-6 items-start gap-6 rounded-2xl bg-[#FAFAFA] max-w-[437px] max-h-[252px]">
@@ -147,7 +158,7 @@ export default function EventDetailsPage({
                       08-10 October, 2023
                     </h1>
                     <h1 className="text-grey-700 font-bold text-xl">
-                      &#8358;20,000
+                      &#8358;{eventDetails.ticketPrice.toLocaleString()}
                     </h1>
                   </div>
                 </div>

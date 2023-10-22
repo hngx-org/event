@@ -58,7 +58,7 @@ const Delete = () => {
     message:
       "Are you sure you want to delete this event? This action cannot be undone.",
     text: "Your event has been successfully deleted. Thank you for using our platform.",
-    route: "event/event-details",
+    route: "/timeline",
     button: "Back to Event Management",
     onclose: () => setShowModal(false),
     onNext: () => {},

@@ -59,7 +59,7 @@ const Cancel = () => {
     message:
       "Are you sure you want to delete this event? This action cannot be undone.",
     text: "Your event registration has been successfully canceled. If you change your mind, you can always register again.",
-    route: "event/event-details",
+    route: "/timeline",
     button: "Back to Event Management",
     onclose: () => setShowModal(false),
     onNext: () => {},

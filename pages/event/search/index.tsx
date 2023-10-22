@@ -10,14 +10,15 @@ import SearchFilterModal from "@/components/modals/searchFilterModal";
 import AuthProvider from "@/provider/authProvider";
 import http from "@/http/interceptor";
 import EventCard from "@/components/eventCard";
+import {EventDetails} from "@/@types";
 
 export default function SearchResults() {
   const search = useSearchParams();
   const searchQuery = search ? search.get("q") : null;
   const router = useRouter();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const [loading, setLoading] = useState(true);
-  const [events, setEvents] = useState<EventsDetails[]>([]);
+  const [loading, setIsLoading] = useState(true);
+  const [events, setEvents] = useState<EventDetails[]>([]);
 
   const fetchData = async () => {
     try {
